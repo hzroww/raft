@@ -1,0 +1,48 @@
+syntax = "proto3";
+package kv;
+
+option cc_generic_services = true;
+
+message PutRequest {
+    string key = 1;
+    string value = 2;
+    string clientId = 3;
+    int64 requestId = 4;
+}
+
+message PutResponse {
+    bool success = 1;
+    string error = 2;
+    int32 leaderId = 3;
+}
+
+message GetRequest {
+    string key = 1;
+    string clientId = 2;
+    int64 requestId = 3;
+}
+
+message GetResponse {
+    bool success = 1;
+    string value = 2;
+    string error = 3;
+    int32 leaderId = 4;
+}
+
+message DeleteRequest {
+    string key = 1;
+    string clientId = 2;
+    int64 requestId = 3;
+}
+
+message DeleteResponse {
+    bool success = 1;
+    string error = 2;
+    int32 leaderId = 3;
+}
+
+service KvServerRpc {
+    rpc Put(PutRequest) returns (PutResponse);
+    rpc Get(GetRequest) returns (GetResponse);
+    rpc Delete(DeleteRequest) returns (DeleteResponse);
+}

@@ -1,0 +1,11 @@
+syntax = "proto3";
+package mprrpc;
+
+// Wire frame layout: [4B header_pb_size][RpcHeader][body_pb]
+// request_id is echoed back in the response for client-side demultiplexing.
+message RpcHeader {
+    uint64 request_id  = 1;
+    bytes  service_name = 2;
+    bytes  method_name  = 3;
+    uint32 args_size    = 4;
+}

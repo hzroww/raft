@@ -1,0 +1,16 @@
+syntax = "proto3";
+package kv;
+
+// Stable payload stored in raft::LogEntry.command.
+message KvCommand {
+    enum OpType {
+        PUT = 0;
+        DELETE = 1;
+    }
+
+    OpType op = 1;
+    string key = 2;
+    string value = 3;
+    string clientId = 4;
+    int64 requestId = 5;
+}
