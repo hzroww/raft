@@ -1,0 +1,159 @@
+2026-04-22 17:57:47.018 INFO pid=134906 tid=134906 tname=coro-main rpc_server.cpp:30 RegisterService | registered rpc service name=raft.RaftRpc
+2026-04-22 17:57:47.019 INFO pid=134906 tid=134908 tname=rpc-worker-0 thread_pool.cpp:11 operator() | worker thread started index=0
+2026-04-22 17:57:47.019 INFO pid=134906 tid=134909 tname=rpc-worker-1 thread_pool.cpp:11 operator() | worker thread started index=1
+2026-04-22 17:57:47.019 INFO pid=134906 tid=134907 tname=rpc-server-main rpc_server.cpp:53 Run | rpc server started ip=127.0.0.1 port=18901 io_threads=1 worker_threads=4 services=1
+2026-04-22 17:57:47.019 INFO pid=134906 tid=134910 tname=rpc-worker-2 thread_pool.cpp:11 operator() | worker thread started index=2
+2026-04-22 17:57:47.020 INFO pid=134906 tid=134911 tname=rpc-worker-3 thread_pool.cpp:11 operator() | worker thread started index=3
+2026-04-22 17:57:47.219 INFO pid=134906 tid=134906 tname=coro-main rpc_channel.cpp:31 RpcChannel | rpc channel created peer=127.0.0.1:18901
+2026-04-22 17:57:47.220 INFO pid=134906 tid=134912 tname=rpc-channel-io rpc_channel.cpp:150 onConnection | rpc channel connected peer=127.0.0.1:18901
+2026-04-22 17:57:47.222 INFO pid=134906 tid=134906 tname=coro-main coro_smoke.cpp:226 main | OK: coroutine resumed on raft thread; term=42 voteGranted=1
+2026-04-22 17:57:47.222 INFO pid=134906 tid=134906 tname=coro-main rpc_channel.cpp:54 ~RpcChannel | rpc channel shutting down peer=127.0.0.1:18901
+2026-04-22 17:58:30.405 INFO pid=135152 tid=135152 tname=coro-main rpc_server.cpp:30 RegisterService | registered rpc service name=raft.RaftRpc
+2026-04-22 17:58:30.405 INFO pid=135152 tid=135153 tname=rpc-server-main rpc_server.cpp:53 Run | rpc server started ip=127.0.0.1 port=18901 io_threads=1 worker_threads=4 services=1
+2026-04-22 17:58:30.405 INFO pid=135152 tid=135154 tname=rpc-worker-0 thread_pool.cpp:11 operator() | worker thread started index=0
+2026-04-22 17:58:30.408 INFO pid=135152 tid=135155 tname=rpc-worker-1 thread_pool.cpp:11 operator() | worker thread started index=1
+2026-04-22 17:58:30.408 INFO pid=135152 tid=135156 tname=rpc-worker-2 thread_pool.cpp:11 operator() | worker thread started index=2
+2026-04-22 17:58:30.408 INFO pid=135152 tid=135157 tname=rpc-worker-3 thread_pool.cpp:11 operator() | worker thread started index=3
+2026-04-22 17:58:30.605 INFO pid=135152 tid=135152 tname=coro-main rpc_channel.cpp:31 RpcChannel | rpc channel created peer=127.0.0.1:18901
+2026-04-22 17:58:30.606 INFO pid=135152 tid=135159 tname=rpc-channel-io rpc_channel.cpp:150 onConnection | rpc channel connected peer=127.0.0.1:18901
+2026-04-22 17:58:30.607 INFO pid=135152 tid=135152 tname=coro-main coro_smoke.cpp:227 main | OK: coroutine resumed on raft thread; term=42 voteGranted=1
+2026-04-23 17:43:14.307 INFO pid=23254 tid=23254 tname=coro-main rpc_server.cpp:30 RegisterService | registered rpc service name=raft.RaftRpc
+2026-04-23 17:43:14.308 INFO pid=23254 tid=23256 tname=rpc-worker-0 thread_pool.cpp:11 operator() | worker thread started index=0
+2026-04-23 17:43:14.308 INFO pid=23254 tid=23258 tname=rpc-worker-2 thread_pool.cpp:11 operator() | worker thread started index=2
+2026-04-23 17:43:14.308 INFO pid=23254 tid=23257 tname=rpc-worker-1 thread_pool.cpp:11 operator() | worker thread started index=1
+2026-04-23 17:43:14.309 INFO pid=23254 tid=23255 tname=rpc-server-main rpc_server.cpp:53 Run | rpc server started ip=127.0.0.1 port=18901 io_threads=1 worker_threads=4 services=1
+2026-04-23 17:43:14.309 INFO pid=23254 tid=23259 tname=rpc-worker-3 thread_pool.cpp:11 operator() | worker thread started index=3
+2026-04-23 17:43:14.509 INFO pid=23254 tid=23254 tname=coro-main rpc_channel.cpp:31 RpcChannel | rpc channel created peer=127.0.0.1:18901
+2026-04-23 17:43:14.509 INFO pid=23254 tid=23260 tname=rpc-channel-io rpc_channel.cpp:150 onConnection | rpc channel connected peer=127.0.0.1:18901
+2026-04-23 17:43:14.510 INFO pid=23254 tid=23254 tname=coro-main coro_smoke.cpp:227 main | OK: coroutine resumed on raft thread; term=42 voteGranted=1
+2026-04-23 18:52:59.333 INFO pid=28619 tid=28619 tname=coro-main rpc_server.cpp:30 RegisterService | registered rpc service name=raft.RaftRpc
+2026-04-23 18:52:59.335 INFO pid=28619 tid=28621 tname=rpc-worker-0 thread_pool.cpp:11 operator() | worker thread started index=0
+2026-04-23 18:52:59.335 INFO pid=28619 tid=28623 tname=rpc-worker-2 thread_pool.cpp:11 operator() | worker thread started index=2
+2026-04-23 18:52:59.336 INFO pid=28619 tid=28622 tname=rpc-worker-1 thread_pool.cpp:11 operator() | worker thread started index=1
+2026-04-23 18:52:59.336 INFO pid=28619 tid=28620 tname=rpc-server-main rpc_server.cpp:53 Run | rpc server started ip=127.0.0.1 port=18901 io_threads=1 worker_threads=4 services=1
+2026-04-23 18:52:59.336 INFO pid=28619 tid=28624 tname=rpc-worker-3 thread_pool.cpp:11 operator() | worker thread started index=3
+2026-04-23 18:52:59.534 INFO pid=28619 tid=28619 tname=coro-main rpc_channel.cpp:31 RpcChannel | rpc channel created peer=127.0.0.1:18901
+2026-04-23 18:52:59.535 INFO pid=28619 tid=28626 tname=rpc-channel-io rpc_channel.cpp:150 onConnection | rpc channel connected peer=127.0.0.1:18901
+2026-04-23 18:52:59.536 INFO pid=28619 tid=28619 tname=coro-main coro_smoke.cpp:227 main | OK: coroutine resumed on raft thread; term=42 voteGranted=1
+2026-04-23 18:53:21.078 INFO pid=28661 tid=28661 tname=coro-main rpc_server.cpp:30 RegisterService | registered rpc service name=raft.RaftRpc
+2026-04-23 18:53:21.078 INFO pid=28661 tid=28663 tname=rpc-worker-0 thread_pool.cpp:11 operator() | worker thread started index=0
+2026-04-23 18:53:21.079 INFO pid=28661 tid=28664 tname=rpc-worker-1 thread_pool.cpp:11 operator() | worker thread started index=1
+2026-04-23 18:53:21.079 INFO pid=28661 tid=28665 tname=rpc-worker-2 thread_pool.cpp:11 operator() | worker thread started index=2
+2026-04-23 18:53:21.079 INFO pid=28661 tid=28666 tname=rpc-worker-3 thread_pool.cpp:11 operator() | worker thread started index=3
+2026-04-23 18:53:21.079 INFO pid=28661 tid=28662 tname=rpc-server-main rpc_server.cpp:53 Run | rpc server started ip=127.0.0.1 port=18901 io_threads=1 worker_threads=4 services=1
+2026-04-23 18:53:21.279 INFO pid=28661 tid=28661 tname=coro-main rpc_channel.cpp:31 RpcChannel | rpc channel created peer=127.0.0.1:18901
+2026-04-23 18:53:21.279 INFO pid=28661 tid=28667 tname=rpc-channel-io rpc_channel.cpp:150 onConnection | rpc channel connected peer=127.0.0.1:18901
+2026-04-23 18:53:21.280 INFO pid=28661 tid=28661 tname=coro-main coro_smoke.cpp:227 main | OK: coroutine resumed on raft thread; term=42 voteGranted=1
+2026-04-23 18:56:09.922 INFO pid=29023 tid=29023 tname=coro-main rpc_server.cpp:30 RegisterService | registered rpc service name=raft.RaftRpc
+2026-04-23 18:56:09.923 INFO pid=29023 tid=29025 tname=rpc-worker-0 thread_pool.cpp:11 operator() | worker thread started index=0
+2026-04-23 18:56:09.924 INFO pid=29023 tid=29024 tname=rpc-server-main rpc_server.cpp:53 Run | rpc server started ip=127.0.0.1 port=18901 io_threads=1 worker_threads=4 services=1
+2026-04-23 18:56:09.924 INFO pid=29023 tid=29028 tname=rpc-worker-3 thread_pool.cpp:11 operator() | worker thread started index=3
+2026-04-23 18:56:09.924 INFO pid=29023 tid=29027 tname=rpc-worker-2 thread_pool.cpp:11 operator() | worker thread started index=2
+2026-04-23 18:56:09.925 INFO pid=29023 tid=29026 tname=rpc-worker-1 thread_pool.cpp:11 operator() | worker thread started index=1
+2026-04-23 18:56:10.123 INFO pid=29023 tid=29023 tname=coro-main rpc_channel.cpp:31 RpcChannel | rpc channel created peer=127.0.0.1:18901
+2026-04-23 18:56:10.124 INFO pid=29023 tid=29029 tname=rpc-channel-io rpc_channel.cpp:150 onConnection | rpc channel connected peer=127.0.0.1:18901
+2026-04-23 18:56:10.125 INFO pid=29023 tid=29023 tname=coro-main coro_smoke.cpp:227 main | OK: coroutine resumed on raft thread; term=42 voteGranted=1
+2026-04-23 18:56:47.543 INFO pid=29270 tid=29270 tname=coro-main rpc_server.cpp:30 RegisterService | registered rpc service name=raft.RaftRpc
+2026-04-23 18:56:47.544 INFO pid=29270 tid=29272 tname=rpc-worker-0 thread_pool.cpp:11 operator() | worker thread started index=0
+2026-04-23 18:56:47.544 INFO pid=29270 tid=29273 tname=rpc-worker-1 thread_pool.cpp:11 operator() | worker thread started index=1
+2026-04-23 18:56:47.544 INFO pid=29270 tid=29271 tname=rpc-server-main rpc_server.cpp:53 Run | rpc server started ip=127.0.0.1 port=18901 io_threads=1 worker_threads=4 services=1
+2026-04-23 18:56:47.545 INFO pid=29270 tid=29275 tname=rpc-worker-3 thread_pool.cpp:11 operator() | worker thread started index=3
+2026-04-23 18:56:47.545 INFO pid=29270 tid=29274 tname=rpc-worker-2 thread_pool.cpp:11 operator() | worker thread started index=2
+2026-04-23 18:56:47.744 INFO pid=29270 tid=29270 tname=coro-main rpc_channel.cpp:31 RpcChannel | rpc channel created peer=127.0.0.1:18901
+2026-04-23 18:56:47.744 INFO pid=29270 tid=29276 tname=rpc-channel-io rpc_channel.cpp:150 onConnection | rpc channel connected peer=127.0.0.1:18901
+2026-04-23 18:56:47.745 INFO pid=29270 tid=29270 tname=coro-main coro_smoke.cpp:227 main | OK: coroutine resumed on raft thread; term=42 voteGranted=1
+2026-04-23 19:07:19.977 INFO pid=30014 tid=30014 tname=coro-main rpc_server.cpp:30 RegisterService | registered rpc service name=raft.RaftRpc
+2026-04-23 19:07:19.977 INFO pid=30014 tid=30017 tname=rpc-worker-1 thread_pool.cpp:11 operator() | worker thread started index=1
+2026-04-23 19:07:19.978 INFO pid=30014 tid=30015 tname=rpc-server-main rpc_server.cpp:53 Run | rpc server started ip=127.0.0.1 port=18901 io_threads=1 worker_threads=4 services=1
+2026-04-23 19:07:19.978 INFO pid=30014 tid=30016 tname=rpc-worker-0 thread_pool.cpp:11 operator() | worker thread started index=0
+2026-04-23 19:07:19.978 INFO pid=30014 tid=30019 tname=rpc-worker-3 thread_pool.cpp:11 operator() | worker thread started index=3
+2026-04-23 19:07:19.978 INFO pid=30014 tid=30018 tname=rpc-worker-2 thread_pool.cpp:11 operator() | worker thread started index=2
+2026-04-23 19:07:20.178 INFO pid=30014 tid=30014 tname=coro-main rpc_channel.cpp:31 RpcChannel | rpc channel created peer=127.0.0.1:18901
+2026-04-23 19:07:20.178 INFO pid=30014 tid=30020 tname=rpc-channel-io rpc_channel.cpp:150 onConnection | rpc channel connected peer=127.0.0.1:18901
+2026-04-23 19:07:20.179 INFO pid=30014 tid=30014 tname=coro-main coro_smoke.cpp:227 main | OK: coroutine resumed on raft thread; term=42 voteGranted=1
+2026-04-23 19:15:24.635 INFO pid=30448 tid=30448 tname=coro-main rpc_server.cpp:30 RegisterService | registered rpc service name=raft.RaftRpc
+2026-04-23 19:15:24.635 INFO pid=30448 tid=30451 tname=rpc-worker-1 thread_pool.cpp:11 operator() | worker thread started index=1
+2026-04-23 19:15:24.636 INFO pid=30448 tid=30450 tname=rpc-worker-0 thread_pool.cpp:11 operator() | worker thread started index=0
+2026-04-23 19:15:24.636 INFO pid=30448 tid=30452 tname=rpc-worker-2 thread_pool.cpp:11 operator() | worker thread started index=2
+2026-04-23 19:15:24.636 INFO pid=30448 tid=30449 tname=rpc-server-main rpc_server.cpp:53 Run | rpc server started ip=127.0.0.1 port=18901 io_threads=1 worker_threads=4 services=1
+2026-04-23 19:15:24.636 INFO pid=30448 tid=30453 tname=rpc-worker-3 thread_pool.cpp:11 operator() | worker thread started index=3
+2026-04-23 19:15:24.835 INFO pid=30448 tid=30448 tname=coro-main rpc_channel.cpp:31 RpcChannel | rpc channel created peer=127.0.0.1:18901
+2026-04-23 19:15:24.836 INFO pid=30448 tid=30454 tname=rpc-channel-io rpc_channel.cpp:150 onConnection | rpc channel connected peer=127.0.0.1:18901
+2026-04-23 19:15:24.837 INFO pid=30448 tid=30448 tname=coro-main coro_smoke.cpp:227 main | OK: coroutine resumed on raft thread; term=42 voteGranted=1
+2026-04-23 19:16:04.843 INFO pid=30513 tid=30513 tname=coro-main rpc_server.cpp:30 RegisterService | registered rpc service name=raft.RaftRpc
+2026-04-23 19:16:04.846 INFO pid=30513 tid=30516 tname=rpc-worker-1 thread_pool.cpp:11 operator() | worker thread started index=1
+2026-04-23 19:16:04.847 INFO pid=30513 tid=30515 tname=rpc-worker-0 thread_pool.cpp:11 operator() | worker thread started index=0
+2026-04-23 19:16:04.847 INFO pid=30513 tid=30517 tname=rpc-worker-2 thread_pool.cpp:11 operator() | worker thread started index=2
+2026-04-23 19:16:04.847 INFO pid=30513 tid=30518 tname=rpc-worker-3 thread_pool.cpp:11 operator() | worker thread started index=3
+2026-04-23 19:16:04.848 INFO pid=30513 tid=30514 tname=rpc-server-main rpc_server.cpp:53 Run | rpc server started ip=127.0.0.1 port=18901 io_threads=1 worker_threads=4 services=1
+2026-04-23 19:16:05.046 INFO pid=30513 tid=30513 tname=coro-main rpc_channel.cpp:31 RpcChannel | rpc channel created peer=127.0.0.1:18901
+2026-04-23 19:16:05.047 INFO pid=30513 tid=30519 tname=rpc-channel-io rpc_channel.cpp:150 onConnection | rpc channel connected peer=127.0.0.1:18901
+2026-04-23 19:16:05.048 INFO pid=30513 tid=30513 tname=coro-main coro_smoke.cpp:227 main | OK: coroutine resumed on raft thread; term=42 voteGranted=1
+2026-04-23 19:16:47.723 INFO pid=30580 tid=30580 tname=coro-main rpc_server.cpp:30 RegisterService | registered rpc service name=raft.RaftRpc
+2026-04-23 19:16:47.728 INFO pid=30580 tid=30582 tname=rpc-worker-0 thread_pool.cpp:11 operator() | worker thread started index=0
+2026-04-23 19:16:47.730 INFO pid=30580 tid=30583 tname=rpc-worker-1 thread_pool.cpp:11 operator() | worker thread started index=1
+2026-04-23 19:16:47.730 INFO pid=30580 tid=30584 tname=rpc-worker-2 thread_pool.cpp:11 operator() | worker thread started index=2
+2026-04-23 19:16:47.732 INFO pid=30580 tid=30585 tname=rpc-worker-3 thread_pool.cpp:11 operator() | worker thread started index=3
+2026-04-23 19:16:47.732 INFO pid=30580 tid=30581 tname=rpc-server-main rpc_server.cpp:53 Run | rpc server started ip=127.0.0.1 port=18901 io_threads=1 worker_threads=4 services=1
+2026-04-23 19:16:47.926 INFO pid=30580 tid=30580 tname=coro-main rpc_channel.cpp:31 RpcChannel | rpc channel created peer=127.0.0.1:18901
+2026-04-23 19:16:47.927 INFO pid=30580 tid=30586 tname=rpc-channel-io rpc_channel.cpp:150 onConnection | rpc channel connected peer=127.0.0.1:18901
+2026-04-23 19:16:47.929 INFO pid=30580 tid=30580 tname=coro-main coro_smoke.cpp:227 main | OK: coroutine resumed on raft thread; term=42 voteGranted=1
+2026-04-23 19:23:00.260 INFO pid=31367 tid=31367 tname=coro-main rpc_server.cpp:30 RegisterService | registered rpc service name=raft.RaftRpc
+2026-04-23 19:23:00.260 INFO pid=31367 tid=31369 tname=rpc-worker-0 thread_pool.cpp:11 operator() | worker thread started index=0
+2026-04-23 19:23:00.261 INFO pid=31367 tid=31368 tname=rpc-server-main rpc_server.cpp:53 Run | rpc server started ip=127.0.0.1 port=18901 io_threads=1 worker_threads=4 services=1
+2026-04-23 19:23:00.261 INFO pid=31367 tid=31372 tname=rpc-worker-3 thread_pool.cpp:11 operator() | worker thread started index=3
+2026-04-23 19:23:00.261 INFO pid=31367 tid=31370 tname=rpc-worker-1 thread_pool.cpp:11 operator() | worker thread started index=1
+2026-04-23 19:23:00.261 INFO pid=31367 tid=31371 tname=rpc-worker-2 thread_pool.cpp:11 operator() | worker thread started index=2
+2026-04-23 19:23:00.461 INFO pid=31367 tid=31367 tname=coro-main rpc_channel.cpp:31 RpcChannel | rpc channel created peer=127.0.0.1:18901
+2026-04-23 19:23:00.461 INFO pid=31367 tid=31373 tname=rpc-channel-io rpc_channel.cpp:150 onConnection | rpc channel connected peer=127.0.0.1:18901
+2026-04-23 19:23:00.461 INFO pid=31367 tid=31374 tname=raft-logic coro_smoke.cpp:92 run | RaftThread: executed task
+2026-04-23 19:23:03.462 WARN pid=31367 tid=31373 tname=rpc-channel-io rpc_channel.cpp:239 finishCall | rpc call failed request_id=1 service=raft.RaftRpc method=RequestVote error=RPC timeout
+2026-04-23 19:23:03.462 ERROR pid=31367 tid=31367 tname=coro-main coro_smoke.cpp:212 main | FAIL: controller reported failure
+2026-04-26 13:39:56.416 INFO pid=42332 tid=42332 tname=smoke-main rpc_channel.cpp:31 RpcChannel | rpc channel created peer=127.0.0.1:19102
+2026-04-26 13:39:56.417 INFO pid=42332 tid=42332 tname=smoke-main rpc_channel.cpp:31 RpcChannel | rpc channel created peer=127.0.0.1:19103
+2026-04-26 13:39:56.418 INFO pid=42332 tid=42332 tname=smoke-main rpc_channel.cpp:31 RpcChannel | rpc channel created peer=127.0.0.1:19101
+2026-04-26 13:39:56.418 INFO pid=42332 tid=42332 tname=smoke-main rpc_channel.cpp:31 RpcChannel | rpc channel created peer=127.0.0.1:19103
+2026-04-26 13:39:56.418 INFO pid=42332 tid=42332 tname=smoke-main rpc_channel.cpp:31 RpcChannel | rpc channel created peer=127.0.0.1:19101
+2026-04-26 13:39:56.419 INFO pid=42332 tid=42332 tname=smoke-main rpc_channel.cpp:31 RpcChannel | rpc channel created peer=127.0.0.1:19102
+2026-04-26 13:39:56.419 INFO pid=42332 tid=42332 tname=smoke-main rpc_server.cpp:30 RegisterService | registered rpc service name=raft.RaftRpc
+2026-04-26 13:39:56.419 INFO pid=42332 tid=42332 tname=smoke-main raft_node.cpp:83 Start | raft node started self_id=0 listen=127.0.0.1:19101 peers=2
+2026-04-26 13:39:56.419 INFO pid=42332 tid=42332 tname=smoke-main rpc_server.cpp:30 RegisterService | registered rpc service name=raft.RaftRpc
+2026-04-26 13:39:56.419 INFO pid=42332 tid=42332 tname=smoke-main raft_node.cpp:83 Start | raft node started self_id=1 listen=127.0.0.1:19102 peers=2
+2026-04-26 13:39:56.419 INFO pid=42332 tid=42332 tname=smoke-main rpc_server.cpp:30 RegisterService | registered rpc service name=raft.RaftRpc
+2026-04-26 13:39:56.419 INFO pid=42332 tid=42332 tname=smoke-main raft_node.cpp:83 Start | raft node started self_id=2 listen=127.0.0.1:19103 peers=2
+2026-04-26 13:39:56.419 INFO pid=42332 tid=42340 tname=rpc-server-main rpc_server.cpp:53 Run | rpc server started ip=127.0.0.1 port=19101 io_threads=1 worker_threads=4 services=1
+2026-04-26 13:39:56.420 INFO pid=42332 tid=42342 tname=rpc-server-main rpc_server.cpp:53 Run | rpc server started ip=127.0.0.1 port=19102 io_threads=1 worker_threads=4 services=1
+2026-04-26 13:39:56.420 INFO pid=42332 tid=42346 tname=rpc-worker-0 thread_pool.cpp:11 operator() | worker thread started index=0
+2026-04-26 13:39:56.420 INFO pid=42332 tid=42350 tname=rpc-worker-0 thread_pool.cpp:11 operator() | worker thread started index=0
+2026-04-26 13:39:56.420 INFO pid=42332 tid=42344 tname=rpc-server-main rpc_server.cpp:53 Run | rpc server started ip=127.0.0.1 port=19103 io_threads=1 worker_threads=4 services=1
+2026-04-26 13:39:56.420 INFO pid=42332 tid=42347 tname=rpc-worker-1 thread_pool.cpp:11 operator() | worker thread started index=1
+2026-04-26 13:39:56.420 INFO pid=42332 tid=42348 tname=rpc-worker-2 thread_pool.cpp:11 operator() | worker thread started index=2
+2026-04-26 13:39:56.420 INFO pid=42332 tid=42349 tname=rpc-worker-3 thread_pool.cpp:11 operator() | worker thread started index=3
+2026-04-26 13:39:56.420 INFO pid=42332 tid=42352 tname=rpc-worker-2 thread_pool.cpp:11 operator() | worker thread started index=2
+2026-04-26 13:39:56.420 INFO pid=42332 tid=42353 tname=rpc-worker-3 thread_pool.cpp:11 operator() | worker thread started index=3
+2026-04-26 13:39:56.420 INFO pid=42332 tid=42351 tname=rpc-worker-1 thread_pool.cpp:11 operator() | worker thread started index=1
+2026-04-26 13:39:56.420 INFO pid=42332 tid=42356 tname=rpc-worker-2 thread_pool.cpp:11 operator() | worker thread started index=2
+2026-04-26 13:39:56.420 INFO pid=42332 tid=42357 tname=rpc-worker-3 thread_pool.cpp:11 operator() | worker thread started index=3
+2026-04-26 13:39:56.420 INFO pid=42332 tid=42354 tname=rpc-worker-0 thread_pool.cpp:11 operator() | worker thread started index=0
+2026-04-26 13:39:56.421 INFO pid=42332 tid=42355 tname=rpc-worker-1 thread_pool.cpp:11 operator() | worker thread started index=1
+2026-04-26 13:39:56.738 INFO pid=42332 tid=42345 tname=raft-main raft_node.cpp:232 BecomeCandidate | become Candidate term=1
+2026-04-26 13:39:56.798 INFO pid=42332 tid=42343 tname=raft-main raft_node.cpp:232 BecomeCandidate | become Candidate term=1
+2026-04-26 13:39:56.806 INFO pid=42332 tid=42341 tname=raft-main raft_node.cpp:232 BecomeCandidate | become Candidate term=1
+2026-04-26 13:39:56.918 INFO pid=42332 tid=42335 tname=rpc-channel-io rpc_channel.cpp:150 onConnection | rpc channel connected peer=127.0.0.1:19103
+2026-04-26 13:39:56.918 INFO pid=42332 tid=42336 tname=rpc-channel-io rpc_channel.cpp:150 onConnection | rpc channel connected peer=127.0.0.1:19101
+2026-04-26 13:39:56.918 INFO pid=42332 tid=42337 tname=rpc-channel-io rpc_channel.cpp:150 onConnection | rpc channel connected peer=127.0.0.1:19103
+2026-04-26 13:39:56.919 INFO pid=42332 tid=42338 tname=rpc-channel-io rpc_channel.cpp:150 onConnection | rpc channel connected peer=127.0.0.1:19101
+2026-04-26 13:39:56.929 INFO pid=42332 tid=42334 tname=rpc-channel-io rpc_channel.cpp:150 onConnection | rpc channel connected peer=127.0.0.1:19102
+2026-04-26 13:39:56.929 INFO pid=42332 tid=42339 tname=rpc-channel-io rpc_channel.cpp:150 onConnection | rpc channel connected peer=127.0.0.1:19102
+2026-04-26 13:39:57.021 INFO pid=42332 tid=42343 tname=raft-main raft_node.cpp:232 BecomeCandidate | become Candidate term=2
+2026-04-26 13:39:57.021 INFO pid=42332 tid=42345 tname=raft-main raft_node.cpp:209 BecomeFollower | become Follower term=2 leader=-1
+2026-04-26 13:39:57.021 INFO pid=42332 tid=42341 tname=raft-main raft_node.cpp:209 BecomeFollower | become Follower term=2 leader=-1
+2026-04-26 13:39:57.021 INFO pid=42332 tid=42343 tname=raft-main raft_node.cpp:313 BecomeLeader | become Leader term=2 last_index=0
+2026-04-26 13:39:57.120 INFO pid=42332 tid=42332 tname=smoke-main raft_node_smoke.cpp:130 main | leader emerged: node=1 term=2
+2026-04-26 13:39:57.221 INFO pid=42332 tid=42332 tname=smoke-main raft_node_smoke.cpp:175 main | node=0 committed_up_to=3
+2026-04-26 13:39:57.221 INFO pid=42332 tid=42332 tname=smoke-main raft_node_smoke.cpp:175 main | node=1 committed_up_to=3
+2026-04-26 13:39:57.221 INFO pid=42332 tid=42332 tname=smoke-main raft_node_smoke.cpp:175 main | node=2 committed_up_to=3
+2026-04-26 13:39:57.221 INFO pid=42332 tid=42332 tname=smoke-main raft_node_smoke.cpp:181 main | OK: leader=1 term=2 all 3 commands committed on every node
+2026-04-26 13:39:57.221 INFO pid=42332 tid=42332 tname=smoke-main raft_node.cpp:101 Stop | raft node stopped self_id=0
+2026-04-26 13:39:57.221 INFO pid=42332 tid=42332 tname=smoke-main raft_node.cpp:101 Stop | raft node stopped self_id=1
+2026-04-26 13:39:57.221 INFO pid=42332 tid=42332 tname=smoke-main raft_node.cpp:101 Stop | raft node stopped self_id=2
