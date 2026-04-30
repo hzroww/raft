@@ -137,6 +137,9 @@ target_link_libraries(raft_core PUBLIC
 # kv_server library  (client-facing KV RPC + in-memory state machine)
 # ---------------------------------------------------------------------------
 add_library(kv_server STATIC
+    kvserver/src/commit_wait_registry.cpp
+    kvserver/src/file_raft_storage.cpp
+    kvserver/src/kv_raft_apply_sink.cpp
     kvserver/src/kv_store.cpp
     kvserver/src/kv_server_service.cpp
 )
@@ -146,6 +149,7 @@ target_include_directories(kv_server PUBLIC
     proto
 )
 target_link_libraries(kv_server PUBLIC
+    raft_core
     rpc_framework
     proto_gen
     kv_db
@@ -171,5 +175,11 @@ set_target_properties(coro_smoke PROPERTIES
 add_executable(raft_node_smoke test/raft_node_smoke.cpp)
 target_link_libraries(raft_node_smoke PRIVATE raft_core)
 set_target_properties(raft_node_smoke PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin
+)
+
+add_executable(kv_bridge_smoke test/kv_bridge_smoke.cpp)
+target_link_libraries(kv_bridge_smoke PRIVATE kv_server)
+set_target_properties(kv_bridge_smoke PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin
 )

@@ -15,6 +15,7 @@
 #include <google/protobuf/service.h>
 
 #include <atomic>
+#include <cstddef>
 #include <condition_variable>
 #include <deque>
 #include <functional>
@@ -64,6 +65,9 @@ public:
         int election_timeout_max_ms = 300;
         int heartbeat_interval_ms   = 50;
         int rpc_timeout_ms          = 1000;
+        int io_threads              = 1;
+        size_t worker_threads       = 4;
+        bool start_rpc_server       = true;
 
         // Optional services registered on the same RpcServer as RaftRpc.
         // The owner must keep them alive for at least as long as this node.
@@ -143,6 +147,7 @@ private:
     // Persist current_term_ / voted_for_ via storage. Cheap no-op when
     // storage is the null implementation.
     void PersistHardState();
+    void LoadPersistentLog();
 
     // ---- Coroutines (fan-out) ----
     // One RequestVote attempt against |peer_index| for |election_term|.

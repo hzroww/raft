@@ -7,6 +7,7 @@
 #include <algorithm>
 #include <chrono>
 #include <future>
+#include <stdexcept>
 #include <utility>
 
 namespace raft_core {
@@ -50,6 +51,7 @@ RaftNode::RaftNode(Config           cfg,
             voted_for_    = v;
             current_term_atomic_.store(t, std::memory_order_release);
         }
+        LoadPersistentLog();
     }
 }
 
@@ -68,17 +70,21 @@ void RaftNode::Start() {
         return;
     }
 
-    rpc_server_.RegisterService(this);
-    for (auto* service : cfg_.extra_services) {
-        if (service) {
-            rpc_server_.RegisterService(service);
+    if (cfg_.start_rpc_server) {
+        rpc_server_.RegisterService(this);
+        for (auto* service : cfg_.extra_services) {
+            if (service) {
+                rpc_server_.RegisterService(service);
+            }
         }
-    }
+        rpc_server_.setIoThreadNum(cfg_.io_threads);
+        rpc_server_.setWorkerThreads(cfg_.worker_threads);
 
-    rpc_thread_ = std::thread([this]() {
-        raft::logging::SetCurrentThreadName(kRpcThreadName);
-        rpc_server_.Run(cfg_.listen_ip, cfg_.listen_port);
-    });
+        rpc_thread_ = std::thread([this]() {
+            raft::logging::SetCurrentThreadName(kRpcThreadName);
+            rpc_server_.Run(cfg_.listen_ip, cfg_.listen_port);
+        });
+    }
 
     main_thread_ = std::thread([this]() {
         raft::logging::SetCurrentThreadName(kMainThreadName);
@@ -325,6 +331,25 @@ void RaftNode::BecomeLeader() {
 void RaftNode::PersistHardState() {
     if (!storage_) return;
     storage_->WriteHardState(current_term_, voted_for_);
+}
+
+void RaftNode::LoadPersistentLog() {
+    Index last_index = 0;
+    Term  last_term  = 0;
+    storage_->LastIndexTerm(&last_index, &last_term);
+    for (Index idx = 1; idx <= last_index; ++idx) {
+        LogEntry entry;
+        if (!storage_->EntryAt(idx, &entry)) {
+            throw std::runtime_error("persistent raft log is missing an entry");
+        }
+        if (entry.index != idx) {
+            throw std::runtime_error("persistent raft log has a non-contiguous entry");
+        }
+        log_cache_.AppendEntry(std::move(entry));
+    }
+    if (log_cache_.LastTerm() != last_term) {
+        throw std::runtime_error("persistent raft log tail term mismatch");
+    }
 }
 
 // ===========================================================================
@@ -599,6 +624,7 @@ bool RaftNode::Propose(std::string command, Index* assigned_index) {
             log_cache_.EntryAt(idx, &e);
             storage_->AppendEntries({e});
         }
+        MaybeAdvanceCommitIndex();
         BroadcastAppendEntries();
         p.set_value({true, idx});
     });

@@ -1,8 +1,11 @@
 #pragma once
 
+#include "commit_wait_registry.h"
 #include "kv.pb.h"
 #include "kv_store.h"
+#include "raft_node.h"
 
+#include <chrono>
 #include <cstdint>
 #include <string>
 
@@ -10,7 +13,13 @@ namespace kvserver {
 
 class KvServerService : public kv::KvServerRpc {
 public:
-    KvServerService(KvStore* store, int32_t self_id);
+    KvServerService(KvStore* store,
+                    raft_core::RaftNode* raft_node,
+                    CommitWaitRegistry* wait_registry,
+                    std::chrono::milliseconds commit_timeout =
+                        std::chrono::milliseconds(5000));
+
+    void SetRaftNode(raft_core::RaftNode* raft_node) { raft_node_ = raft_node; }
 
     void Put(google::protobuf::RpcController* controller,
              const kv::PutRequest*            request,
@@ -32,9 +41,13 @@ private:
                          const std::string& client_id,
                          int64_t            request_id,
                          std::string*       error) const;
+    bool IsLeader() const;
+    int32_t LeaderIdForResponse() const;
 
     KvStore* store_;
-    int32_t  self_id_;
+    raft_core::RaftNode* raft_node_;
+    CommitWaitRegistry* wait_registry_;
+    std::chrono::milliseconds commit_timeout_;
 };
 
 }  // namespace kvserver
