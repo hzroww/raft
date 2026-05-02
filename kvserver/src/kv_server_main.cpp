@@ -22,7 +22,8 @@ void PrintUsage(const char* program) {
               << " [--ip 0.0.0.0] [--port 8000] [--node_id 0]"
               << " [--data_dir data/node_0]"
               << " [--raft_peers 0@127.0.0.1:8000,1@127.0.0.1:8001]"
-              << " [--io_threads 1] [--worker_threads 4]\n";
+              << " [--io_threads 1] [--worker_threads 4]"
+              << " [--snapshot_threshold 1000]\n";
 }
 
 bool NextArg(int argc, char** argv, int* index, std::string* value) {
@@ -85,6 +86,7 @@ int main(int argc, char** argv) {
     int32_t     node_id = 0;
     int         io_threads = 1;
     int         worker_threads = 4;
+    uint64_t    snapshot_threshold = 1000;
     std::string data_dir;
     std::string raft_peers;
 
@@ -106,6 +108,8 @@ int main(int argc, char** argv) {
                 data_dir = value;
             } else if (arg == "--raft_peers" && NextArg(argc, argv, &i, &value)) {
                 raft_peers = value;
+            } else if (arg == "--snapshot_threshold" && NextArg(argc, argv, &i, &value)) {
+                snapshot_threshold = static_cast<uint64_t>(std::stoull(value));
             } else if (arg == "--help" || arg == "-h") {
                 PrintUsage(argv[0]);
                 return 0;
@@ -132,7 +136,11 @@ int main(int argc, char** argv) {
     kvserver::FileRaftStorage storage(data_dir);
     kvserver::KvStore store;
     kvserver::CommitWaitRegistry wait_registry;
-    kvserver::KvApplySink apply_sink(&storage, &store, &wait_registry);
+    // RaftNode is constructed below; pass nullptr for now and back-fill via
+    // SetRaftNode() after construction so that LoadPersistentLog's call to
+    // OnSnapshotInstalled doesn't attempt to use an incomplete RaftNode.
+    kvserver::KvApplySink apply_sink(&storage, &store, &wait_registry,
+                                     /*raft_node=*/nullptr, snapshot_threshold);
     kvserver::KvServerService service(&store, nullptr, &wait_registry);
 
     raft_core::RaftNode::Config cfg;
@@ -145,13 +153,15 @@ int main(int argc, char** argv) {
     cfg.extra_services.push_back(&service);
 
     raft_core::RaftNode raft_node(std::move(cfg), &storage, &apply_sink);
+    apply_sink.SetRaftNode(&raft_node);
     service.SetRaftNode(&raft_node);
 
     LOG_INFO() << "kv server starting node_id=" << node_id
                << " listen=" << ip << ":" << port
                << " data_dir=" << data_dir
                << " io_threads=" << io_threads
-               << " worker_threads=" << worker_threads;
+               << " worker_threads=" << worker_threads
+               << " snapshot_threshold=" << snapshot_threshold;
     raft_node.Start();
     raft_node.WaitForShutdown();
     return 0;

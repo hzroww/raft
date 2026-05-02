@@ -10,10 +10,18 @@ namespace kvserver {
 
 KvApplySink::KvApplySink(raft_core::IRaftStorage* storage,
                          KvStore* store,
-                         CommitWaitRegistry* wait_registry)
+                         CommitWaitRegistry* wait_registry,
+                         raft_core::RaftNode* raft_node,
+                         uint64_t snapshot_threshold)
     : storage_(storage),
       store_(store),
-      wait_registry_(wait_registry) {}
+      wait_registry_(wait_registry),
+      raft_node_(raft_node),
+      snapshot_threshold_(snapshot_threshold) {}
+
+void KvApplySink::SetRaftNode(raft_core::RaftNode* raft_node) {
+    raft_node_ = raft_node;
+}
 
 void KvApplySink::OnCommitted(raft_core::Index start_index,
                               raft_core::Index end_index) {
@@ -42,6 +50,17 @@ void KvApplySink::OnCommitted(raft_core::Index start_index,
             wait_registry_->Notify(index, std::move(result));
         }
     }
+
+    applied_since_snapshot_ += static_cast<uint64_t>(end_index - start_index + 1);
+
+    if (snapshot_threshold_ > 0 &&
+        applied_since_snapshot_ >= snapshot_threshold_ &&
+        raft_node_ && store_) {
+        std::string blob = store_->SaveSnapshot();
+        raft_node_->TakeSnapshotAsync(end_index, std::move(blob));
+        applied_since_snapshot_ = 0;
+        LOG_DEBUG() << "triggered async snapshot at index=" << end_index;
+    }
 }
 
 void KvApplySink::OnSnapshotInstalled(raft_core::Index last_included_index,
@@ -58,6 +77,10 @@ void KvApplySink::OnSnapshotInstalled(raft_core::Index last_included_index,
                     << " term=" << last_included_term;
         std::abort();
     }
+
+    // Reset the counter so we don't trigger a redundant snapshot immediately
+    // after restoring one.
+    applied_since_snapshot_ = 0;
 }
 
 }  // namespace kvserver

@@ -231,6 +231,10 @@ void RaftNode::BecomeFollower(Term new_term, NodeId leader_id) {
     election_timer_.Reset();
     heartbeat_timer_.Disable();
 
+    for (auto& p : peers_) {
+        p->SetSnapshotInFlight(false);
+    }
+
     if (term_changed) {
         PersistHardState();
     }
@@ -405,7 +409,10 @@ Task RaftNode::ReplicateOnce(size_t peer_index, Term leader_term) {
     Index next_idx  = peer.NextIndex();
     if (next_idx < 1) next_idx = 1;
     if (next_idx <= log_cache_.SnapshotLastIndex()) {
-        SendSnapshotOnce(peer_index, leader_term);
+        if (!peer.SnapshotInFlight()) {
+            peer.SetSnapshotInFlight(true);
+            SendSnapshotOnce(peer_index, leader_term);
+        }
         co_return;
     }
     Index prev_idx  = next_idx - 1;
@@ -474,6 +481,7 @@ Task RaftNode::SendSnapshotOnce(size_t peer_index, Term leader_term) {
 
     if (!storage_) {
         peer.SetNextIndex(log_cache_.SnapshotLastIndex() + 1);
+        peer.SetSnapshotInFlight(false);
         co_return;
     }
 
@@ -482,6 +490,7 @@ Task RaftNode::SendSnapshotOnce(size_t peer_index, Term leader_term) {
     std::string snapshot_data;
     if (!storage_->LoadSnapshot(&snapshot_index, &snapshot_term, &snapshot_data)) {
         peer.SetNextIndex(log_cache_.SnapshotLastIndex() + 1);
+        peer.SetSnapshotInFlight(false);
         co_return;
     }
 
@@ -502,19 +511,24 @@ Task RaftNode::SendSnapshotOnce(size_t peer_index, Term leader_term) {
         },
         ResumePoster());
 
+    // All exit paths below must clear the in-flight flag.
     if (state_ != RaftState::Leader || current_term_ != leader_term) {
+        peer.SetSnapshotInFlight(false);
         co_return;
     }
     if (ctl.Failed()) {
         LOG_DEBUG() << "InstallSnapshot failed peer=" << peer.Id()
                     << " err=" << ctl.ErrorText();
+        peer.SetSnapshotInFlight(false);
         co_return;
     }
     if (resp.term() > current_term_) {
+        peer.SetSnapshotInFlight(false);
         BecomeFollower(resp.term(), kNoNode);
         co_return;
     }
 
+    peer.SetSnapshotInFlight(false);
     if (snapshot_index > peer.MatchIndex()) {
         peer.SetMatchIndex(snapshot_index);
     }
@@ -812,32 +826,50 @@ bool RaftNode::Propose(std::string command, Index* assigned_index) {
     return pair.first;
 }
 
+void RaftNode::DoTakeSnapshot(Index last_included_index, std::string data) {
+    if (!storage_ ||
+        last_included_index <= log_cache_.SnapshotLastIndex() ||
+        last_included_index > commit_index_ ||
+        last_included_index > log_cache_.LastIndex()) {
+        return;
+    }
+
+    Term last_included_term = log_cache_.TermAt(last_included_index);
+    if (last_included_term == 0) {
+        return;
+    }
+
+    storage_->SaveSnapshot(last_included_index, last_included_term, data);
+    storage_->TruncatePrefix(last_included_index);
+    log_cache_.DiscardPrefix(last_included_index, last_included_term);
+
+    LOG_DEBUG() << "snapshot taken index=" << last_included_index
+                << " term=" << last_included_term;
+}
+
 bool RaftNode::TakeSnapshot(Index last_included_index, std::string data) {
     std::promise<bool> p;
     auto               fut = p.get_future();
 
     Post([this, last_included_index, data = std::move(data), &p]() mutable {
-        if (!storage_ ||
-            last_included_index <= log_cache_.SnapshotLastIndex() ||
-            last_included_index > commit_index_ ||
-            last_included_index > log_cache_.LastIndex()) {
-            p.set_value(false);
-            return;
+        bool ok = (storage_ &&
+                   last_included_index > log_cache_.SnapshotLastIndex() &&
+                   last_included_index <= commit_index_ &&
+                   last_included_index <= log_cache_.LastIndex() &&
+                   log_cache_.TermAt(last_included_index) != 0);
+        if (ok) {
+            DoTakeSnapshot(last_included_index, std::move(data));
         }
-
-        Term last_included_term = log_cache_.TermAt(last_included_index);
-        if (last_included_term == 0) {
-            p.set_value(false);
-            return;
-        }
-
-        storage_->SaveSnapshot(last_included_index, last_included_term, data);
-        storage_->TruncatePrefix(last_included_index);
-        log_cache_.DiscardPrefix(last_included_index, last_included_term);
-        p.set_value(true);
+        p.set_value(ok);
     });
 
     return fut.get();
+}
+
+void RaftNode::TakeSnapshotAsync(Index last_included_index, std::string data) {
+    Post([this, last_included_index, data = std::move(data)]() mutable {
+        DoTakeSnapshot(last_included_index, std::move(data));
+    });
 }
 
 }  // namespace raft_core

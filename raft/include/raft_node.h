@@ -112,6 +112,11 @@ public:
     // log prefix covered by |last_included_index|.
     bool TakeSnapshot(Index last_included_index, std::string data);
 
+    // Non-blocking variant: posts the snapshot work onto the main thread and
+    // returns immediately. Safe to call from the main thread itself (e.g.
+    // from within OnCommitted). Caller cannot observe success/failure.
+    void TakeSnapshotAsync(Index last_included_index, std::string data);
+
     // ---- RaftRpc service handlers (server-side) ----
     // Called by RpcServer worker threads. They Post() the actual work
     // onto the raft main thread and let the closure fire from there.
@@ -168,6 +173,9 @@ private:
     void AppendNoopEntry();
     void MaybeAdvanceCommitIndex();
     void ApplyCommittedRange();
+
+    // Core snapshot logic; always runs on main thread.
+    void DoTakeSnapshot(Index last_included_index, std::string data);
 
     // Resume poster used by RpcAwaitable. Just forwards to Post().
     std::function<void(std::function<void()>)> ResumePoster();

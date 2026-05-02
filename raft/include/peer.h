@@ -59,19 +59,26 @@ public:
 
     // Convenience: re-init replication state when becoming leader.
     void ResetForLeader(Index leader_last_index) {
-        next_index_  = leader_last_index + 1;
-        match_index_ = 0;
+        next_index_          = leader_last_index + 1;
+        match_index_         = 0;
+        snapshot_in_flight_  = false;
     }
+
+    // True while a SendSnapshotOnce coroutine is outstanding for this peer.
+    // Used to prevent concurrent duplicate InstallSnapshot RPCs.
+    bool SnapshotInFlight() const { return snapshot_in_flight_; }
+    void SetSnapshotInFlight(bool v) { snapshot_in_flight_ = v; }
 
 private:
     PeerInfo                       info_;
     std::unique_ptr<RpcChannel>    channel_;
     ::raft::RaftRpc_Stub           stub_;
 
-    Index next_index_   = 1;
-    Index match_index_  = 0;
-    bool  vote_replied_ = false;
-    bool  vote_granted_ = false;
+    Index next_index_          = 1;
+    Index match_index_         = 0;
+    bool  vote_replied_        = false;
+    bool  vote_granted_        = false;
+    bool  snapshot_in_flight_  = false;
 };
 
 }  // namespace raft_core
