@@ -18,6 +18,7 @@ public:
 
     void AppendEntries(const std::vector<raft_core::LogEntry>& entries) override;
     void TruncateSuffix(raft_core::Index from_index) override;
+    void TruncatePrefix(raft_core::Index through_index) override;
     bool EntryAt(raft_core::Index index, raft_core::LogEntry* out) override;
     void LastIndexTerm(raft_core::Index* index, raft_core::Term* term) override;
 

@@ -23,6 +23,9 @@ void KvApplySink::OnCommitted(raft_core::Index start_index,
             LOG_ERROR() << "missing committed raft log entry index=" << index;
             std::abort();
         }
+        if (entry.command.empty()) {
+            continue;
+        }
 
         kv::KvCommand command;
         if (!DecodeCommand(entry.command, &command)) {
@@ -38,6 +41,22 @@ void KvApplySink::OnCommitted(raft_core::Index start_index,
         if (wait_registry_) {
             wait_registry_->Notify(index, std::move(result));
         }
+    }
+}
+
+void KvApplySink::OnSnapshotInstalled(raft_core::Index last_included_index,
+                                      raft_core::Term last_included_term,
+                                      const std::string& data) {
+    if (!store_) {
+        LOG_ERROR() << "kv store is not configured for snapshot index="
+                    << last_included_index;
+        std::abort();
+    }
+    if (!store_->LoadSnapshot(data)) {
+        LOG_ERROR() << "failed to install kv snapshot index="
+                    << last_included_index
+                    << " term=" << last_included_term;
+        std::abort();
     }
 }
 

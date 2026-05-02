@@ -21,6 +21,7 @@
 #include <iostream>
 #include <memory>
 #include <mutex>
+#include <string>
 #include <thread>
 #include <vector>
 
@@ -36,6 +37,7 @@ public:
         last_start_ = start;
         total_committed_ += (end - start + 1);
     }
+    void OnSnapshotInstalled(Index, Term, const std::string&) override {}
     Index LastEnd() const {
         std::lock_guard<std::mutex> lk(mu_);
         return last_end_;
@@ -139,13 +141,14 @@ int main() {
         }
     }
 
-    // Propose three commands on the leader.
+    // The new leader first appends a no-op entry, so client commands start
+    // after that leader-initialization entry.
     for (int k = 0; k < 3; ++k) {
         Index assigned = 0;
         if (!bundles[leader]->node->Propose("op-" + std::to_string(k), &assigned)) {
             Fail("Propose() failed on leader");
         }
-        if (assigned != static_cast<Index>(k + 1)) {
+        if (assigned != static_cast<Index>(k + 2)) {
             Fail("unexpected assigned index");
         }
     }
@@ -162,7 +165,7 @@ int main() {
     while (std::chrono::steady_clock::now() < commit_deadline) {
         bool all_done = true;
         for (int i = 0; i < kN; ++i) {
-            if (bundles[i]->sink.LastEnd() < 3) {
+            if (bundles[i]->sink.LastEnd() < 4) {
                 all_done = false;
                 break;
             }
@@ -173,7 +176,7 @@ int main() {
     for (int i = 0; i < kN; ++i) {
         Index e = bundles[i]->sink.LastEnd();
         LOG_INFO() << "node=" << i << " committed_up_to=" << static_cast<long long>(e);
-        if (e < 3) {
+        if (e < 4) {
             Fail("commit did not propagate to all nodes within 5s");
         }
     }

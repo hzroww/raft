@@ -22,6 +22,24 @@ constexpr const char* kRpcThreadName  = "raft-rpcsrv";
 // outside of stop, but provides a safe upper bound for cv.wait_until).
 constexpr std::chrono::milliseconds kIdleWait{500};
 
+Index FirstIndexOfTerm(const LogCache& log, Term term) {
+    for (Index idx = log.SnapshotLastIndex() + 1; idx <= log.LastIndex(); ++idx) {
+        if (log.TermAt(idx) == term) {
+            return idx;
+        }
+    }
+    return 0;
+}
+
+Index LastIndexOfTerm(const LogCache& log, Term term) {
+    for (Index idx = log.LastIndex(); idx > log.SnapshotLastIndex(); --idx) {
+        if (log.TermAt(idx) == term) {
+            return idx;
+        }
+    }
+    return 0;
+}
+
 }  // namespace
 
 // ===========================================================================
@@ -324,7 +342,10 @@ void RaftNode::BecomeLeader() {
     LOG_INFO() << "become Leader term=" << current_term_
                << " last_index=" << last;
 
-    // Send an immediate empty heartbeat so peers learn the new leader fast.
+    // Commit an entry in this term so older entries can be safely advanced.
+    AppendNoopEntry();
+
+    // Send an immediate heartbeat/replication round so peers learn the new leader fast.
     BroadcastAppendEntries();
 }
 
@@ -334,10 +355,24 @@ void RaftNode::PersistHardState() {
 }
 
 void RaftNode::LoadPersistentLog() {
+    Index snapshot_index = 0;
+    Term  snapshot_term = 0;
+    std::string snapshot_data;
+    if (storage_->LoadSnapshot(&snapshot_index, &snapshot_term, &snapshot_data)) {
+        log_cache_.DiscardPrefix(snapshot_index, snapshot_term);
+        commit_index_ = snapshot_index;
+        last_applied_ = snapshot_index;
+        if (apply_sink_) {
+            apply_sink_->OnSnapshotInstalled(snapshot_index,
+                                             snapshot_term,
+                                             snapshot_data);
+        }
+    }
+
     Index last_index = 0;
     Term  last_term  = 0;
     storage_->LastIndexTerm(&last_index, &last_term);
-    for (Index idx = 1; idx <= last_index; ++idx) {
+    for (Index idx = snapshot_index + 1; idx <= last_index; ++idx) {
         LogEntry entry;
         if (!storage_->EntryAt(idx, &entry)) {
             throw std::runtime_error("persistent raft log is missing an entry");
@@ -347,7 +382,7 @@ void RaftNode::LoadPersistentLog() {
         }
         log_cache_.AppendEntry(std::move(entry));
     }
-    if (log_cache_.LastTerm() != last_term) {
+    if (last_index > snapshot_index && log_cache_.LastTerm() != last_term) {
         throw std::runtime_error("persistent raft log tail term mismatch");
     }
 }
@@ -369,6 +404,10 @@ Task RaftNode::ReplicateOnce(size_t peer_index, Term leader_term) {
 
     Index next_idx  = peer.NextIndex();
     if (next_idx < 1) next_idx = 1;
+    if (next_idx <= log_cache_.SnapshotLastIndex()) {
+        SendSnapshotOnce(peer_index, leader_term);
+        co_return;
+    }
     Index prev_idx  = next_idx - 1;
     Term  prev_term = log_cache_.TermAt(prev_idx);
     auto  entries   = log_cache_.Slice(next_idx, log_cache_.LastIndex() + 1);
@@ -416,13 +455,82 @@ Task RaftNode::ReplicateOnce(size_t peer_index, Term leader_term) {
             MaybeAdvanceCommitIndex();
         }
     } else {
-        // Minimal AppendEntries phase: we only back off nextIndex by one.
-        // TODO(kvserver): use response.conflictIndex / conflictTerm hints
-        // for a faster rollback once strict log-consistency is enabled.
-        if (peer.NextIndex() > 1) {
-            peer.SetNextIndex(peer.NextIndex() - 1);
+        Index next = resp.conflictindex();
+        if (resp.conflictterm() != 0) {
+            Index last_with_term = LastIndexOfTerm(log_cache_, resp.conflictterm());
+            if (last_with_term > 0) {
+                next = last_with_term + 1;
+            }
+        }
+        if (next < 1) next = 1;
+        if (next < peer.NextIndex()) {
+            peer.SetNextIndex(next);
         }
     }
+}
+
+Task RaftNode::SendSnapshotOnce(size_t peer_index, Term leader_term) {
+    auto& peer = *peers_[peer_index];
+
+    if (!storage_) {
+        peer.SetNextIndex(log_cache_.SnapshotLastIndex() + 1);
+        co_return;
+    }
+
+    Index snapshot_index = 0;
+    Term snapshot_term = 0;
+    std::string snapshot_data;
+    if (!storage_->LoadSnapshot(&snapshot_index, &snapshot_term, &snapshot_data)) {
+        peer.SetNextIndex(log_cache_.SnapshotLastIndex() + 1);
+        co_return;
+    }
+
+    ::raft::InstallSnapshotArgs req;
+    req.set_term(leader_term);
+    req.set_leaderid(cfg_.self_id);
+    req.set_lastincludedindex(snapshot_index);
+    req.set_lastincludedterm(snapshot_term);
+    req.set_data(snapshot_data);
+    req.set_done(true);
+
+    ::raft::InstallSnapshotReply resp;
+    RpcController                ctl;
+
+    co_await MakeRpcAwaitable(
+        [&](google::protobuf::Closure* done) {
+            peer.Stub()->InstallSnapshot(&ctl, &req, &resp, done);
+        },
+        ResumePoster());
+
+    if (state_ != RaftState::Leader || current_term_ != leader_term) {
+        co_return;
+    }
+    if (ctl.Failed()) {
+        LOG_DEBUG() << "InstallSnapshot failed peer=" << peer.Id()
+                    << " err=" << ctl.ErrorText();
+        co_return;
+    }
+    if (resp.term() > current_term_) {
+        BecomeFollower(resp.term(), kNoNode);
+        co_return;
+    }
+
+    if (snapshot_index > peer.MatchIndex()) {
+        peer.SetMatchIndex(snapshot_index);
+    }
+    peer.SetNextIndex(snapshot_index + 1);
+    MaybeAdvanceCommitIndex();
+}
+
+void RaftNode::AppendNoopEntry() {
+    if (state_ != RaftState::Leader) return;
+    Index idx = log_cache_.Append(current_term_, "");
+    if (storage_) {
+        LogEntry e;
+        log_cache_.EntryAt(idx, &e);
+        storage_->AppendEntries({e});
+    }
+    MaybeAdvanceCommitIndex();
 }
 
 void RaftNode::MaybeAdvanceCommitIndex() {
@@ -485,14 +593,8 @@ void RaftNode::InstallSnapshot(google::protobuf::RpcController* /*controller*/,
                                const ::raft::InstallSnapshotArgs* request,
                                ::raft::InstallSnapshotReply*      response,
                                google::protobuf::Closure*         done) {
-    // Stub: only honour the term-update side effect. Snapshot transfer is
-    // intentionally unimplemented at this stage; the future kvserver
-    // module will plug it in via IRaftStorage.
     Post([this, request, response, done]() {
-        if (request->term() > current_term_) {
-            BecomeFollower(request->term(), request->leaderid());
-        }
-        response->set_term(current_term_);
+        HandleInstallSnapshot(request, response);
         done->Run();
     });
 }
@@ -551,45 +653,72 @@ void RaftNode::HandleAppendEntries(const ::raft::AppendEntriesArgs* req,
         election_timer_.Reset();
     }
 
-    // Minimal AppendEntries: skip strict prevLogIndex/prevLogTerm check.
-    // We only accept "well-formed" entry batches (contiguous, starting at
-    // a recognisable position) to avoid creating obvious gaps. A future
-    // pass will replace this with the strict figure-2 algorithm and use
-    // IRaftStorage for log mutation.
     bool accepted = true;
-    if (req->entries_size() > 0) {
-        Index first = req->entries(0).index();
-        Index last_local = log_cache_.LastIndex();
-        if (first <= last_local) {
-            // Overlap: truncate suffix and re-append.
-            log_cache_.TruncateSuffix(first);
-        } else if (first > last_local + 1) {
-            // Gap we cannot fill yet: refuse, leader will retry with
-            // earlier prevLogIndex.
-            accepted = false;
+    Index prev_idx = req->prevlogindex();
+    Term prev_term = req->prevlogterm();
+    if (prev_idx < log_cache_.SnapshotLastIndex()) {
+        accepted = false;
+        resp->set_conflictindex(log_cache_.SnapshotLastIndex() + 1);
+        resp->set_conflictterm(0);
+    } else if (prev_idx > 0 && log_cache_.TermAt(prev_idx) == 0) {
+        accepted = false;
+        resp->set_conflictindex(log_cache_.LastIndex() + 1);
+        resp->set_conflictterm(0);
+    } else if (prev_idx > 0 && log_cache_.TermAt(prev_idx) != prev_term) {
+        accepted = false;
+        Term conflict_term = log_cache_.TermAt(prev_idx);
+        resp->set_conflictterm(conflict_term);
+        resp->set_conflictindex(FirstIndexOfTerm(log_cache_, conflict_term));
+    }
+
+    std::vector<LogEntry> to_append;
+    Index truncate_from = 0;
+    if (accepted) {
+        for (int i = 0; i < req->entries_size(); ++i) {
+            const auto& pe = req->entries(i);
+            Index entry_index = pe.index();
+            if (entry_index <= log_cache_.SnapshotLastIndex()) {
+                continue;
+            }
+            Term local_term = log_cache_.TermAt(entry_index);
+            if (local_term == pe.term()) {
+                continue;
+            }
+            truncate_from = entry_index;
+            break;
         }
-        if (accepted) {
-            for (int i = 0; i < req->entries_size(); ++i) {
-                const auto& pe = req->entries(i);
-                LogEntry e;
-                e.term    = pe.term();
-                e.index   = pe.index();
-                e.command = pe.command();
-                log_cache_.AppendEntry(std::move(e));
-            }
+
+        if (truncate_from > 0) {
+            log_cache_.TruncateSuffix(truncate_from);
             if (storage_) {
-                std::vector<LogEntry> persist;
-                persist.reserve(req->entries_size());
-                for (int i = 0; i < req->entries_size(); ++i) {
-                    LogEntry e;
-                    e.term    = req->entries(i).term();
-                    e.index   = req->entries(i).index();
-                    e.command = req->entries(i).command();
-                    persist.push_back(std::move(e));
-                }
-                storage_->TruncateSuffix(first);
-                storage_->AppendEntries(persist);
+                storage_->TruncateSuffix(truncate_from);
             }
+        }
+
+        for (int i = 0; i < req->entries_size(); ++i) {
+            const auto& pe = req->entries(i);
+            if (pe.index() <= log_cache_.SnapshotLastIndex()) {
+                continue;
+            }
+            if (pe.index() <= log_cache_.LastIndex()) {
+                continue;
+            }
+            if (pe.index() != log_cache_.LastIndex() + 1) {
+                accepted = false;
+                resp->set_conflictindex(log_cache_.LastIndex() + 1);
+                resp->set_conflictterm(0);
+                break;
+            }
+            LogEntry e;
+            e.term    = pe.term();
+            e.index   = pe.index();
+            e.command = pe.command();
+            log_cache_.AppendEntry(e);
+            to_append.push_back(std::move(e));
+        }
+
+        if (accepted && storage_ && !to_append.empty()) {
+            storage_->AppendEntries(to_append);
         }
     }
 
@@ -603,6 +732,55 @@ void RaftNode::HandleAppendEntries(const ::raft::AppendEntriesArgs* req,
 
     resp->set_term(current_term_);
     resp->set_success(accepted);
+}
+
+void RaftNode::HandleInstallSnapshot(const ::raft::InstallSnapshotArgs* req,
+                                     ::raft::InstallSnapshotReply*      resp) {
+    if (req->term() < current_term_) {
+        resp->set_term(current_term_);
+        return;
+    }
+
+    if (req->term() > current_term_ || state_ != RaftState::Follower) {
+        BecomeFollower(req->term(), req->leaderid());
+    } else {
+        leader_id_ = req->leaderid();
+        leader_id_atomic_.store(leader_id_, std::memory_order_release);
+        election_timer_.Reset();
+    }
+
+    Index snapshot_index = req->lastincludedindex();
+    Term snapshot_term = req->lastincludedterm();
+    if (snapshot_index <= commit_index_) {
+        resp->set_term(current_term_);
+        return;
+    }
+
+    bool keep_suffix =
+        snapshot_index <= log_cache_.LastIndex() &&
+        log_cache_.TermAt(snapshot_index) == snapshot_term;
+
+    if (storage_) {
+        storage_->SaveSnapshot(snapshot_index, snapshot_term, req->data());
+        if (keep_suffix) {
+            storage_->TruncatePrefix(snapshot_index);
+        } else {
+            storage_->TruncateSuffix(1);
+        }
+    }
+
+    if (!keep_suffix) {
+        log_cache_.Clear();
+    }
+    log_cache_.DiscardPrefix(snapshot_index, snapshot_term);
+
+    commit_index_ = snapshot_index;
+    last_applied_ = snapshot_index;
+    if (apply_sink_) {
+        apply_sink_->OnSnapshotInstalled(snapshot_index, snapshot_term, req->data());
+    }
+
+    resp->set_term(current_term_);
 }
 
 // ===========================================================================
@@ -632,6 +810,34 @@ bool RaftNode::Propose(std::string command, Index* assigned_index) {
     auto pair = fut.get();
     if (assigned_index) *assigned_index = pair.second;
     return pair.first;
+}
+
+bool RaftNode::TakeSnapshot(Index last_included_index, std::string data) {
+    std::promise<bool> p;
+    auto               fut = p.get_future();
+
+    Post([this, last_included_index, data = std::move(data), &p]() mutable {
+        if (!storage_ ||
+            last_included_index <= log_cache_.SnapshotLastIndex() ||
+            last_included_index > commit_index_ ||
+            last_included_index > log_cache_.LastIndex()) {
+            p.set_value(false);
+            return;
+        }
+
+        Term last_included_term = log_cache_.TermAt(last_included_index);
+        if (last_included_term == 0) {
+            p.set_value(false);
+            return;
+        }
+
+        storage_->SaveSnapshot(last_included_index, last_included_term, data);
+        storage_->TruncatePrefix(last_included_index);
+        log_cache_.DiscardPrefix(last_included_index, last_included_term);
+        p.set_value(true);
+    });
+
+    return fut.get();
 }
 
 }  // namespace raft_core

@@ -2,8 +2,10 @@
 
 #include "raft_types.h"
 
+#include <algorithm>
 #include <cstddef>
 #include <cstdint>
+#include <string>
 #include <utility>
 #include <vector>
 
@@ -38,18 +40,22 @@ public:
     size_t Size()      const { return entries_.size(); }
 
     Index LastIndex() const {
-        return entries_.empty() ? 0
+        return entries_.empty() ? snapshot_last_index_
                                 : entries_.back().index;
     }
 
     Term LastTerm() const {
-        return entries_.empty() ? 0
+        return entries_.empty() ? snapshot_last_term_
                                 : entries_.back().term;
     }
+
+    Index SnapshotLastIndex() const { return snapshot_last_index_; }
+    Term  SnapshotLastTerm() const { return snapshot_last_term_; }
 
     // Returns 0 if the index is out of range.
     Term TermAt(Index index) const {
         if (index <= 0) return 0;
+        if (index == snapshot_last_index_) return snapshot_last_term_;
         if (index < base_index_) return 0;     // compacted (unused for now)
         size_t off = static_cast<size_t>(index - base_index_);
         if (off >= entries_.size()) return 0;
@@ -110,11 +116,29 @@ public:
         entries_.resize(off);
     }
 
+    void DiscardPrefix(Index snapshot_last_index, Term snapshot_last_term) {
+        if (snapshot_last_index < snapshot_last_index_) return;
+
+        std::vector<LogEntry> kept;
+        kept.reserve(entries_.size());
+        for (auto& entry : entries_) {
+            if (entry.index > snapshot_last_index) {
+                kept.push_back(std::move(entry));
+            }
+        }
+        entries_ = std::move(kept);
+        snapshot_last_index_ = snapshot_last_index;
+        snapshot_last_term_ = snapshot_last_term;
+        base_index_ = snapshot_last_index_ + 1;
+    }
+
     void Clear() { entries_.clear(); }
 
 private:
     // Indices are inclusive: entries_[i] has index base_index_ + i.
     Index                 base_index_ = 1;
+    Index                 snapshot_last_index_ = 0;
+    Term                  snapshot_last_term_ = 0;
     std::vector<LogEntry> entries_;
 };
 

@@ -45,6 +45,10 @@ public:
     // follower's log conflicts with the leader's view.
     virtual void TruncateSuffix(Index from_index) = 0;
 
+    // Drop every entry whose index is <= |through_index|. Used after a
+    // snapshot makes the compacted prefix durable.
+    virtual void TruncatePrefix(Index through_index) = 0;
+
     // Look up a single entry; returns false if not present (e.g. compacted
     // away into a snapshot, or never appended).
     virtual bool EntryAt(Index index, LogEntry* out) = 0;
@@ -77,6 +81,7 @@ public:
     void WriteHardState(Term /*term*/, NodeId /*voted_for*/) override {}
     void AppendEntries(const std::vector<LogEntry>& /*entries*/) override {}
     void TruncateSuffix(Index /*from_index*/) override {}
+    void TruncatePrefix(Index /*through_index*/) override {}
     bool EntryAt(Index /*index*/, LogEntry* /*out*/) override { return false; }
     void LastIndexTerm(Index* index, Term* term) override {
         if (index) *index = 0;

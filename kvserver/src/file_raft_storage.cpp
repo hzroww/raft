@@ -100,6 +100,19 @@ void FileRaftStorage::TruncateSuffix(raft_core::Index from_index) {
     }
 }
 
+void FileRaftStorage::TruncatePrefix(raft_core::Index through_index) {
+    if (!fs::exists(log_dir_)) {
+        return;
+    }
+
+    for (const auto& dir_entry : fs::directory_iterator(log_dir_)) {
+        raft_core::Index index = 0;
+        if (ParseLogIndex(dir_entry.path(), &index) && index <= through_index) {
+            fs::remove(dir_entry.path());
+        }
+    }
+}
+
 bool FileRaftStorage::EntryAt(raft_core::Index index,
                               raft_core::LogEntry* out) {
     if (index <= 0) {

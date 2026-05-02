@@ -33,12 +33,16 @@ public:
 
     KvResult Apply(const kv::KvCommand& command);
 
+    std::string SaveSnapshot() const;
+    bool LoadSnapshot(const std::string& data);
+
 private:
     bool IsDuplicateLocked(const std::string& client_id, int64_t request_id) const;
     void RememberRequestLocked(const std::string& client_id, int64_t request_id);
 
     mutable std::mutex                     mu_;
     mutable SkipList<std::string, std::string> data_;
+    std::unordered_map<std::string, std::string> data_snapshot_;
     std::unordered_map<std::string, int64_t>   last_request_id_;
     
 };

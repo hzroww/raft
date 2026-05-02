@@ -108,6 +108,10 @@ public:
     // leader.
     bool Propose(std::string command, Index* assigned_index = nullptr);
 
+    // Client-facing: persist a state-machine snapshot and compact the local
+    // log prefix covered by |last_included_index|.
+    bool TakeSnapshot(Index last_included_index, std::string data);
+
     // ---- RaftRpc service handlers (server-side) ----
     // Called by RpcServer worker threads. They Post() the actual work
     // onto the raft main thread and let the closure fire from there.
@@ -138,6 +142,8 @@ private:
                            ::raft::RequestVoteReply*      resp);
     void HandleAppendEntries(const ::raft::AppendEntriesArgs* req,
                              ::raft::AppendEntriesReply*      resp);
+    void HandleInstallSnapshot(const ::raft::InstallSnapshotArgs* req,
+                               ::raft::InstallSnapshotReply*      resp);
 
     // ---- State transitions ----
     void BecomeFollower(Term new_term, NodeId leader_id);
@@ -154,9 +160,12 @@ private:
     Task RequestVoteOnce(size_t peer_index, Term election_term);
     // One AppendEntries attempt against |peer_index| for |leader_term|.
     Task ReplicateOnce(size_t peer_index, Term leader_term);
+    // One InstallSnapshot attempt against |peer_index| for |leader_term|.
+    Task SendSnapshotOnce(size_t peer_index, Term leader_term);
 
     // ---- Replication helpers ----
     void BroadcastAppendEntries();
+    void AppendNoopEntry();
     void MaybeAdvanceCommitIndex();
     void ApplyCommittedRange();
 
