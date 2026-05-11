@@ -3,10 +3,29 @@ package raft;
 
 option cc_generic_services = true;
 
+enum EntryType {
+    ENTRY_NORMAL = 0;
+    ENTRY_CONFIG = 1;
+}
+
+enum ConfigChangeType {
+    ADD_PEER    = 0;
+    REMOVE_PEER = 1;
+}
+
+// Carried in LogEntry.command when type == ENTRY_CONFIG.
+message ConfigChange {
+    ConfigChangeType change_type = 1;
+    int64            node_id     = 2;
+    string           ip          = 3;
+    int32            port        = 4;
+}
+
 message LogEntry {
-    int64 term    = 1;
-    int64 index   = 2;
-    bytes command = 3;
+    int64     term    = 1;
+    int64     index   = 2;
+    bytes     command = 3;
+    EntryType type    = 4;
 }
 
 message RequestVoteArgs {
@@ -50,8 +69,32 @@ message InstallSnapshotReply {
     int64 term = 1;
 }
 
+message AddPeerArgs {
+    int64  node_id = 1;
+    string ip      = 2;
+    int32  port    = 3;
+}
+
+message AddPeerReply {
+    bool   success   = 1;
+    string message   = 2;
+    int64  leader_id = 3;  // set when success==false and we know the leader
+}
+
+message RemovePeerArgs {
+    int64 node_id = 1;
+}
+
+message RemovePeerReply {
+    bool   success   = 1;
+    string message   = 2;
+    int64  leader_id = 3;
+}
+
 service RaftRpc {
     rpc RequestVote(RequestVoteArgs)         returns (RequestVoteReply);
     rpc AppendEntries(AppendEntriesArgs)     returns (AppendEntriesReply);
     rpc InstallSnapshot(InstallSnapshotArgs) returns (InstallSnapshotReply);
+    rpc AddPeer(AddPeerArgs)                 returns (AddPeerReply);
+    rpc RemovePeer(RemovePeerArgs)           returns (RemovePeerReply);
 }

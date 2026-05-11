@@ -69,6 +69,15 @@ public:
     bool SnapshotInFlight() const { return snapshot_in_flight_; }
     void SetSnapshotInFlight(bool v) { snapshot_in_flight_ = v; }
 
+    // Learner peers receive log replication but do NOT count toward quorum and
+    // cannot win elections. A Learner is promoted to a Voting member by
+    // committing an ENTRY_CONFIG / AddPeer log entry.
+    bool IsLearner()          const { return is_learner_; }
+    void SetLearner(bool v)         { is_learner_ = v; }
+
+    // Expose full PeerInfo for serialisation / reconstruction.
+    const PeerInfo& Info() const { return info_; }
+
 private:
     PeerInfo                       info_;
     std::unique_ptr<RpcChannel>    channel_;
@@ -79,6 +88,7 @@ private:
     bool  vote_replied_        = false;
     bool  vote_granted_        = false;
     bool  snapshot_in_flight_  = false;
+    bool  is_learner_          = false;
 };
 
 }  // namespace raft_core

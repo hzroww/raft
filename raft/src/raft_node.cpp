@@ -55,6 +55,7 @@ RaftNode::RaftNode(Config           cfg,
       election_timer_(cfg_.election_timeout_min_ms, cfg_.election_timeout_max_ms),
       heartbeat_timer_(cfg_.heartbeat_interval_ms) {
 
+    // Build initial peer list from boot config.
     peers_.reserve(cfg_.peers.size());
     for (const auto& info : cfg_.peers) {
         peers_.push_back(std::make_unique<Peer>(info, cfg_.rpc_timeout_ms));
@@ -69,7 +70,26 @@ RaftNode::RaftNode(Config           cfg,
             voted_for_    = v;
             current_term_atomic_.store(t, std::memory_order_release);
         }
+
+        // If a saved config exists (written after a previous membership
+        // change), use it instead of the boot config so the node knows
+        // about peers that were added/removed after initial deployment.
+        std::vector<PeerInfo> saved;
+        if (storage_->LoadConfig(&saved)) {
+            peers_.clear();
+            for (const auto& info : saved) {
+                peers_.push_back(std::make_unique<Peer>(info, cfg_.rpc_timeout_ms));
+            }
+        }
+
         LoadPersistentLog();
+    }
+
+    // Initialise current_members_ from whatever peer list we ended up with.
+    // This set is used for Config-Aware Voting in HandleRequestVote.
+    current_members_.insert(cfg_.self_id);
+    for (const auto& p : peers_) {
+        current_members_.insert(p->Id());
     }
 }
 
@@ -264,18 +284,21 @@ void RaftNode::BecomeCandidate() {
 
     LOG_INFO() << "become Candidate term=" << current_term_;
 
-    // Single-node cluster (no peers): trivially become leader.
-    int total  = static_cast<int>(peers_.size()) + 1;
+    // Single-node cluster (no voting peers): trivially become leader.
+    int total  = VotingPeerCount() + 1;
     int quorum = total / 2 + 1;
     if (votes_granted_ >= quorum) {
         BecomeLeader();
         return;
     }
 
-    // Fan-out RequestVote: one fire-and-forget coroutine per peer.
+    // Fan-out RequestVote: one fire-and-forget coroutine per voting peer.
+    // Learners do not vote and do not receive RequestVote.
     Term election_term = current_term_;
     for (size_t i = 0; i < peers_.size(); ++i) {
-        RequestVoteOnce(i, election_term);
+        if (!peers_[i]->IsLearner()) {
+            RequestVoteOnce(i, election_term);
+        }
     }
 }
 
@@ -317,7 +340,7 @@ Task RaftNode::RequestVoteOnce(size_t peer_index, Term election_term) {
     peer.RecordVote(resp.votegranted());
     if (resp.votegranted()) {
         votes_granted_++;
-        int total  = static_cast<int>(peers_.size()) + 1;
+        int total  = VotingPeerCount() + 1;
         int quorum = total / 2 + 1;
         LOG_DEBUG() << "vote granted by peer=" << peer.Id()
                     << " votes=" << votes_granted_
@@ -345,6 +368,10 @@ void RaftNode::BecomeLeader() {
 
     LOG_INFO() << "become Leader term=" << current_term_
                << " last_index=" << last;
+
+    // Scan uncommitted log for any in-flight config change from a previous
+    // leader term, and restore pending_config_change_ + learner state.
+    RecoverPendingConfigChange();
 
     // Commit an entry in this term so older entries can be safely advanced.
     AppendNoopEntry();
@@ -430,6 +457,7 @@ Task RaftNode::ReplicateOnce(size_t peer_index, Term leader_term) {
         pe->set_term(e.term);
         pe->set_index(e.index);
         pe->set_command(e.command);
+        pe->set_type(static_cast<::raft::EntryType>(static_cast<int>(e.type)));
     }
 
     ::raft::AppendEntriesReply resp;
@@ -460,6 +488,7 @@ Task RaftNode::ReplicateOnce(size_t peer_index, Term leader_term) {
             peer.SetMatchIndex(sent_last);
             peer.SetNextIndex(sent_last + 1);
             MaybeAdvanceCommitIndex();
+            MaybePromoteLearner(peer_index);
         }
     } else {
         Index next = resp.conflictindex();
@@ -550,10 +579,15 @@ void RaftNode::AppendNoopEntry() {
 void RaftNode::MaybeAdvanceCommitIndex() {
     if (state_ != RaftState::Leader) return;
 
+    // Only voting (non-Learner) peers count toward the commit quorum.
     std::vector<Index> match;
     match.reserve(peers_.size() + 1);
     match.push_back(log_cache_.LastIndex());          // self
-    for (auto& p : peers_) match.push_back(p->MatchIndex());
+    for (auto& p : peers_) {
+        if (!p->IsLearner()) {
+            match.push_back(p->MatchIndex());
+        }
+    }
     std::sort(match.begin(), match.end());
 
     // For N nodes, the highest index replicated to a majority is at
@@ -573,6 +607,16 @@ void RaftNode::ApplyCommittedRange() {
     if (last_applied_ >= commit_index_) return;
     Index start = last_applied_ + 1;
     Index end   = commit_index_;
+
+    // Process each newly committed entry: Config entries are handled here
+    // on the raft thread before the range is forwarded to the apply sink.
+    for (Index i = start; i <= end; ++i) {
+        LogEntry e;
+        if (log_cache_.EntryAt(i, &e) && e.type == EntryType::Config) {
+            ApplyConfigChange(e);
+        }
+    }
+
     last_applied_ = commit_index_;
     if (apply_sink_) {
         apply_sink_->OnCommitted(start, end);
@@ -613,8 +657,40 @@ void RaftNode::InstallSnapshot(google::protobuf::RpcController* /*controller*/,
     });
 }
 
+void RaftNode::AddPeer(google::protobuf::RpcController* /*controller*/,
+                       const ::raft::AddPeerArgs*        request,
+                       ::raft::AddPeerReply*             response,
+                       google::protobuf::Closure*        done) {
+    Post([this, request, response, done]() {
+        HandleAddPeer(request, response);
+        done->Run();
+    });
+}
+
+void RaftNode::RemovePeer(google::protobuf::RpcController* /*controller*/,
+                          const ::raft::RemovePeerArgs*     request,
+                          ::raft::RemovePeerReply*          response,
+                          google::protobuf::Closure*        done) {
+    Post([this, request, response, done]() {
+        HandleRemovePeer(request, response);
+        done->Run();
+    });
+}
+
 void RaftNode::HandleRequestVote(const ::raft::RequestVoteArgs* req,
                                  ::raft::RequestVoteReply*      resp) {
+    // Config-Aware Voting: reject votes from nodes that are not part of the
+    // current cluster configuration (e.g. nodes that have been removed).
+    // Crucially we do NOT update our term here, so a stale removed node
+    // cannot force us to step down by sending a high-term RequestVote.
+    if (current_members_.find(req->candidateid()) == current_members_.end()) {
+        resp->set_term(current_term_);
+        resp->set_votegranted(false);
+        LOG_DEBUG() << "RequestVote rejected: candidate=" << req->candidateid()
+                    << " not in current_members_";
+        return;
+    }
+
     if (req->term() > current_term_) {
         BecomeFollower(req->term(), kNoNode);
     }
@@ -727,6 +803,7 @@ void RaftNode::HandleAppendEntries(const ::raft::AppendEntriesArgs* req,
             e.term    = pe.term();
             e.index   = pe.index();
             e.command = pe.command();
+            e.type    = static_cast<EntryType>(static_cast<int>(pe.type()));
             log_cache_.AppendEntry(e);
             to_append.push_back(std::move(e));
         }
@@ -795,6 +872,102 @@ void RaftNode::HandleInstallSnapshot(const ::raft::InstallSnapshotArgs* req,
     }
 
     resp->set_term(current_term_);
+}
+
+void RaftNode::HandleAddPeer(const ::raft::AddPeerArgs* req,
+                             ::raft::AddPeerReply*      resp) {
+    if (state_ != RaftState::Leader) {
+        resp->set_success(false);
+        resp->set_message("not leader");
+        resp->set_leader_id(leader_id_);
+        return;
+    }
+    if (pending_config_change_) {
+        resp->set_success(false);
+        resp->set_message("config change already in progress");
+        return;
+    }
+
+    NodeId new_id = req->node_id();
+    if (new_id == cfg_.self_id) {
+        resp->set_success(false);
+        resp->set_message("cannot add self");
+        return;
+    }
+    for (const auto& p : peers_) {
+        if (p->Id() == new_id) {
+            resp->set_success(false);
+            resp->set_message("peer already exists");
+            return;
+        }
+    }
+
+    PeerInfo info;
+    info.id   = new_id;
+    info.ip   = req->ip();
+    info.port = req->port();
+
+    auto peer = std::make_unique<Peer>(info, cfg_.rpc_timeout_ms);
+    peer->SetLearner(true);
+    peer->ResetForLeader(log_cache_.LastIndex());
+
+    size_t peer_index = peers_.size();
+    peers_.push_back(std::move(peer));
+
+    // Begin replication to the new learner immediately so it can catch up.
+    ReplicateOnce(peer_index, current_term_);
+
+    resp->set_success(true);
+    resp->set_message("learner added; will be promoted to voting member once caught up");
+
+    LOG_INFO() << "AddPeer: learner id=" << info.id
+               << " " << info.ip << ":" << info.port << " added";
+}
+
+void RaftNode::HandleRemovePeer(const ::raft::RemovePeerArgs* req,
+                                ::raft::RemovePeerReply*      resp) {
+    if (state_ != RaftState::Leader) {
+        resp->set_success(false);
+        resp->set_message("not leader");
+        resp->set_leader_id(leader_id_);
+        return;
+    }
+    if (pending_config_change_) {
+        resp->set_success(false);
+        resp->set_message("config change already in progress");
+        return;
+    }
+
+    NodeId target_id = req->node_id();
+
+    // Locate the target peer; only voting members can be removed via RemovePeer.
+    const Peer* found_peer = nullptr;
+    for (const auto& p : peers_) {
+        if (p->Id() == target_id && !p->IsLearner()) {
+            found_peer = p.get();
+            break;
+        }
+    }
+    if (!found_peer) {
+        resp->set_success(false);
+        resp->set_message("peer not found or is a learner");
+        return;
+    }
+
+    // Safety: after removal there must still be at least one voting member
+    // (the leader itself) able to reach quorum with itself.
+    if (VotingPeerCount() <= 1) {
+        resp->set_success(false);
+        resp->set_message("cannot remove peer: would leave cluster without quorum");
+        return;
+    }
+
+    ProposeConfigChange(ConfigChangeType::RemovePeer, found_peer->Info());
+
+    resp->set_success(true);
+    resp->set_message("config change proposed");
+
+    LOG_INFO() << "RemovePeer: proposed removal of id=" << target_id;
 }
 
 // ===========================================================================
@@ -870,6 +1043,165 @@ void RaftNode::TakeSnapshotAsync(Index last_included_index, std::string data) {
     Post([this, last_included_index, data = std::move(data)]() mutable {
         DoTakeSnapshot(last_included_index, std::move(data));
     });
+}
+
+// ===========================================================================
+// Membership change helpers
+// ===========================================================================
+
+int RaftNode::VotingPeerCount() const {
+    int count = 0;
+    for (const auto& p : peers_) {
+        if (!p->IsLearner()) ++count;
+    }
+    return count;
+}
+
+void RaftNode::ProposeConfigChange(ConfigChangeType type, const PeerInfo& peer) {
+    // Encode the membership change as a protobuf and store it as the
+    // command payload of an ENTRY_CONFIG log entry.
+    ::raft::ConfigChange cc;
+    cc.set_change_type(type == ConfigChangeType::AddPeer
+                           ? ::raft::ADD_PEER
+                           : ::raft::REMOVE_PEER);
+    cc.set_node_id(peer.id);
+    cc.set_ip(peer.ip);
+    cc.set_port(peer.port);
+
+    std::string command;
+    cc.SerializeToString(&command);
+
+    LogEntry e;
+    e.term    = current_term_;
+    e.index   = log_cache_.LastIndex() + 1;
+    e.command = std::move(command);
+    e.type    = EntryType::Config;
+    log_cache_.AppendEntry(e);
+
+    if (storage_) {
+        storage_->AppendEntries({e});
+    }
+
+    pending_config_change_ = true;
+
+    MaybeAdvanceCommitIndex();
+    BroadcastAppendEntries();
+
+    LOG_INFO() << "ProposeConfigChange type="
+               << (type == ConfigChangeType::AddPeer ? "AddPeer" : "RemovePeer")
+               << " node_id=" << peer.id
+               << " at index=" << e.index;
+}
+
+void RaftNode::ApplyConfigChange(const LogEntry& entry) {
+    ::raft::ConfigChange cc;
+    if (!cc.ParseFromString(entry.command)) {
+        LOG_ERROR() << "ApplyConfigChange: failed to parse ConfigChange at index="
+                    << entry.index;
+        pending_config_change_ = false;
+        return;
+    }
+
+    NodeId node_id = cc.node_id();
+
+    if (cc.change_type() == ::raft::ADD_PEER) {
+        // Promote the matching Learner to a full voting member.
+        for (auto& p : peers_) {
+            if (p->Id() == node_id && p->IsLearner()) {
+                p->SetLearner(false);
+                current_members_.insert(node_id);
+                LOG_INFO() << "ApplyConfigChange: promoted learner id=" << node_id
+                           << " to voting member";
+                break;
+            }
+        }
+    } else if (cc.change_type() == ::raft::REMOVE_PEER) {
+        auto it = std::find_if(peers_.begin(), peers_.end(),
+                               [node_id](const std::unique_ptr<Peer>& p) {
+                                   return p->Id() == node_id;
+                               });
+        if (it != peers_.end()) {
+            peers_.erase(it);
+        }
+        current_members_.erase(node_id);
+        LOG_INFO() << "ApplyConfigChange: removed peer id=" << node_id;
+    }
+
+    pending_config_change_ = false;
+
+    // Persist the updated list of voting peers so it survives a crash.
+    if (storage_) {
+        std::vector<PeerInfo> voting_peers;
+        voting_peers.reserve(peers_.size());
+        for (const auto& p : peers_) {
+            if (!p->IsLearner()) {
+                voting_peers.push_back(p->Info());
+            }
+        }
+        storage_->SaveConfig(voting_peers);
+    }
+}
+
+void RaftNode::MaybePromoteLearner(size_t peer_index) {
+    if (state_ != RaftState::Leader) return;
+    if (pending_config_change_) return;
+
+    auto& peer = *peers_[peer_index];
+    if (!peer.IsLearner()) return;
+
+    Index last = log_cache_.LastIndex();
+    // Promote once the learner's match_index is within the configured
+    // tolerance of the leader's last log index.
+    if (peer.MatchIndex() + cfg_.learner_lag_tolerance >= last) {
+        LOG_INFO() << "MaybePromoteLearner: learner id=" << peer.Id()
+                   << " match_index=" << peer.MatchIndex()
+                   << " is caught up; proposing promotion";
+        ProposeConfigChange(ConfigChangeType::AddPeer, peer.Info());
+    }
+}
+
+void RaftNode::RecoverPendingConfigChange() {
+    // Scan uncommitted log entries for any in-flight config change left by
+    // a previous leader. If found, restore pending_config_change_ so we
+    // do not allow a second concurrent change, and reconstruct any Learner
+    // Peer whose state lived only in the old leader's memory.
+    for (Index i = commit_index_ + 1; i <= log_cache_.LastIndex(); ++i) {
+        LogEntry e;
+        if (!log_cache_.EntryAt(i, &e)) continue;
+        if (e.type == EntryType::Config) {
+            pending_config_change_ = true;
+            ReconstructLearnerIfNeeded(e);
+            LOG_INFO() << "RecoverPendingConfigChange: found uncommitted config entry"
+                       << " at index=" << i;
+            break;  // single-step: at most one uncommitted config entry
+        }
+    }
+}
+
+void RaftNode::ReconstructLearnerIfNeeded(const LogEntry& config_entry) {
+    ::raft::ConfigChange cc;
+    if (!cc.ParseFromString(config_entry.command)) return;
+    if (cc.change_type() != ::raft::ADD_PEER) return;
+
+    NodeId target_id = cc.node_id();
+
+    // If the peer already exists (possibly from the boot config or a
+    // previous reconstruction), do nothing.
+    for (const auto& p : peers_) {
+        if (p->Id() == target_id) return;
+    }
+
+    PeerInfo info;
+    info.id   = target_id;
+    info.ip   = cc.ip();
+    info.port = cc.port();
+
+    auto peer = std::make_unique<Peer>(info, cfg_.rpc_timeout_ms);
+    peer->SetLearner(true);
+    peer->ResetForLeader(log_cache_.LastIndex());
+    peers_.push_back(std::move(peer));
+
+    LOG_INFO() << "ReconstructLearnerIfNeeded: reconstructed learner id=" << target_id;
 }
 
 }  // namespace raft_core

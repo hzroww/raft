@@ -23,6 +23,7 @@
 #include <mutex>
 #include <string>
 #include <thread>
+#include <unordered_set>
 #include <vector>
 
 namespace raft_core {
@@ -68,6 +69,11 @@ public:
         int io_threads              = 1;
         size_t worker_threads       = 4;
         bool start_rpc_server       = true;
+
+        // A Learner is promoted to a voting member once its match_index
+        // comes within this many entries of the leader's last log index.
+        // 0 means the learner must fully catch up before promotion.
+        int learner_lag_tolerance   = 0;
 
         // Optional services registered on the same RpcServer as RaftRpc.
         // The owner must keep them alive for at least as long as this node.
@@ -135,6 +141,16 @@ public:
                          ::raft::InstallSnapshotReply*      response,
                          google::protobuf::Closure*         done) override;
 
+    void AddPeer(google::protobuf::RpcController* controller,
+                 const ::raft::AddPeerArgs*        request,
+                 ::raft::AddPeerReply*             response,
+                 google::protobuf::Closure*        done) override;
+
+    void RemovePeer(google::protobuf::RpcController* controller,
+                    const ::raft::RemovePeerArgs*     request,
+                    ::raft::RemovePeerReply*          response,
+                    google::protobuf::Closure*        done) override;
+
 private:
     // ---- Main loop (raft logic thread) ----
     void MainLoop();
@@ -149,6 +165,10 @@ private:
                              ::raft::AppendEntriesReply*      resp);
     void HandleInstallSnapshot(const ::raft::InstallSnapshotArgs* req,
                                ::raft::InstallSnapshotReply*      resp);
+    void HandleAddPeer(const ::raft::AddPeerArgs* req,
+                       ::raft::AddPeerReply*      resp);
+    void HandleRemovePeer(const ::raft::RemovePeerArgs* req,
+                          ::raft::RemovePeerReply*      resp);
 
     // ---- State transitions ----
     void BecomeFollower(Term new_term, NodeId leader_id);
@@ -176,6 +196,29 @@ private:
 
     // Core snapshot logic; always runs on main thread.
     void DoTakeSnapshot(Index last_included_index, std::string data);
+
+    // ---- Membership change helpers ----
+    // Encode a ConfigChange and append it as an ENTRY_CONFIG log entry.
+    void ProposeConfigChange(ConfigChangeType type, const PeerInfo& peer);
+
+    // Apply a committed ENTRY_CONFIG log entry to the in-memory peer list
+    // and persist the new configuration.
+    void ApplyConfigChange(const LogEntry& entry);
+
+    // After updating match_index for peer[peer_index], check whether it has
+    // caught up enough to be promoted from Learner to Voting member.
+    void MaybePromoteLearner(size_t peer_index);
+
+    // When a new leader is elected, scan uncommitted log entries for any
+    // pending config change entry and reconstruct its state.
+    void RecoverPendingConfigChange();
+
+    // If a pending ADD_PEER config entry references a node not yet in
+    // peers_, add it as a Learner so replication can continue.
+    void ReconstructLearnerIfNeeded(const LogEntry& config_entry);
+
+    // Returns the number of voting (non-Learner) peers.
+    int VotingPeerCount() const;
 
     // Resume poster used by RpcAwaitable. Just forwards to Post().
     std::function<void(std::function<void()>)> ResumePoster();
@@ -215,6 +258,17 @@ private:
     std::atomic<RaftState> state_atomic_{RaftState::Follower};
     std::atomic<Term>      current_term_atomic_{0};
     std::atomic<NodeId>    leader_id_atomic_{kNoNode};
+
+    // ---- Membership change state (main thread only) ----
+    // True while a config change log entry is in the log but not yet
+    // committed.  Prevents a second concurrent config change from being
+    // appended while one is still in-flight.
+    bool pending_config_change_ = false;
+
+    // Set of NodeIds that are full voting members (excludes self, excludes
+    // Learners).  Used by HandleRequestVote to reject votes from nodes that
+    // are no longer part of the cluster (Config-Aware Voting).
+    std::unordered_set<NodeId> current_members_;
 
     // ---- Peers ----
     std::vector<std::unique_ptr<Peer>> peers_;

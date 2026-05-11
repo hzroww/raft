@@ -31,6 +31,7 @@
 #include <google/protobuf/message.h>
 #include <google/protobuf/repeated_field.h>  // IWYU pragma: export
 #include <google/protobuf/extension_set.h>  // IWYU pragma: export
+#include <google/protobuf/generated_enum_reflection.h>
 #include <google/protobuf/service.h>
 #include <google/protobuf/unknown_field_set.h>
 // @@protoc_insertion_point(includes)
@@ -48,7 +49,7 @@ struct TableStruct_raft_2eproto {
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::AuxillaryParseTableField aux[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
-  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[7]
+  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[12]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::FieldMetadata field_metadata[];
   static const ::PROTOBUF_NAMESPACE_ID::internal::SerializationTable serialization_table[];
@@ -56,12 +57,21 @@ struct TableStruct_raft_2eproto {
 };
 extern const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_raft_2eproto;
 namespace raft {
+class AddPeerArgs;
+class AddPeerArgsDefaultTypeInternal;
+extern AddPeerArgsDefaultTypeInternal _AddPeerArgs_default_instance_;
+class AddPeerReply;
+class AddPeerReplyDefaultTypeInternal;
+extern AddPeerReplyDefaultTypeInternal _AddPeerReply_default_instance_;
 class AppendEntriesArgs;
 class AppendEntriesArgsDefaultTypeInternal;
 extern AppendEntriesArgsDefaultTypeInternal _AppendEntriesArgs_default_instance_;
 class AppendEntriesReply;
 class AppendEntriesReplyDefaultTypeInternal;
 extern AppendEntriesReplyDefaultTypeInternal _AppendEntriesReply_default_instance_;
+class ConfigChange;
+class ConfigChangeDefaultTypeInternal;
+extern ConfigChangeDefaultTypeInternal _ConfigChange_default_instance_;
 class InstallSnapshotArgs;
 class InstallSnapshotArgsDefaultTypeInternal;
 extern InstallSnapshotArgsDefaultTypeInternal _InstallSnapshotArgs_default_instance_;
@@ -71,6 +81,12 @@ extern InstallSnapshotReplyDefaultTypeInternal _InstallSnapshotReply_default_ins
 class LogEntry;
 class LogEntryDefaultTypeInternal;
 extern LogEntryDefaultTypeInternal _LogEntry_default_instance_;
+class RemovePeerArgs;
+class RemovePeerArgsDefaultTypeInternal;
+extern RemovePeerArgsDefaultTypeInternal _RemovePeerArgs_default_instance_;
+class RemovePeerReply;
+class RemovePeerReplyDefaultTypeInternal;
+extern RemovePeerReplyDefaultTypeInternal _RemovePeerReply_default_instance_;
 class RequestVoteArgs;
 class RequestVoteArgsDefaultTypeInternal;
 extern RequestVoteArgsDefaultTypeInternal _RequestVoteArgs_default_instance_;
@@ -79,17 +95,258 @@ class RequestVoteReplyDefaultTypeInternal;
 extern RequestVoteReplyDefaultTypeInternal _RequestVoteReply_default_instance_;
 }  // namespace raft
 PROTOBUF_NAMESPACE_OPEN
+template<> ::raft::AddPeerArgs* Arena::CreateMaybeMessage<::raft::AddPeerArgs>(Arena*);
+template<> ::raft::AddPeerReply* Arena::CreateMaybeMessage<::raft::AddPeerReply>(Arena*);
 template<> ::raft::AppendEntriesArgs* Arena::CreateMaybeMessage<::raft::AppendEntriesArgs>(Arena*);
 template<> ::raft::AppendEntriesReply* Arena::CreateMaybeMessage<::raft::AppendEntriesReply>(Arena*);
+template<> ::raft::ConfigChange* Arena::CreateMaybeMessage<::raft::ConfigChange>(Arena*);
 template<> ::raft::InstallSnapshotArgs* Arena::CreateMaybeMessage<::raft::InstallSnapshotArgs>(Arena*);
 template<> ::raft::InstallSnapshotReply* Arena::CreateMaybeMessage<::raft::InstallSnapshotReply>(Arena*);
 template<> ::raft::LogEntry* Arena::CreateMaybeMessage<::raft::LogEntry>(Arena*);
+template<> ::raft::RemovePeerArgs* Arena::CreateMaybeMessage<::raft::RemovePeerArgs>(Arena*);
+template<> ::raft::RemovePeerReply* Arena::CreateMaybeMessage<::raft::RemovePeerReply>(Arena*);
 template<> ::raft::RequestVoteArgs* Arena::CreateMaybeMessage<::raft::RequestVoteArgs>(Arena*);
 template<> ::raft::RequestVoteReply* Arena::CreateMaybeMessage<::raft::RequestVoteReply>(Arena*);
 PROTOBUF_NAMESPACE_CLOSE
 namespace raft {
 
+enum EntryType : int {
+  ENTRY_NORMAL = 0,
+  ENTRY_CONFIG = 1,
+  EntryType_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
+  EntryType_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
+};
+bool EntryType_IsValid(int value);
+constexpr EntryType EntryType_MIN = ENTRY_NORMAL;
+constexpr EntryType EntryType_MAX = ENTRY_CONFIG;
+constexpr int EntryType_ARRAYSIZE = EntryType_MAX + 1;
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* EntryType_descriptor();
+template<typename T>
+inline const std::string& EntryType_Name(T enum_t_value) {
+  static_assert(::std::is_same<T, EntryType>::value ||
+    ::std::is_integral<T>::value,
+    "Incorrect type passed to function EntryType_Name.");
+  return ::PROTOBUF_NAMESPACE_ID::internal::NameOfEnum(
+    EntryType_descriptor(), enum_t_value);
+}
+inline bool EntryType_Parse(
+    const std::string& name, EntryType* value) {
+  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<EntryType>(
+    EntryType_descriptor(), name, value);
+}
+enum ConfigChangeType : int {
+  ADD_PEER = 0,
+  REMOVE_PEER = 1,
+  ConfigChangeType_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
+  ConfigChangeType_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
+};
+bool ConfigChangeType_IsValid(int value);
+constexpr ConfigChangeType ConfigChangeType_MIN = ADD_PEER;
+constexpr ConfigChangeType ConfigChangeType_MAX = REMOVE_PEER;
+constexpr int ConfigChangeType_ARRAYSIZE = ConfigChangeType_MAX + 1;
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* ConfigChangeType_descriptor();
+template<typename T>
+inline const std::string& ConfigChangeType_Name(T enum_t_value) {
+  static_assert(::std::is_same<T, ConfigChangeType>::value ||
+    ::std::is_integral<T>::value,
+    "Incorrect type passed to function ConfigChangeType_Name.");
+  return ::PROTOBUF_NAMESPACE_ID::internal::NameOfEnum(
+    ConfigChangeType_descriptor(), enum_t_value);
+}
+inline bool ConfigChangeType_Parse(
+    const std::string& name, ConfigChangeType* value) {
+  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<ConfigChangeType>(
+    ConfigChangeType_descriptor(), name, value);
+}
 // ===================================================================
+
+class ConfigChange PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:raft.ConfigChange) */ {
+ public:
+  inline ConfigChange() : ConfigChange(nullptr) {};
+  virtual ~ConfigChange();
+
+  ConfigChange(const ConfigChange& from);
+  ConfigChange(ConfigChange&& from) noexcept
+    : ConfigChange() {
+    *this = ::std::move(from);
+  }
+
+  inline ConfigChange& operator=(const ConfigChange& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline ConfigChange& operator=(ConfigChange&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const ConfigChange& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const ConfigChange* internal_default_instance() {
+    return reinterpret_cast<const ConfigChange*>(
+               &_ConfigChange_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    0;
+
+  friend void swap(ConfigChange& a, ConfigChange& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(ConfigChange* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(ConfigChange* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline ConfigChange* New() const final {
+    return CreateMaybeMessage<ConfigChange>(nullptr);
+  }
+
+  ConfigChange* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<ConfigChange>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const ConfigChange& from);
+  void MergeFrom(const ConfigChange& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(ConfigChange* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "raft.ConfigChange";
+  }
+  protected:
+  explicit ConfigChange(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_raft_2eproto);
+    return ::descriptor_table_raft_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kIpFieldNumber = 3,
+    kNodeIdFieldNumber = 2,
+    kChangeTypeFieldNumber = 1,
+    kPortFieldNumber = 4,
+  };
+  // string ip = 3;
+  void clear_ip();
+  const std::string& ip() const;
+  void set_ip(const std::string& value);
+  void set_ip(std::string&& value);
+  void set_ip(const char* value);
+  void set_ip(const char* value, size_t size);
+  std::string* mutable_ip();
+  std::string* release_ip();
+  void set_allocated_ip(std::string* ip);
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  std::string* unsafe_arena_release_ip();
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  void unsafe_arena_set_allocated_ip(
+      std::string* ip);
+  private:
+  const std::string& _internal_ip() const;
+  void _internal_set_ip(const std::string& value);
+  std::string* _internal_mutable_ip();
+  public:
+
+  // int64 node_id = 2;
+  void clear_node_id();
+  ::PROTOBUF_NAMESPACE_ID::int64 node_id() const;
+  void set_node_id(::PROTOBUF_NAMESPACE_ID::int64 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int64 _internal_node_id() const;
+  void _internal_set_node_id(::PROTOBUF_NAMESPACE_ID::int64 value);
+  public:
+
+  // .raft.ConfigChangeType change_type = 1;
+  void clear_change_type();
+  ::raft::ConfigChangeType change_type() const;
+  void set_change_type(::raft::ConfigChangeType value);
+  private:
+  ::raft::ConfigChangeType _internal_change_type() const;
+  void _internal_set_change_type(::raft::ConfigChangeType value);
+  public:
+
+  // int32 port = 4;
+  void clear_port();
+  ::PROTOBUF_NAMESPACE_ID::int32 port() const;
+  void set_port(::PROTOBUF_NAMESPACE_ID::int32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_port() const;
+  void _internal_set_port(::PROTOBUF_NAMESPACE_ID::int32 value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:raft.ConfigChange)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr ip_;
+  ::PROTOBUF_NAMESPACE_ID::int64 node_id_;
+  int change_type_;
+  ::PROTOBUF_NAMESPACE_ID::int32 port_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_raft_2eproto;
+};
+// -------------------------------------------------------------------
 
 class LogEntry PROTOBUF_FINAL :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:raft.LogEntry) */ {
@@ -133,7 +390,7 @@ class LogEntry PROTOBUF_FINAL :
                &_LogEntry_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    0;
+    1;
 
   friend void swap(LogEntry& a, LogEntry& b) {
     a.Swap(&b);
@@ -207,6 +464,7 @@ class LogEntry PROTOBUF_FINAL :
     kCommandFieldNumber = 3,
     kTermFieldNumber = 1,
     kIndexFieldNumber = 2,
+    kTypeFieldNumber = 4,
   };
   // bytes command = 3;
   void clear_command();
@@ -251,6 +509,15 @@ class LogEntry PROTOBUF_FINAL :
   void _internal_set_index(::PROTOBUF_NAMESPACE_ID::int64 value);
   public:
 
+  // .raft.EntryType type = 4;
+  void clear_type();
+  ::raft::EntryType type() const;
+  void set_type(::raft::EntryType value);
+  private:
+  ::raft::EntryType _internal_type() const;
+  void _internal_set_type(::raft::EntryType value);
+  public:
+
   // @@protoc_insertion_point(class_scope:raft.LogEntry)
  private:
   class _Internal;
@@ -261,6 +528,7 @@ class LogEntry PROTOBUF_FINAL :
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr command_;
   ::PROTOBUF_NAMESPACE_ID::int64 term_;
   ::PROTOBUF_NAMESPACE_ID::int64 index_;
+  int type_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_raft_2eproto;
 };
@@ -308,7 +576,7 @@ class RequestVoteArgs PROTOBUF_FINAL :
                &_RequestVoteArgs_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    1;
+    2;
 
   friend void swap(RequestVoteArgs& a, RequestVoteArgs& b) {
     a.Swap(&b);
@@ -478,7 +746,7 @@ class RequestVoteReply PROTOBUF_FINAL :
                &_RequestVoteReply_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    2;
+    3;
 
   friend void swap(RequestVoteReply& a, RequestVoteReply& b) {
     a.Swap(&b);
@@ -626,7 +894,7 @@ class AppendEntriesArgs PROTOBUF_FINAL :
                &_AppendEntriesArgs_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    3;
+    4;
 
   friend void swap(AppendEntriesArgs& a, AppendEntriesArgs& b) {
     a.Swap(&b);
@@ -827,7 +1095,7 @@ class AppendEntriesReply PROTOBUF_FINAL :
                &_AppendEntriesReply_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    4;
+    5;
 
   friend void swap(AppendEntriesReply& a, AppendEntriesReply& b) {
     a.Swap(&b);
@@ -997,7 +1265,7 @@ class InstallSnapshotArgs PROTOBUF_FINAL :
                &_InstallSnapshotArgs_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    5;
+    6;
 
   friend void swap(InstallSnapshotArgs& a, InstallSnapshotArgs& b) {
     a.Swap(&b);
@@ -1205,7 +1473,7 @@ class InstallSnapshotReply PROTOBUF_FINAL :
                &_InstallSnapshotReply_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    6;
+    7;
 
   friend void swap(InstallSnapshotReply& a, InstallSnapshotReply& b) {
     a.Swap(&b);
@@ -1298,6 +1566,668 @@ class InstallSnapshotReply PROTOBUF_FINAL :
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_raft_2eproto;
 };
+// -------------------------------------------------------------------
+
+class AddPeerArgs PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:raft.AddPeerArgs) */ {
+ public:
+  inline AddPeerArgs() : AddPeerArgs(nullptr) {};
+  virtual ~AddPeerArgs();
+
+  AddPeerArgs(const AddPeerArgs& from);
+  AddPeerArgs(AddPeerArgs&& from) noexcept
+    : AddPeerArgs() {
+    *this = ::std::move(from);
+  }
+
+  inline AddPeerArgs& operator=(const AddPeerArgs& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline AddPeerArgs& operator=(AddPeerArgs&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const AddPeerArgs& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const AddPeerArgs* internal_default_instance() {
+    return reinterpret_cast<const AddPeerArgs*>(
+               &_AddPeerArgs_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    8;
+
+  friend void swap(AddPeerArgs& a, AddPeerArgs& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(AddPeerArgs* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(AddPeerArgs* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline AddPeerArgs* New() const final {
+    return CreateMaybeMessage<AddPeerArgs>(nullptr);
+  }
+
+  AddPeerArgs* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<AddPeerArgs>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const AddPeerArgs& from);
+  void MergeFrom(const AddPeerArgs& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(AddPeerArgs* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "raft.AddPeerArgs";
+  }
+  protected:
+  explicit AddPeerArgs(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_raft_2eproto);
+    return ::descriptor_table_raft_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kIpFieldNumber = 2,
+    kNodeIdFieldNumber = 1,
+    kPortFieldNumber = 3,
+  };
+  // string ip = 2;
+  void clear_ip();
+  const std::string& ip() const;
+  void set_ip(const std::string& value);
+  void set_ip(std::string&& value);
+  void set_ip(const char* value);
+  void set_ip(const char* value, size_t size);
+  std::string* mutable_ip();
+  std::string* release_ip();
+  void set_allocated_ip(std::string* ip);
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  std::string* unsafe_arena_release_ip();
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  void unsafe_arena_set_allocated_ip(
+      std::string* ip);
+  private:
+  const std::string& _internal_ip() const;
+  void _internal_set_ip(const std::string& value);
+  std::string* _internal_mutable_ip();
+  public:
+
+  // int64 node_id = 1;
+  void clear_node_id();
+  ::PROTOBUF_NAMESPACE_ID::int64 node_id() const;
+  void set_node_id(::PROTOBUF_NAMESPACE_ID::int64 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int64 _internal_node_id() const;
+  void _internal_set_node_id(::PROTOBUF_NAMESPACE_ID::int64 value);
+  public:
+
+  // int32 port = 3;
+  void clear_port();
+  ::PROTOBUF_NAMESPACE_ID::int32 port() const;
+  void set_port(::PROTOBUF_NAMESPACE_ID::int32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_port() const;
+  void _internal_set_port(::PROTOBUF_NAMESPACE_ID::int32 value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:raft.AddPeerArgs)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr ip_;
+  ::PROTOBUF_NAMESPACE_ID::int64 node_id_;
+  ::PROTOBUF_NAMESPACE_ID::int32 port_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_raft_2eproto;
+};
+// -------------------------------------------------------------------
+
+class AddPeerReply PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:raft.AddPeerReply) */ {
+ public:
+  inline AddPeerReply() : AddPeerReply(nullptr) {};
+  virtual ~AddPeerReply();
+
+  AddPeerReply(const AddPeerReply& from);
+  AddPeerReply(AddPeerReply&& from) noexcept
+    : AddPeerReply() {
+    *this = ::std::move(from);
+  }
+
+  inline AddPeerReply& operator=(const AddPeerReply& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline AddPeerReply& operator=(AddPeerReply&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const AddPeerReply& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const AddPeerReply* internal_default_instance() {
+    return reinterpret_cast<const AddPeerReply*>(
+               &_AddPeerReply_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    9;
+
+  friend void swap(AddPeerReply& a, AddPeerReply& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(AddPeerReply* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(AddPeerReply* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline AddPeerReply* New() const final {
+    return CreateMaybeMessage<AddPeerReply>(nullptr);
+  }
+
+  AddPeerReply* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<AddPeerReply>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const AddPeerReply& from);
+  void MergeFrom(const AddPeerReply& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(AddPeerReply* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "raft.AddPeerReply";
+  }
+  protected:
+  explicit AddPeerReply(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_raft_2eproto);
+    return ::descriptor_table_raft_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kMessageFieldNumber = 2,
+    kLeaderIdFieldNumber = 3,
+    kSuccessFieldNumber = 1,
+  };
+  // string message = 2;
+  void clear_message();
+  const std::string& message() const;
+  void set_message(const std::string& value);
+  void set_message(std::string&& value);
+  void set_message(const char* value);
+  void set_message(const char* value, size_t size);
+  std::string* mutable_message();
+  std::string* release_message();
+  void set_allocated_message(std::string* message);
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  std::string* unsafe_arena_release_message();
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  void unsafe_arena_set_allocated_message(
+      std::string* message);
+  private:
+  const std::string& _internal_message() const;
+  void _internal_set_message(const std::string& value);
+  std::string* _internal_mutable_message();
+  public:
+
+  // int64 leader_id = 3;
+  void clear_leader_id();
+  ::PROTOBUF_NAMESPACE_ID::int64 leader_id() const;
+  void set_leader_id(::PROTOBUF_NAMESPACE_ID::int64 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int64 _internal_leader_id() const;
+  void _internal_set_leader_id(::PROTOBUF_NAMESPACE_ID::int64 value);
+  public:
+
+  // bool success = 1;
+  void clear_success();
+  bool success() const;
+  void set_success(bool value);
+  private:
+  bool _internal_success() const;
+  void _internal_set_success(bool value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:raft.AddPeerReply)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr message_;
+  ::PROTOBUF_NAMESPACE_ID::int64 leader_id_;
+  bool success_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_raft_2eproto;
+};
+// -------------------------------------------------------------------
+
+class RemovePeerArgs PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:raft.RemovePeerArgs) */ {
+ public:
+  inline RemovePeerArgs() : RemovePeerArgs(nullptr) {};
+  virtual ~RemovePeerArgs();
+
+  RemovePeerArgs(const RemovePeerArgs& from);
+  RemovePeerArgs(RemovePeerArgs&& from) noexcept
+    : RemovePeerArgs() {
+    *this = ::std::move(from);
+  }
+
+  inline RemovePeerArgs& operator=(const RemovePeerArgs& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline RemovePeerArgs& operator=(RemovePeerArgs&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const RemovePeerArgs& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const RemovePeerArgs* internal_default_instance() {
+    return reinterpret_cast<const RemovePeerArgs*>(
+               &_RemovePeerArgs_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    10;
+
+  friend void swap(RemovePeerArgs& a, RemovePeerArgs& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(RemovePeerArgs* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(RemovePeerArgs* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline RemovePeerArgs* New() const final {
+    return CreateMaybeMessage<RemovePeerArgs>(nullptr);
+  }
+
+  RemovePeerArgs* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<RemovePeerArgs>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const RemovePeerArgs& from);
+  void MergeFrom(const RemovePeerArgs& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(RemovePeerArgs* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "raft.RemovePeerArgs";
+  }
+  protected:
+  explicit RemovePeerArgs(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_raft_2eproto);
+    return ::descriptor_table_raft_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kNodeIdFieldNumber = 1,
+  };
+  // int64 node_id = 1;
+  void clear_node_id();
+  ::PROTOBUF_NAMESPACE_ID::int64 node_id() const;
+  void set_node_id(::PROTOBUF_NAMESPACE_ID::int64 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int64 _internal_node_id() const;
+  void _internal_set_node_id(::PROTOBUF_NAMESPACE_ID::int64 value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:raft.RemovePeerArgs)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::int64 node_id_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_raft_2eproto;
+};
+// -------------------------------------------------------------------
+
+class RemovePeerReply PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:raft.RemovePeerReply) */ {
+ public:
+  inline RemovePeerReply() : RemovePeerReply(nullptr) {};
+  virtual ~RemovePeerReply();
+
+  RemovePeerReply(const RemovePeerReply& from);
+  RemovePeerReply(RemovePeerReply&& from) noexcept
+    : RemovePeerReply() {
+    *this = ::std::move(from);
+  }
+
+  inline RemovePeerReply& operator=(const RemovePeerReply& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline RemovePeerReply& operator=(RemovePeerReply&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const RemovePeerReply& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const RemovePeerReply* internal_default_instance() {
+    return reinterpret_cast<const RemovePeerReply*>(
+               &_RemovePeerReply_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    11;
+
+  friend void swap(RemovePeerReply& a, RemovePeerReply& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(RemovePeerReply* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(RemovePeerReply* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline RemovePeerReply* New() const final {
+    return CreateMaybeMessage<RemovePeerReply>(nullptr);
+  }
+
+  RemovePeerReply* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<RemovePeerReply>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const RemovePeerReply& from);
+  void MergeFrom(const RemovePeerReply& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(RemovePeerReply* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "raft.RemovePeerReply";
+  }
+  protected:
+  explicit RemovePeerReply(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_raft_2eproto);
+    return ::descriptor_table_raft_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kMessageFieldNumber = 2,
+    kLeaderIdFieldNumber = 3,
+    kSuccessFieldNumber = 1,
+  };
+  // string message = 2;
+  void clear_message();
+  const std::string& message() const;
+  void set_message(const std::string& value);
+  void set_message(std::string&& value);
+  void set_message(const char* value);
+  void set_message(const char* value, size_t size);
+  std::string* mutable_message();
+  std::string* release_message();
+  void set_allocated_message(std::string* message);
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  std::string* unsafe_arena_release_message();
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  void unsafe_arena_set_allocated_message(
+      std::string* message);
+  private:
+  const std::string& _internal_message() const;
+  void _internal_set_message(const std::string& value);
+  std::string* _internal_mutable_message();
+  public:
+
+  // int64 leader_id = 3;
+  void clear_leader_id();
+  ::PROTOBUF_NAMESPACE_ID::int64 leader_id() const;
+  void set_leader_id(::PROTOBUF_NAMESPACE_ID::int64 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int64 _internal_leader_id() const;
+  void _internal_set_leader_id(::PROTOBUF_NAMESPACE_ID::int64 value);
+  public:
+
+  // bool success = 1;
+  void clear_success();
+  bool success() const;
+  void set_success(bool value);
+  private:
+  bool _internal_success() const;
+  void _internal_set_success(bool value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:raft.RemovePeerReply)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr message_;
+  ::PROTOBUF_NAMESPACE_ID::int64 leader_id_;
+  bool success_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_raft_2eproto;
+};
 // ===================================================================
 
 class RaftRpc_Stub;
@@ -1324,6 +2254,14 @@ class RaftRpc : public ::PROTOBUF_NAMESPACE_ID::Service {
   virtual void InstallSnapshot(::PROTOBUF_NAMESPACE_ID::RpcController* controller,
                        const ::raft::InstallSnapshotArgs* request,
                        ::raft::InstallSnapshotReply* response,
+                       ::google::protobuf::Closure* done);
+  virtual void AddPeer(::PROTOBUF_NAMESPACE_ID::RpcController* controller,
+                       const ::raft::AddPeerArgs* request,
+                       ::raft::AddPeerReply* response,
+                       ::google::protobuf::Closure* done);
+  virtual void RemovePeer(::PROTOBUF_NAMESPACE_ID::RpcController* controller,
+                       const ::raft::RemovePeerArgs* request,
+                       ::raft::RemovePeerReply* response,
                        ::google::protobuf::Closure* done);
 
   // implements Service ----------------------------------------------
@@ -1366,6 +2304,14 @@ class RaftRpc_Stub : public RaftRpc {
                        const ::raft::InstallSnapshotArgs* request,
                        ::raft::InstallSnapshotReply* response,
                        ::google::protobuf::Closure* done);
+  void AddPeer(::PROTOBUF_NAMESPACE_ID::RpcController* controller,
+                       const ::raft::AddPeerArgs* request,
+                       ::raft::AddPeerReply* response,
+                       ::google::protobuf::Closure* done);
+  void RemovePeer(::PROTOBUF_NAMESPACE_ID::RpcController* controller,
+                       const ::raft::RemovePeerArgs* request,
+                       ::raft::RemovePeerReply* response,
+                       ::google::protobuf::Closure* done);
  private:
   ::PROTOBUF_NAMESPACE_ID::RpcChannel* channel_;
   bool owns_channel_;
@@ -1382,6 +2328,151 @@ class RaftRpc_Stub : public RaftRpc {
   #pragma GCC diagnostic push
   #pragma GCC diagnostic ignored "-Wstrict-aliasing"
 #endif  // __GNUC__
+// ConfigChange
+
+// .raft.ConfigChangeType change_type = 1;
+inline void ConfigChange::clear_change_type() {
+  change_type_ = 0;
+}
+inline ::raft::ConfigChangeType ConfigChange::_internal_change_type() const {
+  return static_cast< ::raft::ConfigChangeType >(change_type_);
+}
+inline ::raft::ConfigChangeType ConfigChange::change_type() const {
+  // @@protoc_insertion_point(field_get:raft.ConfigChange.change_type)
+  return _internal_change_type();
+}
+inline void ConfigChange::_internal_set_change_type(::raft::ConfigChangeType value) {
+  
+  change_type_ = value;
+}
+inline void ConfigChange::set_change_type(::raft::ConfigChangeType value) {
+  _internal_set_change_type(value);
+  // @@protoc_insertion_point(field_set:raft.ConfigChange.change_type)
+}
+
+// int64 node_id = 2;
+inline void ConfigChange::clear_node_id() {
+  node_id_ = PROTOBUF_LONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 ConfigChange::_internal_node_id() const {
+  return node_id_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 ConfigChange::node_id() const {
+  // @@protoc_insertion_point(field_get:raft.ConfigChange.node_id)
+  return _internal_node_id();
+}
+inline void ConfigChange::_internal_set_node_id(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  
+  node_id_ = value;
+}
+inline void ConfigChange::set_node_id(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  _internal_set_node_id(value);
+  // @@protoc_insertion_point(field_set:raft.ConfigChange.node_id)
+}
+
+// string ip = 3;
+inline void ConfigChange::clear_ip() {
+  ip_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline const std::string& ConfigChange::ip() const {
+  // @@protoc_insertion_point(field_get:raft.ConfigChange.ip)
+  return _internal_ip();
+}
+inline void ConfigChange::set_ip(const std::string& value) {
+  _internal_set_ip(value);
+  // @@protoc_insertion_point(field_set:raft.ConfigChange.ip)
+}
+inline std::string* ConfigChange::mutable_ip() {
+  // @@protoc_insertion_point(field_mutable:raft.ConfigChange.ip)
+  return _internal_mutable_ip();
+}
+inline const std::string& ConfigChange::_internal_ip() const {
+  return ip_.Get();
+}
+inline void ConfigChange::_internal_set_ip(const std::string& value) {
+  
+  ip_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value, GetArena());
+}
+inline void ConfigChange::set_ip(std::string&& value) {
+  
+  ip_.Set(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:raft.ConfigChange.ip)
+}
+inline void ConfigChange::set_ip(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  ip_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
+              GetArena());
+  // @@protoc_insertion_point(field_set_char:raft.ConfigChange.ip)
+}
+inline void ConfigChange::set_ip(const char* value,
+    size_t size) {
+  
+  ip_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:raft.ConfigChange.ip)
+}
+inline std::string* ConfigChange::_internal_mutable_ip() {
+  
+  return ip_.Mutable(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline std::string* ConfigChange::release_ip() {
+  // @@protoc_insertion_point(field_release:raft.ConfigChange.ip)
+  return ip_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void ConfigChange::set_allocated_ip(std::string* ip) {
+  if (ip != nullptr) {
+    
+  } else {
+    
+  }
+  ip_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ip,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:raft.ConfigChange.ip)
+}
+inline std::string* ConfigChange::unsafe_arena_release_ip() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:raft.ConfigChange.ip)
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  
+  return ip_.UnsafeArenaRelease(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      GetArena());
+}
+inline void ConfigChange::unsafe_arena_set_allocated_ip(
+    std::string* ip) {
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  if (ip != nullptr) {
+    
+  } else {
+    
+  }
+  ip_.UnsafeArenaSetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      ip, GetArena());
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:raft.ConfigChange.ip)
+}
+
+// int32 port = 4;
+inline void ConfigChange::clear_port() {
+  port_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 ConfigChange::_internal_port() const {
+  return port_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 ConfigChange::port() const {
+  // @@protoc_insertion_point(field_get:raft.ConfigChange.port)
+  return _internal_port();
+}
+inline void ConfigChange::_internal_set_port(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  port_ = value;
+}
+inline void ConfigChange::set_port(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_port(value);
+  // @@protoc_insertion_point(field_set:raft.ConfigChange.port)
+}
+
+// -------------------------------------------------------------------
+
 // LogEntry
 
 // int64 term = 1;
@@ -1503,6 +2594,26 @@ inline void LogEntry::unsafe_arena_set_allocated_command(
   command_.UnsafeArenaSetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
       command, GetArena());
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:raft.LogEntry.command)
+}
+
+// .raft.EntryType type = 4;
+inline void LogEntry::clear_type() {
+  type_ = 0;
+}
+inline ::raft::EntryType LogEntry::_internal_type() const {
+  return static_cast< ::raft::EntryType >(type_);
+}
+inline ::raft::EntryType LogEntry::type() const {
+  // @@protoc_insertion_point(field_get:raft.LogEntry.type)
+  return _internal_type();
+}
+inline void LogEntry::_internal_set_type(::raft::EntryType value) {
+  
+  type_ = value;
+}
+inline void LogEntry::set_type(::raft::EntryType value) {
+  _internal_set_type(value);
+  // @@protoc_insertion_point(field_set:raft.LogEntry.type)
 }
 
 // -------------------------------------------------------------------
@@ -2069,9 +3180,418 @@ inline void InstallSnapshotReply::set_term(::PROTOBUF_NAMESPACE_ID::int64 value)
   // @@protoc_insertion_point(field_set:raft.InstallSnapshotReply.term)
 }
 
+// -------------------------------------------------------------------
+
+// AddPeerArgs
+
+// int64 node_id = 1;
+inline void AddPeerArgs::clear_node_id() {
+  node_id_ = PROTOBUF_LONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 AddPeerArgs::_internal_node_id() const {
+  return node_id_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 AddPeerArgs::node_id() const {
+  // @@protoc_insertion_point(field_get:raft.AddPeerArgs.node_id)
+  return _internal_node_id();
+}
+inline void AddPeerArgs::_internal_set_node_id(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  
+  node_id_ = value;
+}
+inline void AddPeerArgs::set_node_id(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  _internal_set_node_id(value);
+  // @@protoc_insertion_point(field_set:raft.AddPeerArgs.node_id)
+}
+
+// string ip = 2;
+inline void AddPeerArgs::clear_ip() {
+  ip_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline const std::string& AddPeerArgs::ip() const {
+  // @@protoc_insertion_point(field_get:raft.AddPeerArgs.ip)
+  return _internal_ip();
+}
+inline void AddPeerArgs::set_ip(const std::string& value) {
+  _internal_set_ip(value);
+  // @@protoc_insertion_point(field_set:raft.AddPeerArgs.ip)
+}
+inline std::string* AddPeerArgs::mutable_ip() {
+  // @@protoc_insertion_point(field_mutable:raft.AddPeerArgs.ip)
+  return _internal_mutable_ip();
+}
+inline const std::string& AddPeerArgs::_internal_ip() const {
+  return ip_.Get();
+}
+inline void AddPeerArgs::_internal_set_ip(const std::string& value) {
+  
+  ip_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value, GetArena());
+}
+inline void AddPeerArgs::set_ip(std::string&& value) {
+  
+  ip_.Set(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:raft.AddPeerArgs.ip)
+}
+inline void AddPeerArgs::set_ip(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  ip_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
+              GetArena());
+  // @@protoc_insertion_point(field_set_char:raft.AddPeerArgs.ip)
+}
+inline void AddPeerArgs::set_ip(const char* value,
+    size_t size) {
+  
+  ip_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:raft.AddPeerArgs.ip)
+}
+inline std::string* AddPeerArgs::_internal_mutable_ip() {
+  
+  return ip_.Mutable(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline std::string* AddPeerArgs::release_ip() {
+  // @@protoc_insertion_point(field_release:raft.AddPeerArgs.ip)
+  return ip_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void AddPeerArgs::set_allocated_ip(std::string* ip) {
+  if (ip != nullptr) {
+    
+  } else {
+    
+  }
+  ip_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ip,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:raft.AddPeerArgs.ip)
+}
+inline std::string* AddPeerArgs::unsafe_arena_release_ip() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:raft.AddPeerArgs.ip)
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  
+  return ip_.UnsafeArenaRelease(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      GetArena());
+}
+inline void AddPeerArgs::unsafe_arena_set_allocated_ip(
+    std::string* ip) {
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  if (ip != nullptr) {
+    
+  } else {
+    
+  }
+  ip_.UnsafeArenaSetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      ip, GetArena());
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:raft.AddPeerArgs.ip)
+}
+
+// int32 port = 3;
+inline void AddPeerArgs::clear_port() {
+  port_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 AddPeerArgs::_internal_port() const {
+  return port_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 AddPeerArgs::port() const {
+  // @@protoc_insertion_point(field_get:raft.AddPeerArgs.port)
+  return _internal_port();
+}
+inline void AddPeerArgs::_internal_set_port(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  port_ = value;
+}
+inline void AddPeerArgs::set_port(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_port(value);
+  // @@protoc_insertion_point(field_set:raft.AddPeerArgs.port)
+}
+
+// -------------------------------------------------------------------
+
+// AddPeerReply
+
+// bool success = 1;
+inline void AddPeerReply::clear_success() {
+  success_ = false;
+}
+inline bool AddPeerReply::_internal_success() const {
+  return success_;
+}
+inline bool AddPeerReply::success() const {
+  // @@protoc_insertion_point(field_get:raft.AddPeerReply.success)
+  return _internal_success();
+}
+inline void AddPeerReply::_internal_set_success(bool value) {
+  
+  success_ = value;
+}
+inline void AddPeerReply::set_success(bool value) {
+  _internal_set_success(value);
+  // @@protoc_insertion_point(field_set:raft.AddPeerReply.success)
+}
+
+// string message = 2;
+inline void AddPeerReply::clear_message() {
+  message_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline const std::string& AddPeerReply::message() const {
+  // @@protoc_insertion_point(field_get:raft.AddPeerReply.message)
+  return _internal_message();
+}
+inline void AddPeerReply::set_message(const std::string& value) {
+  _internal_set_message(value);
+  // @@protoc_insertion_point(field_set:raft.AddPeerReply.message)
+}
+inline std::string* AddPeerReply::mutable_message() {
+  // @@protoc_insertion_point(field_mutable:raft.AddPeerReply.message)
+  return _internal_mutable_message();
+}
+inline const std::string& AddPeerReply::_internal_message() const {
+  return message_.Get();
+}
+inline void AddPeerReply::_internal_set_message(const std::string& value) {
+  
+  message_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value, GetArena());
+}
+inline void AddPeerReply::set_message(std::string&& value) {
+  
+  message_.Set(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:raft.AddPeerReply.message)
+}
+inline void AddPeerReply::set_message(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  message_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
+              GetArena());
+  // @@protoc_insertion_point(field_set_char:raft.AddPeerReply.message)
+}
+inline void AddPeerReply::set_message(const char* value,
+    size_t size) {
+  
+  message_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:raft.AddPeerReply.message)
+}
+inline std::string* AddPeerReply::_internal_mutable_message() {
+  
+  return message_.Mutable(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline std::string* AddPeerReply::release_message() {
+  // @@protoc_insertion_point(field_release:raft.AddPeerReply.message)
+  return message_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void AddPeerReply::set_allocated_message(std::string* message) {
+  if (message != nullptr) {
+    
+  } else {
+    
+  }
+  message_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), message,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:raft.AddPeerReply.message)
+}
+inline std::string* AddPeerReply::unsafe_arena_release_message() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:raft.AddPeerReply.message)
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  
+  return message_.UnsafeArenaRelease(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      GetArena());
+}
+inline void AddPeerReply::unsafe_arena_set_allocated_message(
+    std::string* message) {
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  if (message != nullptr) {
+    
+  } else {
+    
+  }
+  message_.UnsafeArenaSetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      message, GetArena());
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:raft.AddPeerReply.message)
+}
+
+// int64 leader_id = 3;
+inline void AddPeerReply::clear_leader_id() {
+  leader_id_ = PROTOBUF_LONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 AddPeerReply::_internal_leader_id() const {
+  return leader_id_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 AddPeerReply::leader_id() const {
+  // @@protoc_insertion_point(field_get:raft.AddPeerReply.leader_id)
+  return _internal_leader_id();
+}
+inline void AddPeerReply::_internal_set_leader_id(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  
+  leader_id_ = value;
+}
+inline void AddPeerReply::set_leader_id(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  _internal_set_leader_id(value);
+  // @@protoc_insertion_point(field_set:raft.AddPeerReply.leader_id)
+}
+
+// -------------------------------------------------------------------
+
+// RemovePeerArgs
+
+// int64 node_id = 1;
+inline void RemovePeerArgs::clear_node_id() {
+  node_id_ = PROTOBUF_LONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 RemovePeerArgs::_internal_node_id() const {
+  return node_id_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 RemovePeerArgs::node_id() const {
+  // @@protoc_insertion_point(field_get:raft.RemovePeerArgs.node_id)
+  return _internal_node_id();
+}
+inline void RemovePeerArgs::_internal_set_node_id(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  
+  node_id_ = value;
+}
+inline void RemovePeerArgs::set_node_id(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  _internal_set_node_id(value);
+  // @@protoc_insertion_point(field_set:raft.RemovePeerArgs.node_id)
+}
+
+// -------------------------------------------------------------------
+
+// RemovePeerReply
+
+// bool success = 1;
+inline void RemovePeerReply::clear_success() {
+  success_ = false;
+}
+inline bool RemovePeerReply::_internal_success() const {
+  return success_;
+}
+inline bool RemovePeerReply::success() const {
+  // @@protoc_insertion_point(field_get:raft.RemovePeerReply.success)
+  return _internal_success();
+}
+inline void RemovePeerReply::_internal_set_success(bool value) {
+  
+  success_ = value;
+}
+inline void RemovePeerReply::set_success(bool value) {
+  _internal_set_success(value);
+  // @@protoc_insertion_point(field_set:raft.RemovePeerReply.success)
+}
+
+// string message = 2;
+inline void RemovePeerReply::clear_message() {
+  message_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline const std::string& RemovePeerReply::message() const {
+  // @@protoc_insertion_point(field_get:raft.RemovePeerReply.message)
+  return _internal_message();
+}
+inline void RemovePeerReply::set_message(const std::string& value) {
+  _internal_set_message(value);
+  // @@protoc_insertion_point(field_set:raft.RemovePeerReply.message)
+}
+inline std::string* RemovePeerReply::mutable_message() {
+  // @@protoc_insertion_point(field_mutable:raft.RemovePeerReply.message)
+  return _internal_mutable_message();
+}
+inline const std::string& RemovePeerReply::_internal_message() const {
+  return message_.Get();
+}
+inline void RemovePeerReply::_internal_set_message(const std::string& value) {
+  
+  message_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value, GetArena());
+}
+inline void RemovePeerReply::set_message(std::string&& value) {
+  
+  message_.Set(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:raft.RemovePeerReply.message)
+}
+inline void RemovePeerReply::set_message(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  message_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
+              GetArena());
+  // @@protoc_insertion_point(field_set_char:raft.RemovePeerReply.message)
+}
+inline void RemovePeerReply::set_message(const char* value,
+    size_t size) {
+  
+  message_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:raft.RemovePeerReply.message)
+}
+inline std::string* RemovePeerReply::_internal_mutable_message() {
+  
+  return message_.Mutable(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline std::string* RemovePeerReply::release_message() {
+  // @@protoc_insertion_point(field_release:raft.RemovePeerReply.message)
+  return message_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void RemovePeerReply::set_allocated_message(std::string* message) {
+  if (message != nullptr) {
+    
+  } else {
+    
+  }
+  message_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), message,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:raft.RemovePeerReply.message)
+}
+inline std::string* RemovePeerReply::unsafe_arena_release_message() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:raft.RemovePeerReply.message)
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  
+  return message_.UnsafeArenaRelease(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      GetArena());
+}
+inline void RemovePeerReply::unsafe_arena_set_allocated_message(
+    std::string* message) {
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  if (message != nullptr) {
+    
+  } else {
+    
+  }
+  message_.UnsafeArenaSetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      message, GetArena());
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:raft.RemovePeerReply.message)
+}
+
+// int64 leader_id = 3;
+inline void RemovePeerReply::clear_leader_id() {
+  leader_id_ = PROTOBUF_LONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 RemovePeerReply::_internal_leader_id() const {
+  return leader_id_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 RemovePeerReply::leader_id() const {
+  // @@protoc_insertion_point(field_get:raft.RemovePeerReply.leader_id)
+  return _internal_leader_id();
+}
+inline void RemovePeerReply::_internal_set_leader_id(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  
+  leader_id_ = value;
+}
+inline void RemovePeerReply::set_leader_id(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  _internal_set_leader_id(value);
+  // @@protoc_insertion_point(field_set:raft.RemovePeerReply.leader_id)
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------
@@ -2088,6 +3608,21 @@ inline void InstallSnapshotReply::set_term(::PROTOBUF_NAMESPACE_ID::int64 value)
 // @@protoc_insertion_point(namespace_scope)
 
 }  // namespace raft
+
+PROTOBUF_NAMESPACE_OPEN
+
+template <> struct is_proto_enum< ::raft::EntryType> : ::std::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::raft::EntryType>() {
+  return ::raft::EntryType_descriptor();
+}
+template <> struct is_proto_enum< ::raft::ConfigChangeType> : ::std::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::raft::ConfigChangeType>() {
+  return ::raft::ConfigChangeType_descriptor();
+}
+
+PROTOBUF_NAMESPACE_CLOSE
 
 // @@protoc_insertion_point(global_scope)
 

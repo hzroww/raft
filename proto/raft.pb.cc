@@ -16,6 +16,10 @@
 #include <google/protobuf/port_def.inc>
 extern PROTOBUF_INTERNAL_EXPORT_raft_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_LogEntry_raft_2eproto;
 namespace raft {
+class ConfigChangeDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<ConfigChange> _instance;
+} _ConfigChange_default_instance_;
 class LogEntryDefaultTypeInternal {
  public:
   ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<LogEntry> _instance;
@@ -44,7 +48,51 @@ class InstallSnapshotReplyDefaultTypeInternal {
  public:
   ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<InstallSnapshotReply> _instance;
 } _InstallSnapshotReply_default_instance_;
+class AddPeerArgsDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<AddPeerArgs> _instance;
+} _AddPeerArgs_default_instance_;
+class AddPeerReplyDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<AddPeerReply> _instance;
+} _AddPeerReply_default_instance_;
+class RemovePeerArgsDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<RemovePeerArgs> _instance;
+} _RemovePeerArgs_default_instance_;
+class RemovePeerReplyDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<RemovePeerReply> _instance;
+} _RemovePeerReply_default_instance_;
 }  // namespace raft
+static void InitDefaultsscc_info_AddPeerArgs_raft_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::raft::_AddPeerArgs_default_instance_;
+    new (ptr) ::raft::AddPeerArgs();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::raft::AddPeerArgs::InitAsDefaultInstance();
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_AddPeerArgs_raft_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_AddPeerArgs_raft_2eproto}, {}};
+
+static void InitDefaultsscc_info_AddPeerReply_raft_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::raft::_AddPeerReply_default_instance_;
+    new (ptr) ::raft::AddPeerReply();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::raft::AddPeerReply::InitAsDefaultInstance();
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_AddPeerReply_raft_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_AddPeerReply_raft_2eproto}, {}};
+
 static void InitDefaultsscc_info_AppendEntriesArgs_raft_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
@@ -73,6 +121,20 @@ static void InitDefaultsscc_info_AppendEntriesReply_raft_2eproto() {
 
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_AppendEntriesReply_raft_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_AppendEntriesReply_raft_2eproto}, {}};
+
+static void InitDefaultsscc_info_ConfigChange_raft_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::raft::_ConfigChange_default_instance_;
+    new (ptr) ::raft::ConfigChange();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::raft::ConfigChange::InitAsDefaultInstance();
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ConfigChange_raft_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_ConfigChange_raft_2eproto}, {}};
 
 static void InitDefaultsscc_info_InstallSnapshotArgs_raft_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
@@ -116,6 +178,34 @@ static void InitDefaultsscc_info_LogEntry_raft_2eproto() {
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_LogEntry_raft_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_LogEntry_raft_2eproto}, {}};
 
+static void InitDefaultsscc_info_RemovePeerArgs_raft_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::raft::_RemovePeerArgs_default_instance_;
+    new (ptr) ::raft::RemovePeerArgs();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::raft::RemovePeerArgs::InitAsDefaultInstance();
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_RemovePeerArgs_raft_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_RemovePeerArgs_raft_2eproto}, {}};
+
+static void InitDefaultsscc_info_RemovePeerReply_raft_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::raft::_RemovePeerReply_default_instance_;
+    new (ptr) ::raft::RemovePeerReply();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::raft::RemovePeerReply::InitAsDefaultInstance();
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_RemovePeerReply_raft_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_RemovePeerReply_raft_2eproto}, {}};
+
 static void InitDefaultsscc_info_RequestVoteArgs_raft_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
@@ -144,11 +234,20 @@ static void InitDefaultsscc_info_RequestVoteReply_raft_2eproto() {
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_RequestVoteReply_raft_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_RequestVoteReply_raft_2eproto}, {}};
 
-static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_raft_2eproto[7];
-static constexpr ::PROTOBUF_NAMESPACE_ID::EnumDescriptor const** file_level_enum_descriptors_raft_2eproto = nullptr;
+static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_raft_2eproto[12];
+static const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* file_level_enum_descriptors_raft_2eproto[2];
 static const ::PROTOBUF_NAMESPACE_ID::ServiceDescriptor* file_level_service_descriptors_raft_2eproto[1];
 
 const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_raft_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::raft::ConfigChange, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::raft::ConfigChange, change_type_),
+  PROTOBUF_FIELD_OFFSET(::raft::ConfigChange, node_id_),
+  PROTOBUF_FIELD_OFFSET(::raft::ConfigChange, ip_),
+  PROTOBUF_FIELD_OFFSET(::raft::ConfigChange, port_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::raft::LogEntry, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -157,6 +256,7 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_raft_2eproto::offsets[] PROTOB
   PROTOBUF_FIELD_OFFSET(::raft::LogEntry, term_),
   PROTOBUF_FIELD_OFFSET(::raft::LogEntry, index_),
   PROTOBUF_FIELD_OFFSET(::raft::LogEntry, command_),
+  PROTOBUF_FIELD_OFFSET(::raft::LogEntry, type_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::raft::RequestVoteArgs, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -210,18 +310,54 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_raft_2eproto::offsets[] PROTOB
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   PROTOBUF_FIELD_OFFSET(::raft::InstallSnapshotReply, term_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::raft::AddPeerArgs, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::raft::AddPeerArgs, node_id_),
+  PROTOBUF_FIELD_OFFSET(::raft::AddPeerArgs, ip_),
+  PROTOBUF_FIELD_OFFSET(::raft::AddPeerArgs, port_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::raft::AddPeerReply, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::raft::AddPeerReply, success_),
+  PROTOBUF_FIELD_OFFSET(::raft::AddPeerReply, message_),
+  PROTOBUF_FIELD_OFFSET(::raft::AddPeerReply, leader_id_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::raft::RemovePeerArgs, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::raft::RemovePeerArgs, node_id_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::raft::RemovePeerReply, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::raft::RemovePeerReply, success_),
+  PROTOBUF_FIELD_OFFSET(::raft::RemovePeerReply, message_),
+  PROTOBUF_FIELD_OFFSET(::raft::RemovePeerReply, leader_id_),
 };
 static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
-  { 0, -1, sizeof(::raft::LogEntry)},
-  { 8, -1, sizeof(::raft::RequestVoteArgs)},
-  { 17, -1, sizeof(::raft::RequestVoteReply)},
-  { 24, -1, sizeof(::raft::AppendEntriesArgs)},
-  { 35, -1, sizeof(::raft::AppendEntriesReply)},
-  { 44, -1, sizeof(::raft::InstallSnapshotArgs)},
-  { 55, -1, sizeof(::raft::InstallSnapshotReply)},
+  { 0, -1, sizeof(::raft::ConfigChange)},
+  { 9, -1, sizeof(::raft::LogEntry)},
+  { 18, -1, sizeof(::raft::RequestVoteArgs)},
+  { 27, -1, sizeof(::raft::RequestVoteReply)},
+  { 34, -1, sizeof(::raft::AppendEntriesArgs)},
+  { 45, -1, sizeof(::raft::AppendEntriesReply)},
+  { 54, -1, sizeof(::raft::InstallSnapshotArgs)},
+  { 65, -1, sizeof(::raft::InstallSnapshotReply)},
+  { 71, -1, sizeof(::raft::AddPeerArgs)},
+  { 79, -1, sizeof(::raft::AddPeerReply)},
+  { 87, -1, sizeof(::raft::RemovePeerArgs)},
+  { 93, -1, sizeof(::raft::RemovePeerReply)},
 };
 
 static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::raft::_ConfigChange_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::raft::_LogEntry_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::raft::_RequestVoteArgs_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::raft::_RequestVoteReply_default_instance_),
@@ -229,55 +365,400 @@ static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] =
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::raft::_AppendEntriesReply_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::raft::_InstallSnapshotArgs_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::raft::_InstallSnapshotReply_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::raft::_AddPeerArgs_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::raft::_AddPeerReply_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::raft::_RemovePeerArgs_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::raft::_RemovePeerReply_default_instance_),
 };
 
 const char descriptor_table_protodef_raft_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
-  "\n\nraft.proto\022\004raft\"8\n\010LogEntry\022\014\n\004term\030\001"
-  " \001(\003\022\r\n\005index\030\002 \001(\003\022\017\n\007command\030\003 \001(\014\"_\n\017"
-  "RequestVoteArgs\022\014\n\004term\030\001 \001(\003\022\023\n\013candida"
-  "teId\030\002 \001(\003\022\024\n\014lastLogIndex\030\003 \001(\003\022\023\n\013last"
-  "LogTerm\030\004 \001(\003\"5\n\020RequestVoteReply\022\014\n\004ter"
-  "m\030\001 \001(\003\022\023\n\013voteGranted\030\002 \001(\010\"\225\001\n\021AppendE"
-  "ntriesArgs\022\014\n\004term\030\001 \001(\003\022\020\n\010leaderId\030\002 \001"
-  "(\003\022\024\n\014prevLogIndex\030\003 \001(\003\022\023\n\013prevLogTerm\030"
-  "\004 \001(\003\022\037\n\007entries\030\005 \003(\0132\016.raft.LogEntry\022\024"
-  "\n\014leaderCommit\030\006 \001(\003\"`\n\022AppendEntriesRep"
-  "ly\022\014\n\004term\030\001 \001(\003\022\017\n\007success\030\002 \001(\010\022\025\n\rcon"
-  "flictIndex\030\003 \001(\003\022\024\n\014conflictTerm\030\004 \001(\003\"\206"
-  "\001\n\023InstallSnapshotArgs\022\014\n\004term\030\001 \001(\003\022\020\n\010"
-  "leaderId\030\002 \001(\003\022\031\n\021lastIncludedIndex\030\003 \001("
-  "\003\022\030\n\020lastIncludedTerm\030\004 \001(\003\022\014\n\004data\030\005 \001("
-  "\014\022\014\n\004done\030\006 \001(\010\"$\n\024InstallSnapshotReply\022"
-  "\014\n\004term\030\001 \001(\0032\325\001\n\007RaftRpc\022<\n\013RequestVote"
-  "\022\025.raft.RequestVoteArgs\032\026.raft.RequestVo"
-  "teReply\022B\n\rAppendEntries\022\027.raft.AppendEn"
-  "triesArgs\032\030.raft.AppendEntriesReply\022H\n\017I"
-  "nstallSnapshot\022\031.raft.InstallSnapshotArg"
-  "s\032\032.raft.InstallSnapshotReplyB\003\200\001\001b\006prot"
-  "o3"
+  "\n\nraft.proto\022\004raft\"f\n\014ConfigChange\022+\n\013ch"
+  "ange_type\030\001 \001(\0162\026.raft.ConfigChangeType\022"
+  "\017\n\007node_id\030\002 \001(\003\022\n\n\002ip\030\003 \001(\t\022\014\n\004port\030\004 \001"
+  "(\005\"W\n\010LogEntry\022\014\n\004term\030\001 \001(\003\022\r\n\005index\030\002 "
+  "\001(\003\022\017\n\007command\030\003 \001(\014\022\035\n\004type\030\004 \001(\0162\017.raf"
+  "t.EntryType\"_\n\017RequestVoteArgs\022\014\n\004term\030\001"
+  " \001(\003\022\023\n\013candidateId\030\002 \001(\003\022\024\n\014lastLogInde"
+  "x\030\003 \001(\003\022\023\n\013lastLogTerm\030\004 \001(\003\"5\n\020RequestV"
+  "oteReply\022\014\n\004term\030\001 \001(\003\022\023\n\013voteGranted\030\002 "
+  "\001(\010\"\225\001\n\021AppendEntriesArgs\022\014\n\004term\030\001 \001(\003\022"
+  "\020\n\010leaderId\030\002 \001(\003\022\024\n\014prevLogIndex\030\003 \001(\003\022"
+  "\023\n\013prevLogTerm\030\004 \001(\003\022\037\n\007entries\030\005 \003(\0132\016."
+  "raft.LogEntry\022\024\n\014leaderCommit\030\006 \001(\003\"`\n\022A"
+  "ppendEntriesReply\022\014\n\004term\030\001 \001(\003\022\017\n\007succe"
+  "ss\030\002 \001(\010\022\025\n\rconflictIndex\030\003 \001(\003\022\024\n\014confl"
+  "ictTerm\030\004 \001(\003\"\206\001\n\023InstallSnapshotArgs\022\014\n"
+  "\004term\030\001 \001(\003\022\020\n\010leaderId\030\002 \001(\003\022\031\n\021lastInc"
+  "ludedIndex\030\003 \001(\003\022\030\n\020lastIncludedTerm\030\004 \001"
+  "(\003\022\014\n\004data\030\005 \001(\014\022\014\n\004done\030\006 \001(\010\"$\n\024Instal"
+  "lSnapshotReply\022\014\n\004term\030\001 \001(\003\"8\n\013AddPeerA"
+  "rgs\022\017\n\007node_id\030\001 \001(\003\022\n\n\002ip\030\002 \001(\t\022\014\n\004port"
+  "\030\003 \001(\005\"C\n\014AddPeerReply\022\017\n\007success\030\001 \001(\010\022"
+  "\017\n\007message\030\002 \001(\t\022\021\n\tleader_id\030\003 \001(\003\"!\n\016R"
+  "emovePeerArgs\022\017\n\007node_id\030\001 \001(\003\"F\n\017Remove"
+  "PeerReply\022\017\n\007success\030\001 \001(\010\022\017\n\007message\030\002 "
+  "\001(\t\022\021\n\tleader_id\030\003 \001(\003*/\n\tEntryType\022\020\n\014E"
+  "NTRY_NORMAL\020\000\022\020\n\014ENTRY_CONFIG\020\001*1\n\020Confi"
+  "gChangeType\022\014\n\010ADD_PEER\020\000\022\017\n\013REMOVE_PEER"
+  "\020\0012\302\002\n\007RaftRpc\022<\n\013RequestVote\022\025.raft.Req"
+  "uestVoteArgs\032\026.raft.RequestVoteReply\022B\n\r"
+  "AppendEntries\022\027.raft.AppendEntriesArgs\032\030"
+  ".raft.AppendEntriesReply\022H\n\017InstallSnaps"
+  "hot\022\031.raft.InstallSnapshotArgs\032\032.raft.In"
+  "stallSnapshotReply\0220\n\007AddPeer\022\021.raft.Add"
+  "PeerArgs\032\022.raft.AddPeerReply\0229\n\nRemovePe"
+  "er\022\024.raft.RemovePeerArgs\032\025.raft.RemovePe"
+  "erReplyB\003\200\001\001b\006proto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_raft_2eproto_deps[1] = {
 };
-static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_raft_2eproto_sccs[7] = {
+static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_raft_2eproto_sccs[12] = {
+  &scc_info_AddPeerArgs_raft_2eproto.base,
+  &scc_info_AddPeerReply_raft_2eproto.base,
   &scc_info_AppendEntriesArgs_raft_2eproto.base,
   &scc_info_AppendEntriesReply_raft_2eproto.base,
+  &scc_info_ConfigChange_raft_2eproto.base,
   &scc_info_InstallSnapshotArgs_raft_2eproto.base,
   &scc_info_InstallSnapshotReply_raft_2eproto.base,
   &scc_info_LogEntry_raft_2eproto.base,
+  &scc_info_RemovePeerArgs_raft_2eproto.base,
+  &scc_info_RemovePeerReply_raft_2eproto.base,
   &scc_info_RequestVoteArgs_raft_2eproto.base,
   &scc_info_RequestVoteReply_raft_2eproto.base,
 };
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_raft_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_raft_2eproto = {
-  false, false, descriptor_table_protodef_raft_2eproto, "raft.proto", 882,
-  &descriptor_table_raft_2eproto_once, descriptor_table_raft_2eproto_sccs, descriptor_table_raft_2eproto_deps, 7, 0,
+  false, false, descriptor_table_protodef_raft_2eproto, "raft.proto", 1460,
+  &descriptor_table_raft_2eproto_once, descriptor_table_raft_2eproto_sccs, descriptor_table_raft_2eproto_deps, 12, 0,
   schemas, file_default_instances, TableStruct_raft_2eproto::offsets,
-  file_level_metadata_raft_2eproto, 7, file_level_enum_descriptors_raft_2eproto, file_level_service_descriptors_raft_2eproto,
+  file_level_metadata_raft_2eproto, 12, file_level_enum_descriptors_raft_2eproto, file_level_service_descriptors_raft_2eproto,
 };
 
 // Force running AddDescriptors() at dynamic initialization time.
 static bool dynamic_init_dummy_raft_2eproto = (static_cast<void>(::PROTOBUF_NAMESPACE_ID::internal::AddDescriptors(&descriptor_table_raft_2eproto)), true);
 namespace raft {
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* EntryType_descriptor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_raft_2eproto);
+  return file_level_enum_descriptors_raft_2eproto[0];
+}
+bool EntryType_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 1:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* ConfigChangeType_descriptor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_raft_2eproto);
+  return file_level_enum_descriptors_raft_2eproto[1];
+}
+bool ConfigChangeType_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 1:
+      return true;
+    default:
+      return false;
+  }
+}
+
+
+// ===================================================================
+
+void ConfigChange::InitAsDefaultInstance() {
+}
+class ConfigChange::_Internal {
+ public:
+};
+
+ConfigChange::ConfigChange(::PROTOBUF_NAMESPACE_ID::Arena* arena)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena) {
+  SharedCtor();
+  RegisterArenaDtor(arena);
+  // @@protoc_insertion_point(arena_constructor:raft.ConfigChange)
+}
+ConfigChange::ConfigChange(const ConfigChange& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  ip_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from._internal_ip().empty()) {
+    ip_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from._internal_ip(),
+      GetArena());
+  }
+  ::memcpy(&node_id_, &from.node_id_,
+    static_cast<size_t>(reinterpret_cast<char*>(&port_) -
+    reinterpret_cast<char*>(&node_id_)) + sizeof(port_));
+  // @@protoc_insertion_point(copy_constructor:raft.ConfigChange)
+}
+
+void ConfigChange::SharedCtor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_ConfigChange_raft_2eproto.base);
+  ip_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  ::memset(&node_id_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&port_) -
+      reinterpret_cast<char*>(&node_id_)) + sizeof(port_));
+}
+
+ConfigChange::~ConfigChange() {
+  // @@protoc_insertion_point(destructor:raft.ConfigChange)
+  SharedDtor();
+  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+void ConfigChange::SharedDtor() {
+  GOOGLE_DCHECK(GetArena() == nullptr);
+  ip_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+
+void ConfigChange::ArenaDtor(void* object) {
+  ConfigChange* _this = reinterpret_cast< ConfigChange* >(object);
+  (void)_this;
+}
+void ConfigChange::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
+}
+void ConfigChange::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const ConfigChange& ConfigChange::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_ConfigChange_raft_2eproto.base);
+  return *internal_default_instance();
+}
+
+
+void ConfigChange::Clear() {
+// @@protoc_insertion_point(message_clear_start:raft.ConfigChange)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  ip_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  ::memset(&node_id_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&port_) -
+      reinterpret_cast<char*>(&node_id_)) + sizeof(port_));
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* ConfigChange::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  ::PROTOBUF_NAMESPACE_ID::Arena* arena = GetArena(); (void)arena;
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
+      // .raft.ConfigChangeType change_type = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
+          ::PROTOBUF_NAMESPACE_ID::uint64 val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+          _internal_set_change_type(static_cast<::raft::ConfigChangeType>(val));
+        } else goto handle_unusual;
+        continue;
+      // int64 node_id = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 16)) {
+          node_id_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // string ip = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 26)) {
+          auto str = _internal_mutable_ip();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "raft.ConfigChange.ip"));
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // int32 port = 4;
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 32)) {
+          port_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
+          goto success;
+        }
+        ptr = UnknownFieldParse(tag,
+            _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+            ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
+      }
+    }  // switch
+  }  // while
+success:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
+}
+
+::PROTOBUF_NAMESPACE_ID::uint8* ConfigChange::_InternalSerialize(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:raft.ConfigChange)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // .raft.ConfigChangeType change_type = 1;
+  if (this->change_type() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteEnumToArray(
+      1, this->_internal_change_type(), target);
+  }
+
+  // int64 node_id = 2;
+  if (this->node_id() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(2, this->_internal_node_id(), target);
+  }
+
+  // string ip = 3;
+  if (this->ip().size() > 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_ip().data(), static_cast<int>(this->_internal_ip().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "raft.ConfigChange.ip");
+    target = stream->WriteStringMaybeAliased(
+        3, this->_internal_ip(), target);
+  }
+
+  // int32 port = 4;
+  if (this->port() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(4, this->_internal_port(), target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:raft.ConfigChange)
+  return target;
+}
+
+size_t ConfigChange::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:raft.ConfigChange)
+  size_t total_size = 0;
+
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // string ip = 3;
+  if (this->ip().size() > 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_ip());
+  }
+
+  // int64 node_id = 2;
+  if (this->node_id() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int64Size(
+        this->_internal_node_id());
+  }
+
+  // .raft.ConfigChangeType change_type = 1;
+  if (this->change_type() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::EnumSize(this->_internal_change_type());
+  }
+
+  // int32 port = 4;
+  if (this->port() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
+        this->_internal_port());
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void ConfigChange::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:raft.ConfigChange)
+  GOOGLE_DCHECK_NE(&from, this);
+  const ConfigChange* source =
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<ConfigChange>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:raft.ConfigChange)
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:raft.ConfigChange)
+    MergeFrom(*source);
+  }
+}
+
+void ConfigChange::MergeFrom(const ConfigChange& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:raft.ConfigChange)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from.ip().size() > 0) {
+    _internal_set_ip(from._internal_ip());
+  }
+  if (from.node_id() != 0) {
+    _internal_set_node_id(from._internal_node_id());
+  }
+  if (from.change_type() != 0) {
+    _internal_set_change_type(from._internal_change_type());
+  }
+  if (from.port() != 0) {
+    _internal_set_port(from._internal_port());
+  }
+}
+
+void ConfigChange::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:raft.ConfigChange)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void ConfigChange::CopyFrom(const ConfigChange& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:raft.ConfigChange)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool ConfigChange::IsInitialized() const {
+  return true;
+}
+
+void ConfigChange::InternalSwap(ConfigChange* other) {
+  using std::swap;
+  _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
+  ip_.Swap(&other->ip_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(ConfigChange, port_)
+      + sizeof(ConfigChange::port_)
+      - PROTOBUF_FIELD_OFFSET(ConfigChange, node_id_)>(
+          reinterpret_cast<char*>(&node_id_),
+          reinterpret_cast<char*>(&other->node_id_));
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata ConfigChange::GetMetadata() const {
+  return GetMetadataStatic();
+}
+
 
 // ===================================================================
 
@@ -302,8 +783,8 @@ LogEntry::LogEntry(const LogEntry& from)
       GetArena());
   }
   ::memcpy(&term_, &from.term_,
-    static_cast<size_t>(reinterpret_cast<char*>(&index_) -
-    reinterpret_cast<char*>(&term_)) + sizeof(index_));
+    static_cast<size_t>(reinterpret_cast<char*>(&type_) -
+    reinterpret_cast<char*>(&term_)) + sizeof(type_));
   // @@protoc_insertion_point(copy_constructor:raft.LogEntry)
 }
 
@@ -311,8 +792,8 @@ void LogEntry::SharedCtor() {
   ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_LogEntry_raft_2eproto.base);
   command_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   ::memset(&term_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&index_) -
-      reinterpret_cast<char*>(&term_)) + sizeof(index_));
+      reinterpret_cast<char*>(&type_) -
+      reinterpret_cast<char*>(&term_)) + sizeof(type_));
 }
 
 LogEntry::~LogEntry() {
@@ -349,8 +830,8 @@ void LogEntry::Clear() {
 
   command_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
   ::memset(&term_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&index_) -
-      reinterpret_cast<char*>(&term_)) + sizeof(index_));
+      reinterpret_cast<char*>(&type_) -
+      reinterpret_cast<char*>(&term_)) + sizeof(type_));
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -382,6 +863,14 @@ const char* LogEntry::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::i
           auto str = _internal_mutable_command();
           ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // .raft.EntryType type = 4;
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 32)) {
+          ::PROTOBUF_NAMESPACE_ID::uint64 val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+          _internal_set_type(static_cast<::raft::EntryType>(val));
         } else goto handle_unusual;
         continue;
       default: {
@@ -430,6 +919,13 @@ failure:
         3, this->_internal_command(), target);
   }
 
+  // .raft.EntryType type = 4;
+  if (this->type() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteEnumToArray(
+      4, this->_internal_type(), target);
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
@@ -465,6 +961,12 @@ size_t LogEntry::ByteSizeLong() const {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int64Size(
         this->_internal_index());
+  }
+
+  // .raft.EntryType type = 4;
+  if (this->type() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::EnumSize(this->_internal_type());
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -507,6 +1009,9 @@ void LogEntry::MergeFrom(const LogEntry& from) {
   if (from.index() != 0) {
     _internal_set_index(from._internal_index());
   }
+  if (from.type() != 0) {
+    _internal_set_type(from._internal_type());
+  }
 }
 
 void LogEntry::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
@@ -532,8 +1037,8 @@ void LogEntry::InternalSwap(LogEntry* other) {
   _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
   command_.Swap(&other->command_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(LogEntry, index_)
-      + sizeof(LogEntry::index_)
+      PROTOBUF_FIELD_OFFSET(LogEntry, type_)
+      + sizeof(LogEntry::type_)
       - PROTOBUF_FIELD_OFFSET(LogEntry, term_)>(
           reinterpret_cast<char*>(&term_),
           reinterpret_cast<char*>(&other->term_));
@@ -2189,6 +2694,1009 @@ void InstallSnapshotReply::InternalSwap(InstallSnapshotReply* other) {
 
 // ===================================================================
 
+void AddPeerArgs::InitAsDefaultInstance() {
+}
+class AddPeerArgs::_Internal {
+ public:
+};
+
+AddPeerArgs::AddPeerArgs(::PROTOBUF_NAMESPACE_ID::Arena* arena)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena) {
+  SharedCtor();
+  RegisterArenaDtor(arena);
+  // @@protoc_insertion_point(arena_constructor:raft.AddPeerArgs)
+}
+AddPeerArgs::AddPeerArgs(const AddPeerArgs& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  ip_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from._internal_ip().empty()) {
+    ip_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from._internal_ip(),
+      GetArena());
+  }
+  ::memcpy(&node_id_, &from.node_id_,
+    static_cast<size_t>(reinterpret_cast<char*>(&port_) -
+    reinterpret_cast<char*>(&node_id_)) + sizeof(port_));
+  // @@protoc_insertion_point(copy_constructor:raft.AddPeerArgs)
+}
+
+void AddPeerArgs::SharedCtor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_AddPeerArgs_raft_2eproto.base);
+  ip_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  ::memset(&node_id_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&port_) -
+      reinterpret_cast<char*>(&node_id_)) + sizeof(port_));
+}
+
+AddPeerArgs::~AddPeerArgs() {
+  // @@protoc_insertion_point(destructor:raft.AddPeerArgs)
+  SharedDtor();
+  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+void AddPeerArgs::SharedDtor() {
+  GOOGLE_DCHECK(GetArena() == nullptr);
+  ip_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+
+void AddPeerArgs::ArenaDtor(void* object) {
+  AddPeerArgs* _this = reinterpret_cast< AddPeerArgs* >(object);
+  (void)_this;
+}
+void AddPeerArgs::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
+}
+void AddPeerArgs::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const AddPeerArgs& AddPeerArgs::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_AddPeerArgs_raft_2eproto.base);
+  return *internal_default_instance();
+}
+
+
+void AddPeerArgs::Clear() {
+// @@protoc_insertion_point(message_clear_start:raft.AddPeerArgs)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  ip_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  ::memset(&node_id_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&port_) -
+      reinterpret_cast<char*>(&node_id_)) + sizeof(port_));
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* AddPeerArgs::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  ::PROTOBUF_NAMESPACE_ID::Arena* arena = GetArena(); (void)arena;
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
+      // int64 node_id = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
+          node_id_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // string ip = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
+          auto str = _internal_mutable_ip();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "raft.AddPeerArgs.ip"));
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // int32 port = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 24)) {
+          port_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
+          goto success;
+        }
+        ptr = UnknownFieldParse(tag,
+            _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+            ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
+      }
+    }  // switch
+  }  // while
+success:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
+}
+
+::PROTOBUF_NAMESPACE_ID::uint8* AddPeerArgs::_InternalSerialize(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:raft.AddPeerArgs)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // int64 node_id = 1;
+  if (this->node_id() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(1, this->_internal_node_id(), target);
+  }
+
+  // string ip = 2;
+  if (this->ip().size() > 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_ip().data(), static_cast<int>(this->_internal_ip().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "raft.AddPeerArgs.ip");
+    target = stream->WriteStringMaybeAliased(
+        2, this->_internal_ip(), target);
+  }
+
+  // int32 port = 3;
+  if (this->port() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(3, this->_internal_port(), target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:raft.AddPeerArgs)
+  return target;
+}
+
+size_t AddPeerArgs::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:raft.AddPeerArgs)
+  size_t total_size = 0;
+
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // string ip = 2;
+  if (this->ip().size() > 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_ip());
+  }
+
+  // int64 node_id = 1;
+  if (this->node_id() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int64Size(
+        this->_internal_node_id());
+  }
+
+  // int32 port = 3;
+  if (this->port() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
+        this->_internal_port());
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void AddPeerArgs::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:raft.AddPeerArgs)
+  GOOGLE_DCHECK_NE(&from, this);
+  const AddPeerArgs* source =
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<AddPeerArgs>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:raft.AddPeerArgs)
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:raft.AddPeerArgs)
+    MergeFrom(*source);
+  }
+}
+
+void AddPeerArgs::MergeFrom(const AddPeerArgs& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:raft.AddPeerArgs)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from.ip().size() > 0) {
+    _internal_set_ip(from._internal_ip());
+  }
+  if (from.node_id() != 0) {
+    _internal_set_node_id(from._internal_node_id());
+  }
+  if (from.port() != 0) {
+    _internal_set_port(from._internal_port());
+  }
+}
+
+void AddPeerArgs::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:raft.AddPeerArgs)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void AddPeerArgs::CopyFrom(const AddPeerArgs& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:raft.AddPeerArgs)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool AddPeerArgs::IsInitialized() const {
+  return true;
+}
+
+void AddPeerArgs::InternalSwap(AddPeerArgs* other) {
+  using std::swap;
+  _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
+  ip_.Swap(&other->ip_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(AddPeerArgs, port_)
+      + sizeof(AddPeerArgs::port_)
+      - PROTOBUF_FIELD_OFFSET(AddPeerArgs, node_id_)>(
+          reinterpret_cast<char*>(&node_id_),
+          reinterpret_cast<char*>(&other->node_id_));
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata AddPeerArgs::GetMetadata() const {
+  return GetMetadataStatic();
+}
+
+
+// ===================================================================
+
+void AddPeerReply::InitAsDefaultInstance() {
+}
+class AddPeerReply::_Internal {
+ public:
+};
+
+AddPeerReply::AddPeerReply(::PROTOBUF_NAMESPACE_ID::Arena* arena)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena) {
+  SharedCtor();
+  RegisterArenaDtor(arena);
+  // @@protoc_insertion_point(arena_constructor:raft.AddPeerReply)
+}
+AddPeerReply::AddPeerReply(const AddPeerReply& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  message_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from._internal_message().empty()) {
+    message_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from._internal_message(),
+      GetArena());
+  }
+  ::memcpy(&leader_id_, &from.leader_id_,
+    static_cast<size_t>(reinterpret_cast<char*>(&success_) -
+    reinterpret_cast<char*>(&leader_id_)) + sizeof(success_));
+  // @@protoc_insertion_point(copy_constructor:raft.AddPeerReply)
+}
+
+void AddPeerReply::SharedCtor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_AddPeerReply_raft_2eproto.base);
+  message_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  ::memset(&leader_id_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&success_) -
+      reinterpret_cast<char*>(&leader_id_)) + sizeof(success_));
+}
+
+AddPeerReply::~AddPeerReply() {
+  // @@protoc_insertion_point(destructor:raft.AddPeerReply)
+  SharedDtor();
+  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+void AddPeerReply::SharedDtor() {
+  GOOGLE_DCHECK(GetArena() == nullptr);
+  message_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+
+void AddPeerReply::ArenaDtor(void* object) {
+  AddPeerReply* _this = reinterpret_cast< AddPeerReply* >(object);
+  (void)_this;
+}
+void AddPeerReply::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
+}
+void AddPeerReply::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const AddPeerReply& AddPeerReply::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_AddPeerReply_raft_2eproto.base);
+  return *internal_default_instance();
+}
+
+
+void AddPeerReply::Clear() {
+// @@protoc_insertion_point(message_clear_start:raft.AddPeerReply)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  message_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  ::memset(&leader_id_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&success_) -
+      reinterpret_cast<char*>(&leader_id_)) + sizeof(success_));
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* AddPeerReply::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  ::PROTOBUF_NAMESPACE_ID::Arena* arena = GetArena(); (void)arena;
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
+      // bool success = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
+          success_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // string message = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
+          auto str = _internal_mutable_message();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "raft.AddPeerReply.message"));
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // int64 leader_id = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 24)) {
+          leader_id_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
+          goto success;
+        }
+        ptr = UnknownFieldParse(tag,
+            _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+            ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
+      }
+    }  // switch
+  }  // while
+success:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
+}
+
+::PROTOBUF_NAMESPACE_ID::uint8* AddPeerReply::_InternalSerialize(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:raft.AddPeerReply)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // bool success = 1;
+  if (this->success() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(1, this->_internal_success(), target);
+  }
+
+  // string message = 2;
+  if (this->message().size() > 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_message().data(), static_cast<int>(this->_internal_message().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "raft.AddPeerReply.message");
+    target = stream->WriteStringMaybeAliased(
+        2, this->_internal_message(), target);
+  }
+
+  // int64 leader_id = 3;
+  if (this->leader_id() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(3, this->_internal_leader_id(), target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:raft.AddPeerReply)
+  return target;
+}
+
+size_t AddPeerReply::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:raft.AddPeerReply)
+  size_t total_size = 0;
+
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // string message = 2;
+  if (this->message().size() > 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_message());
+  }
+
+  // int64 leader_id = 3;
+  if (this->leader_id() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int64Size(
+        this->_internal_leader_id());
+  }
+
+  // bool success = 1;
+  if (this->success() != 0) {
+    total_size += 1 + 1;
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void AddPeerReply::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:raft.AddPeerReply)
+  GOOGLE_DCHECK_NE(&from, this);
+  const AddPeerReply* source =
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<AddPeerReply>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:raft.AddPeerReply)
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:raft.AddPeerReply)
+    MergeFrom(*source);
+  }
+}
+
+void AddPeerReply::MergeFrom(const AddPeerReply& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:raft.AddPeerReply)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from.message().size() > 0) {
+    _internal_set_message(from._internal_message());
+  }
+  if (from.leader_id() != 0) {
+    _internal_set_leader_id(from._internal_leader_id());
+  }
+  if (from.success() != 0) {
+    _internal_set_success(from._internal_success());
+  }
+}
+
+void AddPeerReply::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:raft.AddPeerReply)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void AddPeerReply::CopyFrom(const AddPeerReply& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:raft.AddPeerReply)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool AddPeerReply::IsInitialized() const {
+  return true;
+}
+
+void AddPeerReply::InternalSwap(AddPeerReply* other) {
+  using std::swap;
+  _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
+  message_.Swap(&other->message_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(AddPeerReply, success_)
+      + sizeof(AddPeerReply::success_)
+      - PROTOBUF_FIELD_OFFSET(AddPeerReply, leader_id_)>(
+          reinterpret_cast<char*>(&leader_id_),
+          reinterpret_cast<char*>(&other->leader_id_));
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata AddPeerReply::GetMetadata() const {
+  return GetMetadataStatic();
+}
+
+
+// ===================================================================
+
+void RemovePeerArgs::InitAsDefaultInstance() {
+}
+class RemovePeerArgs::_Internal {
+ public:
+};
+
+RemovePeerArgs::RemovePeerArgs(::PROTOBUF_NAMESPACE_ID::Arena* arena)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena) {
+  SharedCtor();
+  RegisterArenaDtor(arena);
+  // @@protoc_insertion_point(arena_constructor:raft.RemovePeerArgs)
+}
+RemovePeerArgs::RemovePeerArgs(const RemovePeerArgs& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  node_id_ = from.node_id_;
+  // @@protoc_insertion_point(copy_constructor:raft.RemovePeerArgs)
+}
+
+void RemovePeerArgs::SharedCtor() {
+  node_id_ = PROTOBUF_LONGLONG(0);
+}
+
+RemovePeerArgs::~RemovePeerArgs() {
+  // @@protoc_insertion_point(destructor:raft.RemovePeerArgs)
+  SharedDtor();
+  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+void RemovePeerArgs::SharedDtor() {
+  GOOGLE_DCHECK(GetArena() == nullptr);
+}
+
+void RemovePeerArgs::ArenaDtor(void* object) {
+  RemovePeerArgs* _this = reinterpret_cast< RemovePeerArgs* >(object);
+  (void)_this;
+}
+void RemovePeerArgs::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
+}
+void RemovePeerArgs::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const RemovePeerArgs& RemovePeerArgs::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_RemovePeerArgs_raft_2eproto.base);
+  return *internal_default_instance();
+}
+
+
+void RemovePeerArgs::Clear() {
+// @@protoc_insertion_point(message_clear_start:raft.RemovePeerArgs)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  node_id_ = PROTOBUF_LONGLONG(0);
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* RemovePeerArgs::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  ::PROTOBUF_NAMESPACE_ID::Arena* arena = GetArena(); (void)arena;
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
+      // int64 node_id = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
+          node_id_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
+          goto success;
+        }
+        ptr = UnknownFieldParse(tag,
+            _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+            ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
+      }
+    }  // switch
+  }  // while
+success:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
+}
+
+::PROTOBUF_NAMESPACE_ID::uint8* RemovePeerArgs::_InternalSerialize(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:raft.RemovePeerArgs)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // int64 node_id = 1;
+  if (this->node_id() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(1, this->_internal_node_id(), target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:raft.RemovePeerArgs)
+  return target;
+}
+
+size_t RemovePeerArgs::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:raft.RemovePeerArgs)
+  size_t total_size = 0;
+
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // int64 node_id = 1;
+  if (this->node_id() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int64Size(
+        this->_internal_node_id());
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void RemovePeerArgs::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:raft.RemovePeerArgs)
+  GOOGLE_DCHECK_NE(&from, this);
+  const RemovePeerArgs* source =
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<RemovePeerArgs>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:raft.RemovePeerArgs)
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:raft.RemovePeerArgs)
+    MergeFrom(*source);
+  }
+}
+
+void RemovePeerArgs::MergeFrom(const RemovePeerArgs& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:raft.RemovePeerArgs)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from.node_id() != 0) {
+    _internal_set_node_id(from._internal_node_id());
+  }
+}
+
+void RemovePeerArgs::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:raft.RemovePeerArgs)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void RemovePeerArgs::CopyFrom(const RemovePeerArgs& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:raft.RemovePeerArgs)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool RemovePeerArgs::IsInitialized() const {
+  return true;
+}
+
+void RemovePeerArgs::InternalSwap(RemovePeerArgs* other) {
+  using std::swap;
+  _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
+  swap(node_id_, other->node_id_);
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata RemovePeerArgs::GetMetadata() const {
+  return GetMetadataStatic();
+}
+
+
+// ===================================================================
+
+void RemovePeerReply::InitAsDefaultInstance() {
+}
+class RemovePeerReply::_Internal {
+ public:
+};
+
+RemovePeerReply::RemovePeerReply(::PROTOBUF_NAMESPACE_ID::Arena* arena)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena) {
+  SharedCtor();
+  RegisterArenaDtor(arena);
+  // @@protoc_insertion_point(arena_constructor:raft.RemovePeerReply)
+}
+RemovePeerReply::RemovePeerReply(const RemovePeerReply& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  message_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from._internal_message().empty()) {
+    message_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from._internal_message(),
+      GetArena());
+  }
+  ::memcpy(&leader_id_, &from.leader_id_,
+    static_cast<size_t>(reinterpret_cast<char*>(&success_) -
+    reinterpret_cast<char*>(&leader_id_)) + sizeof(success_));
+  // @@protoc_insertion_point(copy_constructor:raft.RemovePeerReply)
+}
+
+void RemovePeerReply::SharedCtor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_RemovePeerReply_raft_2eproto.base);
+  message_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  ::memset(&leader_id_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&success_) -
+      reinterpret_cast<char*>(&leader_id_)) + sizeof(success_));
+}
+
+RemovePeerReply::~RemovePeerReply() {
+  // @@protoc_insertion_point(destructor:raft.RemovePeerReply)
+  SharedDtor();
+  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+void RemovePeerReply::SharedDtor() {
+  GOOGLE_DCHECK(GetArena() == nullptr);
+  message_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+
+void RemovePeerReply::ArenaDtor(void* object) {
+  RemovePeerReply* _this = reinterpret_cast< RemovePeerReply* >(object);
+  (void)_this;
+}
+void RemovePeerReply::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
+}
+void RemovePeerReply::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const RemovePeerReply& RemovePeerReply::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_RemovePeerReply_raft_2eproto.base);
+  return *internal_default_instance();
+}
+
+
+void RemovePeerReply::Clear() {
+// @@protoc_insertion_point(message_clear_start:raft.RemovePeerReply)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  message_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  ::memset(&leader_id_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&success_) -
+      reinterpret_cast<char*>(&leader_id_)) + sizeof(success_));
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* RemovePeerReply::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  ::PROTOBUF_NAMESPACE_ID::Arena* arena = GetArena(); (void)arena;
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
+      // bool success = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
+          success_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // string message = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
+          auto str = _internal_mutable_message();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "raft.RemovePeerReply.message"));
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // int64 leader_id = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 24)) {
+          leader_id_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
+          goto success;
+        }
+        ptr = UnknownFieldParse(tag,
+            _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+            ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
+      }
+    }  // switch
+  }  // while
+success:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
+}
+
+::PROTOBUF_NAMESPACE_ID::uint8* RemovePeerReply::_InternalSerialize(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:raft.RemovePeerReply)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // bool success = 1;
+  if (this->success() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(1, this->_internal_success(), target);
+  }
+
+  // string message = 2;
+  if (this->message().size() > 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_message().data(), static_cast<int>(this->_internal_message().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "raft.RemovePeerReply.message");
+    target = stream->WriteStringMaybeAliased(
+        2, this->_internal_message(), target);
+  }
+
+  // int64 leader_id = 3;
+  if (this->leader_id() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(3, this->_internal_leader_id(), target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:raft.RemovePeerReply)
+  return target;
+}
+
+size_t RemovePeerReply::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:raft.RemovePeerReply)
+  size_t total_size = 0;
+
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // string message = 2;
+  if (this->message().size() > 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_message());
+  }
+
+  // int64 leader_id = 3;
+  if (this->leader_id() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int64Size(
+        this->_internal_leader_id());
+  }
+
+  // bool success = 1;
+  if (this->success() != 0) {
+    total_size += 1 + 1;
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void RemovePeerReply::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:raft.RemovePeerReply)
+  GOOGLE_DCHECK_NE(&from, this);
+  const RemovePeerReply* source =
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<RemovePeerReply>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:raft.RemovePeerReply)
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:raft.RemovePeerReply)
+    MergeFrom(*source);
+  }
+}
+
+void RemovePeerReply::MergeFrom(const RemovePeerReply& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:raft.RemovePeerReply)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from.message().size() > 0) {
+    _internal_set_message(from._internal_message());
+  }
+  if (from.leader_id() != 0) {
+    _internal_set_leader_id(from._internal_leader_id());
+  }
+  if (from.success() != 0) {
+    _internal_set_success(from._internal_success());
+  }
+}
+
+void RemovePeerReply::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:raft.RemovePeerReply)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void RemovePeerReply::CopyFrom(const RemovePeerReply& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:raft.RemovePeerReply)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool RemovePeerReply::IsInitialized() const {
+  return true;
+}
+
+void RemovePeerReply::InternalSwap(RemovePeerReply* other) {
+  using std::swap;
+  _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
+  message_.Swap(&other->message_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(RemovePeerReply, success_)
+      + sizeof(RemovePeerReply::success_)
+      - PROTOBUF_FIELD_OFFSET(RemovePeerReply, leader_id_)>(
+          reinterpret_cast<char*>(&leader_id_),
+          reinterpret_cast<char*>(&other->leader_id_));
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata RemovePeerReply::GetMetadata() const {
+  return GetMetadataStatic();
+}
+
+
+// ===================================================================
+
 RaftRpc::~RaftRpc() {}
 
 const ::PROTOBUF_NAMESPACE_ID::ServiceDescriptor* RaftRpc::descriptor() {
@@ -2224,6 +3732,22 @@ void RaftRpc::InstallSnapshot(::PROTOBUF_NAMESPACE_ID::RpcController* controller
   done->Run();
 }
 
+void RaftRpc::AddPeer(::PROTOBUF_NAMESPACE_ID::RpcController* controller,
+                         const ::raft::AddPeerArgs*,
+                         ::raft::AddPeerReply*,
+                         ::google::protobuf::Closure* done) {
+  controller->SetFailed("Method AddPeer() not implemented.");
+  done->Run();
+}
+
+void RaftRpc::RemovePeer(::PROTOBUF_NAMESPACE_ID::RpcController* controller,
+                         const ::raft::RemovePeerArgs*,
+                         ::raft::RemovePeerReply*,
+                         ::google::protobuf::Closure* done) {
+  controller->SetFailed("Method RemovePeer() not implemented.");
+  done->Run();
+}
+
 void RaftRpc::CallMethod(const ::PROTOBUF_NAMESPACE_ID::MethodDescriptor* method,
                              ::PROTOBUF_NAMESPACE_ID::RpcController* controller,
                              const ::PROTOBUF_NAMESPACE_ID::Message* request,
@@ -2255,6 +3779,22 @@ void RaftRpc::CallMethod(const ::PROTOBUF_NAMESPACE_ID::MethodDescriptor* method
                  response),
              done);
       break;
+    case 3:
+      AddPeer(controller,
+             ::PROTOBUF_NAMESPACE_ID::internal::DownCast<const ::raft::AddPeerArgs*>(
+                 request),
+             ::PROTOBUF_NAMESPACE_ID::internal::DownCast<::raft::AddPeerReply*>(
+                 response),
+             done);
+      break;
+    case 4:
+      RemovePeer(controller,
+             ::PROTOBUF_NAMESPACE_ID::internal::DownCast<const ::raft::RemovePeerArgs*>(
+                 request),
+             ::PROTOBUF_NAMESPACE_ID::internal::DownCast<::raft::RemovePeerReply*>(
+                 response),
+             done);
+      break;
     default:
       GOOGLE_LOG(FATAL) << "Bad method index; this should never happen.";
       break;
@@ -2271,6 +3811,10 @@ const ::PROTOBUF_NAMESPACE_ID::Message& RaftRpc::GetRequestPrototype(
       return ::raft::AppendEntriesArgs::default_instance();
     case 2:
       return ::raft::InstallSnapshotArgs::default_instance();
+    case 3:
+      return ::raft::AddPeerArgs::default_instance();
+    case 4:
+      return ::raft::RemovePeerArgs::default_instance();
     default:
       GOOGLE_LOG(FATAL) << "Bad method index; this should never happen.";
       return *::PROTOBUF_NAMESPACE_ID::MessageFactory::generated_factory()
@@ -2288,6 +3832,10 @@ const ::PROTOBUF_NAMESPACE_ID::Message& RaftRpc::GetResponsePrototype(
       return ::raft::AppendEntriesReply::default_instance();
     case 2:
       return ::raft::InstallSnapshotReply::default_instance();
+    case 3:
+      return ::raft::AddPeerReply::default_instance();
+    case 4:
+      return ::raft::RemovePeerReply::default_instance();
     default:
       GOOGLE_LOG(FATAL) << "Bad method index; this should never happen.";
       return *::PROTOBUF_NAMESPACE_ID::MessageFactory::generated_factory()
@@ -2327,10 +3875,27 @@ void RaftRpc_Stub::InstallSnapshot(::PROTOBUF_NAMESPACE_ID::RpcController* contr
   channel_->CallMethod(descriptor()->method(2),
                        controller, request, response, done);
 }
+void RaftRpc_Stub::AddPeer(::PROTOBUF_NAMESPACE_ID::RpcController* controller,
+                              const ::raft::AddPeerArgs* request,
+                              ::raft::AddPeerReply* response,
+                              ::google::protobuf::Closure* done) {
+  channel_->CallMethod(descriptor()->method(3),
+                       controller, request, response, done);
+}
+void RaftRpc_Stub::RemovePeer(::PROTOBUF_NAMESPACE_ID::RpcController* controller,
+                              const ::raft::RemovePeerArgs* request,
+                              ::raft::RemovePeerReply* response,
+                              ::google::protobuf::Closure* done) {
+  channel_->CallMethod(descriptor()->method(4),
+                       controller, request, response, done);
+}
 
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace raft
 PROTOBUF_NAMESPACE_OPEN
+template<> PROTOBUF_NOINLINE ::raft::ConfigChange* Arena::CreateMaybeMessage< ::raft::ConfigChange >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::raft::ConfigChange >(arena);
+}
 template<> PROTOBUF_NOINLINE ::raft::LogEntry* Arena::CreateMaybeMessage< ::raft::LogEntry >(Arena* arena) {
   return Arena::CreateMessageInternal< ::raft::LogEntry >(arena);
 }
@@ -2351,6 +3916,18 @@ template<> PROTOBUF_NOINLINE ::raft::InstallSnapshotArgs* Arena::CreateMaybeMess
 }
 template<> PROTOBUF_NOINLINE ::raft::InstallSnapshotReply* Arena::CreateMaybeMessage< ::raft::InstallSnapshotReply >(Arena* arena) {
   return Arena::CreateMessageInternal< ::raft::InstallSnapshotReply >(arena);
+}
+template<> PROTOBUF_NOINLINE ::raft::AddPeerArgs* Arena::CreateMaybeMessage< ::raft::AddPeerArgs >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::raft::AddPeerArgs >(arena);
+}
+template<> PROTOBUF_NOINLINE ::raft::AddPeerReply* Arena::CreateMaybeMessage< ::raft::AddPeerReply >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::raft::AddPeerReply >(arena);
+}
+template<> PROTOBUF_NOINLINE ::raft::RemovePeerArgs* Arena::CreateMaybeMessage< ::raft::RemovePeerArgs >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::raft::RemovePeerArgs >(arena);
+}
+template<> PROTOBUF_NOINLINE ::raft::RemovePeerReply* Arena::CreateMaybeMessage< ::raft::RemovePeerReply >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::raft::RemovePeerReply >(arena);
 }
 PROTOBUF_NAMESPACE_CLOSE
 

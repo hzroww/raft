@@ -39,7 +39,8 @@ FileRaftStorage::FileRaftStorage(std::string data_dir)
     : data_dir_(std::move(data_dir)),
       log_dir_(data_dir_ / "log"),
       hard_state_path_(data_dir_ / "hard.state"),
-      snapshot_path_(data_dir_ / "snapshot") {
+      snapshot_path_(data_dir_ / "snapshot"),
+      config_path_(data_dir_ / "cluster.config") {
     fs::create_directories(log_dir_);
 }
 
@@ -238,6 +239,9 @@ void FileRaftStorage::WriteEntryFile(const fs::path& path,
     std::ofstream out(path, std::ios::binary | std::ios::trunc);
     WriteBinary(out, entry.term, "write raft log term");
     WriteBinary(out, entry.index, "write raft log index");
+    // Entry type is stored as a uint32 for forward compatibility.
+    uint32_t type_val = static_cast<uint32_t>(entry.type);
+    WriteBinary(out, type_val, "write raft log type");
     uint64_t size = static_cast<uint64_t>(entry.command.size());
     WriteBinary(out, size, "write raft log payload size");
     out.write(entry.command.data(), static_cast<std::streamsize>(entry.command.size()));
@@ -253,9 +257,11 @@ bool FileRaftStorage::ReadEntryFile(const fs::path& path,
 
     raft_core::Term term = 0;
     raft_core::Index index = 0;
+    uint32_t type_val = 0;
     uint64_t size = 0;
     if (!ReadBinary(in, &term) ||
         !ReadBinary(in, &index) ||
+        !ReadBinary(in, &type_val) ||
         !ReadBinary(in, &size)) {
         throw std::runtime_error("failed to read raft log entry metadata");
     }
@@ -270,10 +276,49 @@ bool FileRaftStorage::ReadEntryFile(const fs::path& path,
     }
 
     if (entry) {
-        entry->term = term;
-        entry->index = index;
+        entry->term    = term;
+        entry->index   = index;
+        entry->type    = static_cast<raft_core::EntryType>(type_val);
         entry->command = std::move(command);
     }
+    return true;
+}
+
+void FileRaftStorage::SaveConfig(
+    const std::vector<raft_core::PeerInfo>& peers) {
+    fs::create_directories(data_dir_);
+    fs::path tmp = TempPath(config_path_);
+    {
+        std::ofstream out(tmp, std::ios::trunc);
+        EnsureGood(out, "open cluster config for writing");
+        for (const auto& p : peers) {
+            out << p.id << ' ' << p.ip << ' ' << p.port << '\n';
+            EnsureGood(out, "write cluster config entry");
+        }
+    }
+    fs::rename(tmp, config_path_);
+}
+
+bool FileRaftStorage::LoadConfig(std::vector<raft_core::PeerInfo>* peers) {
+    std::ifstream in(config_path_);
+    if (!in.is_open()) {
+        return false;
+    }
+    std::vector<raft_core::PeerInfo> result;
+    raft_core::NodeId id;
+    std::string ip;
+    int port;
+    while (in >> id >> ip >> port) {
+        raft_core::PeerInfo p;
+        p.id   = id;
+        p.ip   = std::move(ip);
+        p.port = port;
+        result.push_back(std::move(p));
+    }
+    if (!in.eof() && in.fail()) {
+        throw std::runtime_error("failed to read cluster config");
+    }
+    if (peers) *peers = std::move(result);
     return true;
 }
 

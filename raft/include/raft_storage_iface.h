@@ -67,6 +67,17 @@ public:
     virtual bool LoadSnapshot(Index*       last_included_index,
                               Term*        last_included_term,
                               std::string* data) = 0;
+
+    // -------- Cluster configuration --------
+    // Persist the current set of voting peer nodes (does NOT include self).
+    // Called by the raft node whenever a membership change is committed so
+    // that after a crash the node can reconstruct the correct peer list.
+    virtual void SaveConfig(const std::vector<PeerInfo>& peers) = 0;
+
+    // Load the persisted peer list. Returns true if a previously saved
+    // configuration was found; false for a fresh node (caller uses the
+    // static boot configuration in that case).
+    virtual bool LoadConfig(std::vector<PeerInfo>* peers) = 0;
 };
 
 // No-op storage. Useful for unit tests / smoke tests that exercise the
@@ -89,6 +100,8 @@ public:
     }
     void SaveSnapshot(Index, Term, const std::string&) override {}
     bool LoadSnapshot(Index*, Term*, std::string*) override { return false; }
+    void SaveConfig(const std::vector<PeerInfo>& /*peers*/) override {}
+    bool LoadConfig(std::vector<PeerInfo>* /*peers*/) override { return false; }
 };
 
 }  // namespace raft_core

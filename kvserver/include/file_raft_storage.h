@@ -29,6 +29,9 @@ public:
                       raft_core::Term* last_included_term,
                       std::string* data) override;
 
+    void SaveConfig(const std::vector<raft_core::PeerInfo>& peers) override;
+    bool LoadConfig(std::vector<raft_core::PeerInfo>* peers) override;
+
 private:
     std::filesystem::path LogPath(raft_core::Index index) const;
     std::filesystem::path TempPath(const std::filesystem::path& path) const;
@@ -44,6 +47,7 @@ private:
     std::filesystem::path log_dir_;
     std::filesystem::path hard_state_path_;
     std::filesystem::path snapshot_path_;
+    std::filesystem::path config_path_;
 };
 
 }  // namespace kvserver
