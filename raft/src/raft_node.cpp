@@ -1105,15 +1105,52 @@ void RaftNode::ApplyConfigChange(const LogEntry& entry) {
     NodeId node_id = cc.node_id();
 
     if (cc.change_type() == ::raft::ADD_PEER) {
-        // Promote the matching Learner to a full voting member.
+        // Case A: peer already present (learner on the leader, or an existing
+        //   voting peer on a re-applied entry). Promote learner -> voter if
+        //   needed, then ensure current_members_ contains the id. This keeps
+        //   the operation idempotent across replays / restarts.
+        // Case B: peer not present in peers_. This happens on every follower
+        //   (which never saw the learner stage), and on a fresh node that is
+        //   replaying old log entries. We materialise the peer here from the
+        //   ConfigChange payload so every node ends up with the same voting
+        //   peer table as the leader.
+        // Case C: node_id == self. By convention peers_ does not include self;
+        //   we only update current_members_.
+        Peer* existing = nullptr;
         for (auto& p : peers_) {
-            if (p->Id() == node_id && p->IsLearner()) {
-                p->SetLearner(false);
-                current_members_.insert(node_id);
-                LOG_INFO() << "ApplyConfigChange: promoted learner id=" << node_id
-                           << " to voting member";
+            if (p->Id() == node_id) {
+                existing = p.get();
                 break;
             }
+        }
+
+        if (existing) {
+            if (existing->IsLearner()) {
+                existing->SetLearner(false);
+                LOG_INFO() << "ApplyConfigChange: promoted learner id=" << node_id
+                           << " to voting member";
+            }
+            current_members_.insert(node_id);
+        } else if (node_id == cfg_.self_id) {
+            current_members_.insert(node_id);
+            LOG_INFO() << "ApplyConfigChange: self id=" << node_id
+                       << " is now a voting member";
+        } else {
+            PeerInfo info;
+            info.id   = node_id;
+            info.ip   = cc.ip();
+            info.port = cc.port();
+
+            auto peer = std::make_unique<Peer>(info, cfg_.rpc_timeout_ms);
+            // New voter; only the leader replicates, but match/next get
+            // initialised properly the next time we become leader via
+            // ResetForLeader(). Default-constructed values are safe for
+            // followers (they never read these fields).
+            peer->SetLearner(false);
+            peers_.push_back(std::move(peer));
+            current_members_.insert(node_id);
+            LOG_INFO() << "ApplyConfigChange: added voting peer id=" << node_id
+                       << " " << info.ip << ":" << info.port;
         }
     } else if (cc.change_type() == ::raft::REMOVE_PEER) {
         auto it = std::find_if(peers_.begin(), peers_.end(),

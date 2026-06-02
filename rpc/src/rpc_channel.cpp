@@ -55,11 +55,20 @@ RpcChannel::~RpcChannel() {
     failAllPending("RpcChannel destroyed");
 
     if (loop_) {
+        // Disconnect AND destroy the TcpClient on the IO loop, so that all
+        // muduo internals (mutexes, connectors, channels) are torn down on
+        // the same thread that created them. Otherwise destroying client_ on
+        // the calling thread after the loop has been quit can race with
+        // residual muduo callbacks and corrupt internal state.
         loop_->runInLoop([this]() {
-            if (client_) client_->disconnect();
+            if (client_) {
+                client_->disconnect();
+                client_.reset();
+            }
         });
     }
-    // EventLoopThread dtor will quit() the loop and join the thread.
+    // EventLoopThread dtor will quit() the loop and join the thread, which
+    // first drains the runInLoop functor queued above.
     ioThread_.reset();
 }
 
