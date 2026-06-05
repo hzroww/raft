@@ -393,6 +393,8 @@ void RaftNode::LoadPersistentLog() {
         log_cache_.DiscardPrefix(snapshot_index, snapshot_term);
         commit_index_ = snapshot_index;
         last_applied_ = snapshot_index;
+        commit_index_atomic_.store(commit_index_, std::memory_order_release);
+        last_applied_atomic_.store(last_applied_, std::memory_order_release);
         if (apply_sink_) {
             apply_sink_->OnSnapshotInstalled(snapshot_index,
                                              snapshot_term,
@@ -598,6 +600,7 @@ void RaftNode::MaybeAdvanceCommitIndex() {
     if (candidate > commit_index_ &&
         log_cache_.TermAt(candidate) == current_term_) {
         commit_index_ = candidate;
+        commit_index_atomic_.store(commit_index_, std::memory_order_release);
         LOG_DEBUG() << "advance commit_index=" << commit_index_;
         ApplyCommittedRange();
     }
@@ -618,6 +621,7 @@ void RaftNode::ApplyCommittedRange() {
     }
 
     last_applied_ = commit_index_;
+    last_applied_atomic_.store(last_applied_, std::memory_order_release);
     if (apply_sink_) {
         apply_sink_->OnCommitted(start, end);
     }
@@ -817,6 +821,7 @@ void RaftNode::HandleAppendEntries(const ::raft::AppendEntriesArgs* req,
         Index leader_commit = req->leadercommit();
         if (leader_commit > commit_index_) {
             commit_index_ = std::min(leader_commit, log_cache_.LastIndex());
+            commit_index_atomic_.store(commit_index_, std::memory_order_release);
             ApplyCommittedRange();
         }
     }
@@ -867,6 +872,8 @@ void RaftNode::HandleInstallSnapshot(const ::raft::InstallSnapshotArgs* req,
 
     commit_index_ = snapshot_index;
     last_applied_ = snapshot_index;
+    commit_index_atomic_.store(commit_index_, std::memory_order_release);
+    last_applied_atomic_.store(last_applied_, std::memory_order_release);
     if (apply_sink_) {
         apply_sink_->OnSnapshotInstalled(snapshot_index, snapshot_term, req->data());
     }

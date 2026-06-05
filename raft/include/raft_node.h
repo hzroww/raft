@@ -103,6 +103,8 @@ public:
     RaftState State()        const { return state_atomic_.load(std::memory_order_acquire); }
     Term      CurrentTerm()  const { return current_term_atomic_.load(std::memory_order_acquire); }
     NodeId    LeaderId()     const { return leader_id_atomic_.load(std::memory_order_acquire); }
+    Index     CommitIndex()  const { return commit_index_atomic_.load(std::memory_order_acquire); }
+    Index     LastApplied()  const { return last_applied_atomic_.load(std::memory_order_acquire); }
 
     // Schedule |fn| to run on the raft main thread. Thread-safe.
     void Post(std::function<void()> fn);
@@ -258,6 +260,8 @@ private:
     std::atomic<RaftState> state_atomic_{RaftState::Follower};
     std::atomic<Term>      current_term_atomic_{0};
     std::atomic<NodeId>    leader_id_atomic_{kNoNode};
+    std::atomic<Index>     commit_index_atomic_{0};
+    std::atomic<Index>     last_applied_atomic_{0};
 
     // ---- Membership change state (main thread only) ----
     // True while a config change log entry is in the log but not yet

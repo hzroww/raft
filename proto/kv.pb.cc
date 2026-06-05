@@ -14,6 +14,7 @@
 #include <google/protobuf/wire_format.h>
 // @@protoc_insertion_point(includes)
 #include <google/protobuf/port_def.inc>
+extern PROTOBUF_INTERNAL_EXPORT_kv_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_LogEntryInfo_kv_2eproto;
 namespace kv {
 class PutRequestDefaultTypeInternal {
  public:
@@ -39,6 +40,18 @@ class DeleteResponseDefaultTypeInternal {
  public:
   ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<DeleteResponse> _instance;
 } _DeleteResponse_default_instance_;
+class LogEntryInfoDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<LogEntryInfo> _instance;
+} _LogEntryInfo_default_instance_;
+class GetNodeStatusRequestDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<GetNodeStatusRequest> _instance;
+} _GetNodeStatusRequest_default_instance_;
+class GetNodeStatusResponseDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<GetNodeStatusResponse> _instance;
+} _GetNodeStatusResponse_default_instance_;
 }  // namespace kv
 static void InitDefaultsscc_info_DeleteRequest_kv_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
@@ -68,6 +81,35 @@ static void InitDefaultsscc_info_DeleteResponse_kv_2eproto() {
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_DeleteResponse_kv_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_DeleteResponse_kv_2eproto}, {}};
 
+static void InitDefaultsscc_info_GetNodeStatusRequest_kv_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::kv::_GetNodeStatusRequest_default_instance_;
+    new (ptr) ::kv::GetNodeStatusRequest();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::kv::GetNodeStatusRequest::InitAsDefaultInstance();
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_GetNodeStatusRequest_kv_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_GetNodeStatusRequest_kv_2eproto}, {}};
+
+static void InitDefaultsscc_info_GetNodeStatusResponse_kv_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::kv::_GetNodeStatusResponse_default_instance_;
+    new (ptr) ::kv::GetNodeStatusResponse();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::kv::GetNodeStatusResponse::InitAsDefaultInstance();
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_GetNodeStatusResponse_kv_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_GetNodeStatusResponse_kv_2eproto}, {
+      &scc_info_LogEntryInfo_kv_2eproto.base,}};
+
 static void InitDefaultsscc_info_GetRequest_kv_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
@@ -95,6 +137,20 @@ static void InitDefaultsscc_info_GetResponse_kv_2eproto() {
 
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_GetResponse_kv_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_GetResponse_kv_2eproto}, {}};
+
+static void InitDefaultsscc_info_LogEntryInfo_kv_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::kv::_LogEntryInfo_default_instance_;
+    new (ptr) ::kv::LogEntryInfo();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::kv::LogEntryInfo::InitAsDefaultInstance();
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_LogEntryInfo_kv_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_LogEntryInfo_kv_2eproto}, {}};
 
 static void InitDefaultsscc_info_PutRequest_kv_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
@@ -124,7 +180,7 @@ static void InitDefaultsscc_info_PutResponse_kv_2eproto() {
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_PutResponse_kv_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_PutResponse_kv_2eproto}, {}};
 
-static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_kv_2eproto[6];
+static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_kv_2eproto[9];
 static constexpr ::PROTOBUF_NAMESPACE_ID::EnumDescriptor const** file_level_enum_descriptors_kv_2eproto = nullptr;
 static const ::PROTOBUF_NAMESPACE_ID::ServiceDescriptor* file_level_service_descriptors_kv_2eproto[1];
 
@@ -179,6 +235,37 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_kv_2eproto::offsets[] PROTOBUF
   PROTOBUF_FIELD_OFFSET(::kv::DeleteResponse, success_),
   PROTOBUF_FIELD_OFFSET(::kv::DeleteResponse, error_),
   PROTOBUF_FIELD_OFFSET(::kv::DeleteResponse, leaderid_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::kv::LogEntryInfo, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::kv::LogEntryInfo, index_),
+  PROTOBUF_FIELD_OFFSET(::kv::LogEntryInfo, term_),
+  PROTOBUF_FIELD_OFFSET(::kv::LogEntryInfo, op_),
+  PROTOBUF_FIELD_OFFSET(::kv::LogEntryInfo, key_),
+  PROTOBUF_FIELD_OFFSET(::kv::LogEntryInfo, value_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::kv::GetNodeStatusRequest, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::kv::GetNodeStatusResponse, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::kv::GetNodeStatusResponse, success_),
+  PROTOBUF_FIELD_OFFSET(::kv::GetNodeStatusResponse, error_),
+  PROTOBUF_FIELD_OFFSET(::kv::GetNodeStatusResponse, nodeid_),
+  PROTOBUF_FIELD_OFFSET(::kv::GetNodeStatusResponse, state_),
+  PROTOBUF_FIELD_OFFSET(::kv::GetNodeStatusResponse, currentterm_),
+  PROTOBUF_FIELD_OFFSET(::kv::GetNodeStatusResponse, leaderid_),
+  PROTOBUF_FIELD_OFFSET(::kv::GetNodeStatusResponse, commitindex_),
+  PROTOBUF_FIELD_OFFSET(::kv::GetNodeStatusResponse, lastapplied_),
+  PROTOBUF_FIELD_OFFSET(::kv::GetNodeStatusResponse, lastlogindex_),
+  PROTOBUF_FIELD_OFFSET(::kv::GetNodeStatusResponse, lastlogterm_),
+  PROTOBUF_FIELD_OFFSET(::kv::GetNodeStatusResponse, entries_),
 };
 static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, sizeof(::kv::PutRequest)},
@@ -187,6 +274,9 @@ static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOB
   { 25, -1, sizeof(::kv::GetResponse)},
   { 34, -1, sizeof(::kv::DeleteRequest)},
   { 42, -1, sizeof(::kv::DeleteResponse)},
+  { 50, -1, sizeof(::kv::LogEntryInfo)},
+  { 60, -1, sizeof(::kv::GetNodeStatusRequest)},
+  { 65, -1, sizeof(::kv::GetNodeStatusResponse)},
 };
 
 static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
@@ -196,6 +286,9 @@ static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] =
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::kv::_GetResponse_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::kv::_DeleteRequest_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::kv::_DeleteResponse_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::kv::_LogEntryInfo_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::kv::_GetNodeStatusRequest_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::kv::_GetNodeStatusResponse_default_instance_),
 };
 
 const char descriptor_table_protodef_kv_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
@@ -209,28 +302,42 @@ const char descriptor_table_protodef_kv_2eproto[] PROTOBUF_SECTION_VARIABLE(prot
   " \001(\t\022\020\n\010leaderId\030\004 \001(\005\"A\n\rDeleteRequest\022"
   "\013\n\003key\030\001 \001(\t\022\020\n\010clientId\030\002 \001(\t\022\021\n\treques"
   "tId\030\003 \001(\003\"B\n\016DeleteResponse\022\017\n\007success\030\001"
-  " \001(\010\022\r\n\005error\030\002 \001(\t\022\020\n\010leaderId\030\003 \001(\0052\216\001"
-  "\n\013KvServerRpc\022&\n\003Put\022\016.kv.PutRequest\032\017.k"
-  "v.PutResponse\022&\n\003Get\022\016.kv.GetRequest\032\017.k"
-  "v.GetResponse\022/\n\006Delete\022\021.kv.DeleteReque"
-  "st\032\022.kv.DeleteResponseB\003\200\001\001b\006proto3"
+  " \001(\010\022\r\n\005error\030\002 \001(\t\022\020\n\010leaderId\030\003 \001(\005\"S\n"
+  "\014LogEntryInfo\022\r\n\005index\030\001 \001(\003\022\014\n\004term\030\002 \001"
+  "(\003\022\n\n\002op\030\003 \001(\t\022\013\n\003key\030\004 \001(\t\022\r\n\005value\030\005 \001"
+  "(\t\"\026\n\024GetNodeStatusRequest\"\365\001\n\025GetNodeSt"
+  "atusResponse\022\017\n\007success\030\001 \001(\010\022\r\n\005error\030\002"
+  " \001(\t\022\016\n\006nodeId\030\003 \001(\005\022\r\n\005state\030\004 \001(\t\022\023\n\013c"
+  "urrentTerm\030\005 \001(\003\022\020\n\010leaderId\030\006 \001(\005\022\023\n\013co"
+  "mmitIndex\030\007 \001(\003\022\023\n\013lastApplied\030\010 \001(\003\022\024\n\014"
+  "lastLogIndex\030\t \001(\003\022\023\n\013lastLogTerm\030\n \001(\003\022"
+  "!\n\007entries\030\013 \003(\0132\020.kv.LogEntryInfo2\324\001\n\013K"
+  "vServerRpc\022&\n\003Put\022\016.kv.PutRequest\032\017.kv.P"
+  "utResponse\022&\n\003Get\022\016.kv.GetRequest\032\017.kv.G"
+  "etResponse\022/\n\006Delete\022\021.kv.DeleteRequest\032"
+  "\022.kv.DeleteResponse\022D\n\rGetNodeStatus\022\030.k"
+  "v.GetNodeStatusRequest\032\031.kv.GetNodeStatu"
+  "sResponseB\003\200\001\001b\006proto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_kv_2eproto_deps[1] = {
 };
-static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_kv_2eproto_sccs[6] = {
+static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_kv_2eproto_sccs[9] = {
   &scc_info_DeleteRequest_kv_2eproto.base,
   &scc_info_DeleteResponse_kv_2eproto.base,
+  &scc_info_GetNodeStatusRequest_kv_2eproto.base,
+  &scc_info_GetNodeStatusResponse_kv_2eproto.base,
   &scc_info_GetRequest_kv_2eproto.base,
   &scc_info_GetResponse_kv_2eproto.base,
+  &scc_info_LogEntryInfo_kv_2eproto.base,
   &scc_info_PutRequest_kv_2eproto.base,
   &scc_info_PutResponse_kv_2eproto.base,
 };
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_kv_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_kv_2eproto = {
-  false, false, descriptor_table_protodef_kv_2eproto, "kv.proto", 595,
-  &descriptor_table_kv_2eproto_once, descriptor_table_kv_2eproto_sccs, descriptor_table_kv_2eproto_deps, 6, 0,
+  false, false, descriptor_table_protodef_kv_2eproto, "kv.proto", 1022,
+  &descriptor_table_kv_2eproto_once, descriptor_table_kv_2eproto_sccs, descriptor_table_kv_2eproto_deps, 9, 0,
   schemas, file_default_instances, TableStruct_kv_2eproto::offsets,
-  file_level_metadata_kv_2eproto, 6, file_level_enum_descriptors_kv_2eproto, file_level_service_descriptors_kv_2eproto,
+  file_level_metadata_kv_2eproto, 9, file_level_enum_descriptors_kv_2eproto, file_level_service_descriptors_kv_2eproto,
 };
 
 // Force running AddDescriptors() at dynamic initialization time.
@@ -1941,6 +2048,993 @@ void DeleteResponse::InternalSwap(DeleteResponse* other) {
 
 // ===================================================================
 
+void LogEntryInfo::InitAsDefaultInstance() {
+}
+class LogEntryInfo::_Internal {
+ public:
+};
+
+LogEntryInfo::LogEntryInfo(::PROTOBUF_NAMESPACE_ID::Arena* arena)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena) {
+  SharedCtor();
+  RegisterArenaDtor(arena);
+  // @@protoc_insertion_point(arena_constructor:kv.LogEntryInfo)
+}
+LogEntryInfo::LogEntryInfo(const LogEntryInfo& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  op_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from._internal_op().empty()) {
+    op_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from._internal_op(),
+      GetArena());
+  }
+  key_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from._internal_key().empty()) {
+    key_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from._internal_key(),
+      GetArena());
+  }
+  value_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from._internal_value().empty()) {
+    value_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from._internal_value(),
+      GetArena());
+  }
+  ::memcpy(&index_, &from.index_,
+    static_cast<size_t>(reinterpret_cast<char*>(&term_) -
+    reinterpret_cast<char*>(&index_)) + sizeof(term_));
+  // @@protoc_insertion_point(copy_constructor:kv.LogEntryInfo)
+}
+
+void LogEntryInfo::SharedCtor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_LogEntryInfo_kv_2eproto.base);
+  op_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  key_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  value_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  ::memset(&index_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&term_) -
+      reinterpret_cast<char*>(&index_)) + sizeof(term_));
+}
+
+LogEntryInfo::~LogEntryInfo() {
+  // @@protoc_insertion_point(destructor:kv.LogEntryInfo)
+  SharedDtor();
+  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+void LogEntryInfo::SharedDtor() {
+  GOOGLE_DCHECK(GetArena() == nullptr);
+  op_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  key_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  value_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+
+void LogEntryInfo::ArenaDtor(void* object) {
+  LogEntryInfo* _this = reinterpret_cast< LogEntryInfo* >(object);
+  (void)_this;
+}
+void LogEntryInfo::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
+}
+void LogEntryInfo::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const LogEntryInfo& LogEntryInfo::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_LogEntryInfo_kv_2eproto.base);
+  return *internal_default_instance();
+}
+
+
+void LogEntryInfo::Clear() {
+// @@protoc_insertion_point(message_clear_start:kv.LogEntryInfo)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  op_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  key_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  value_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  ::memset(&index_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&term_) -
+      reinterpret_cast<char*>(&index_)) + sizeof(term_));
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* LogEntryInfo::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  ::PROTOBUF_NAMESPACE_ID::Arena* arena = GetArena(); (void)arena;
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
+      // int64 index = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
+          index_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // int64 term = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 16)) {
+          term_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // string op = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 26)) {
+          auto str = _internal_mutable_op();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "kv.LogEntryInfo.op"));
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // string key = 4;
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 34)) {
+          auto str = _internal_mutable_key();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "kv.LogEntryInfo.key"));
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // string value = 5;
+      case 5:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 42)) {
+          auto str = _internal_mutable_value();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "kv.LogEntryInfo.value"));
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
+          goto success;
+        }
+        ptr = UnknownFieldParse(tag,
+            _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+            ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
+      }
+    }  // switch
+  }  // while
+success:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
+}
+
+::PROTOBUF_NAMESPACE_ID::uint8* LogEntryInfo::_InternalSerialize(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:kv.LogEntryInfo)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // int64 index = 1;
+  if (this->index() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(1, this->_internal_index(), target);
+  }
+
+  // int64 term = 2;
+  if (this->term() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(2, this->_internal_term(), target);
+  }
+
+  // string op = 3;
+  if (this->op().size() > 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_op().data(), static_cast<int>(this->_internal_op().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "kv.LogEntryInfo.op");
+    target = stream->WriteStringMaybeAliased(
+        3, this->_internal_op(), target);
+  }
+
+  // string key = 4;
+  if (this->key().size() > 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_key().data(), static_cast<int>(this->_internal_key().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "kv.LogEntryInfo.key");
+    target = stream->WriteStringMaybeAliased(
+        4, this->_internal_key(), target);
+  }
+
+  // string value = 5;
+  if (this->value().size() > 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_value().data(), static_cast<int>(this->_internal_value().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "kv.LogEntryInfo.value");
+    target = stream->WriteStringMaybeAliased(
+        5, this->_internal_value(), target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:kv.LogEntryInfo)
+  return target;
+}
+
+size_t LogEntryInfo::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:kv.LogEntryInfo)
+  size_t total_size = 0;
+
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // string op = 3;
+  if (this->op().size() > 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_op());
+  }
+
+  // string key = 4;
+  if (this->key().size() > 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_key());
+  }
+
+  // string value = 5;
+  if (this->value().size() > 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_value());
+  }
+
+  // int64 index = 1;
+  if (this->index() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int64Size(
+        this->_internal_index());
+  }
+
+  // int64 term = 2;
+  if (this->term() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int64Size(
+        this->_internal_term());
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void LogEntryInfo::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:kv.LogEntryInfo)
+  GOOGLE_DCHECK_NE(&from, this);
+  const LogEntryInfo* source =
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<LogEntryInfo>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:kv.LogEntryInfo)
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:kv.LogEntryInfo)
+    MergeFrom(*source);
+  }
+}
+
+void LogEntryInfo::MergeFrom(const LogEntryInfo& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:kv.LogEntryInfo)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from.op().size() > 0) {
+    _internal_set_op(from._internal_op());
+  }
+  if (from.key().size() > 0) {
+    _internal_set_key(from._internal_key());
+  }
+  if (from.value().size() > 0) {
+    _internal_set_value(from._internal_value());
+  }
+  if (from.index() != 0) {
+    _internal_set_index(from._internal_index());
+  }
+  if (from.term() != 0) {
+    _internal_set_term(from._internal_term());
+  }
+}
+
+void LogEntryInfo::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:kv.LogEntryInfo)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void LogEntryInfo::CopyFrom(const LogEntryInfo& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:kv.LogEntryInfo)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool LogEntryInfo::IsInitialized() const {
+  return true;
+}
+
+void LogEntryInfo::InternalSwap(LogEntryInfo* other) {
+  using std::swap;
+  _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
+  op_.Swap(&other->op_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  key_.Swap(&other->key_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  value_.Swap(&other->value_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(LogEntryInfo, term_)
+      + sizeof(LogEntryInfo::term_)
+      - PROTOBUF_FIELD_OFFSET(LogEntryInfo, index_)>(
+          reinterpret_cast<char*>(&index_),
+          reinterpret_cast<char*>(&other->index_));
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata LogEntryInfo::GetMetadata() const {
+  return GetMetadataStatic();
+}
+
+
+// ===================================================================
+
+void GetNodeStatusRequest::InitAsDefaultInstance() {
+}
+class GetNodeStatusRequest::_Internal {
+ public:
+};
+
+GetNodeStatusRequest::GetNodeStatusRequest(::PROTOBUF_NAMESPACE_ID::Arena* arena)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena) {
+  SharedCtor();
+  RegisterArenaDtor(arena);
+  // @@protoc_insertion_point(arena_constructor:kv.GetNodeStatusRequest)
+}
+GetNodeStatusRequest::GetNodeStatusRequest(const GetNodeStatusRequest& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  // @@protoc_insertion_point(copy_constructor:kv.GetNodeStatusRequest)
+}
+
+void GetNodeStatusRequest::SharedCtor() {
+}
+
+GetNodeStatusRequest::~GetNodeStatusRequest() {
+  // @@protoc_insertion_point(destructor:kv.GetNodeStatusRequest)
+  SharedDtor();
+  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+void GetNodeStatusRequest::SharedDtor() {
+  GOOGLE_DCHECK(GetArena() == nullptr);
+}
+
+void GetNodeStatusRequest::ArenaDtor(void* object) {
+  GetNodeStatusRequest* _this = reinterpret_cast< GetNodeStatusRequest* >(object);
+  (void)_this;
+}
+void GetNodeStatusRequest::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
+}
+void GetNodeStatusRequest::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const GetNodeStatusRequest& GetNodeStatusRequest::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_GetNodeStatusRequest_kv_2eproto.base);
+  return *internal_default_instance();
+}
+
+
+void GetNodeStatusRequest::Clear() {
+// @@protoc_insertion_point(message_clear_start:kv.GetNodeStatusRequest)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* GetNodeStatusRequest::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  ::PROTOBUF_NAMESPACE_ID::Arena* arena = GetArena(); (void)arena;
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
+          goto success;
+        }
+        ptr = UnknownFieldParse(tag,
+            _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+            ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
+  }  // while
+success:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
+}
+
+::PROTOBUF_NAMESPACE_ID::uint8* GetNodeStatusRequest::_InternalSerialize(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:kv.GetNodeStatusRequest)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:kv.GetNodeStatusRequest)
+  return target;
+}
+
+size_t GetNodeStatusRequest::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:kv.GetNodeStatusRequest)
+  size_t total_size = 0;
+
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void GetNodeStatusRequest::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:kv.GetNodeStatusRequest)
+  GOOGLE_DCHECK_NE(&from, this);
+  const GetNodeStatusRequest* source =
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<GetNodeStatusRequest>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:kv.GetNodeStatusRequest)
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:kv.GetNodeStatusRequest)
+    MergeFrom(*source);
+  }
+}
+
+void GetNodeStatusRequest::MergeFrom(const GetNodeStatusRequest& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:kv.GetNodeStatusRequest)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+}
+
+void GetNodeStatusRequest::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:kv.GetNodeStatusRequest)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void GetNodeStatusRequest::CopyFrom(const GetNodeStatusRequest& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:kv.GetNodeStatusRequest)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool GetNodeStatusRequest::IsInitialized() const {
+  return true;
+}
+
+void GetNodeStatusRequest::InternalSwap(GetNodeStatusRequest* other) {
+  using std::swap;
+  _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata GetNodeStatusRequest::GetMetadata() const {
+  return GetMetadataStatic();
+}
+
+
+// ===================================================================
+
+void GetNodeStatusResponse::InitAsDefaultInstance() {
+}
+class GetNodeStatusResponse::_Internal {
+ public:
+};
+
+GetNodeStatusResponse::GetNodeStatusResponse(::PROTOBUF_NAMESPACE_ID::Arena* arena)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena),
+  entries_(arena) {
+  SharedCtor();
+  RegisterArenaDtor(arena);
+  // @@protoc_insertion_point(arena_constructor:kv.GetNodeStatusResponse)
+}
+GetNodeStatusResponse::GetNodeStatusResponse(const GetNodeStatusResponse& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
+      entries_(from.entries_) {
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  error_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from._internal_error().empty()) {
+    error_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from._internal_error(),
+      GetArena());
+  }
+  state_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from._internal_state().empty()) {
+    state_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from._internal_state(),
+      GetArena());
+  }
+  ::memcpy(&success_, &from.success_,
+    static_cast<size_t>(reinterpret_cast<char*>(&leaderid_) -
+    reinterpret_cast<char*>(&success_)) + sizeof(leaderid_));
+  // @@protoc_insertion_point(copy_constructor:kv.GetNodeStatusResponse)
+}
+
+void GetNodeStatusResponse::SharedCtor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_GetNodeStatusResponse_kv_2eproto.base);
+  error_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  state_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  ::memset(&success_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&leaderid_) -
+      reinterpret_cast<char*>(&success_)) + sizeof(leaderid_));
+}
+
+GetNodeStatusResponse::~GetNodeStatusResponse() {
+  // @@protoc_insertion_point(destructor:kv.GetNodeStatusResponse)
+  SharedDtor();
+  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+void GetNodeStatusResponse::SharedDtor() {
+  GOOGLE_DCHECK(GetArena() == nullptr);
+  error_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  state_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+
+void GetNodeStatusResponse::ArenaDtor(void* object) {
+  GetNodeStatusResponse* _this = reinterpret_cast< GetNodeStatusResponse* >(object);
+  (void)_this;
+}
+void GetNodeStatusResponse::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
+}
+void GetNodeStatusResponse::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const GetNodeStatusResponse& GetNodeStatusResponse::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_GetNodeStatusResponse_kv_2eproto.base);
+  return *internal_default_instance();
+}
+
+
+void GetNodeStatusResponse::Clear() {
+// @@protoc_insertion_point(message_clear_start:kv.GetNodeStatusResponse)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  entries_.Clear();
+  error_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  state_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  ::memset(&success_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&leaderid_) -
+      reinterpret_cast<char*>(&success_)) + sizeof(leaderid_));
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* GetNodeStatusResponse::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  ::PROTOBUF_NAMESPACE_ID::Arena* arena = GetArena(); (void)arena;
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
+      // bool success = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
+          success_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // string error = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
+          auto str = _internal_mutable_error();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "kv.GetNodeStatusResponse.error"));
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // int32 nodeId = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 24)) {
+          nodeid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // string state = 4;
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 34)) {
+          auto str = _internal_mutable_state();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "kv.GetNodeStatusResponse.state"));
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // int64 currentTerm = 5;
+      case 5:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 40)) {
+          currentterm_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // int32 leaderId = 6;
+      case 6:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 48)) {
+          leaderid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // int64 commitIndex = 7;
+      case 7:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 56)) {
+          commitindex_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // int64 lastApplied = 8;
+      case 8:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 64)) {
+          lastapplied_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // int64 lastLogIndex = 9;
+      case 9:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 72)) {
+          lastlogindex_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // int64 lastLogTerm = 10;
+      case 10:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 80)) {
+          lastlogterm_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // repeated .kv.LogEntryInfo entries = 11;
+      case 11:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 90)) {
+          ptr -= 1;
+          do {
+            ptr += 1;
+            ptr = ctx->ParseMessage(_internal_add_entries(), ptr);
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<90>(ptr));
+        } else goto handle_unusual;
+        continue;
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
+          goto success;
+        }
+        ptr = UnknownFieldParse(tag,
+            _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+            ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
+      }
+    }  // switch
+  }  // while
+success:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
+}
+
+::PROTOBUF_NAMESPACE_ID::uint8* GetNodeStatusResponse::_InternalSerialize(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:kv.GetNodeStatusResponse)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // bool success = 1;
+  if (this->success() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(1, this->_internal_success(), target);
+  }
+
+  // string error = 2;
+  if (this->error().size() > 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_error().data(), static_cast<int>(this->_internal_error().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "kv.GetNodeStatusResponse.error");
+    target = stream->WriteStringMaybeAliased(
+        2, this->_internal_error(), target);
+  }
+
+  // int32 nodeId = 3;
+  if (this->nodeid() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(3, this->_internal_nodeid(), target);
+  }
+
+  // string state = 4;
+  if (this->state().size() > 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->_internal_state().data(), static_cast<int>(this->_internal_state().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "kv.GetNodeStatusResponse.state");
+    target = stream->WriteStringMaybeAliased(
+        4, this->_internal_state(), target);
+  }
+
+  // int64 currentTerm = 5;
+  if (this->currentterm() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(5, this->_internal_currentterm(), target);
+  }
+
+  // int32 leaderId = 6;
+  if (this->leaderid() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(6, this->_internal_leaderid(), target);
+  }
+
+  // int64 commitIndex = 7;
+  if (this->commitindex() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(7, this->_internal_commitindex(), target);
+  }
+
+  // int64 lastApplied = 8;
+  if (this->lastapplied() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(8, this->_internal_lastapplied(), target);
+  }
+
+  // int64 lastLogIndex = 9;
+  if (this->lastlogindex() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(9, this->_internal_lastlogindex(), target);
+  }
+
+  // int64 lastLogTerm = 10;
+  if (this->lastlogterm() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(10, this->_internal_lastlogterm(), target);
+  }
+
+  // repeated .kv.LogEntryInfo entries = 11;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->_internal_entries_size()); i < n; i++) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(11, this->_internal_entries(i), target, stream);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:kv.GetNodeStatusResponse)
+  return target;
+}
+
+size_t GetNodeStatusResponse::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:kv.GetNodeStatusResponse)
+  size_t total_size = 0;
+
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // repeated .kv.LogEntryInfo entries = 11;
+  total_size += 1UL * this->_internal_entries_size();
+  for (const auto& msg : this->entries_) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
+  }
+
+  // string error = 2;
+  if (this->error().size() > 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_error());
+  }
+
+  // string state = 4;
+  if (this->state().size() > 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->_internal_state());
+  }
+
+  // bool success = 1;
+  if (this->success() != 0) {
+    total_size += 1 + 1;
+  }
+
+  // int32 nodeId = 3;
+  if (this->nodeid() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
+        this->_internal_nodeid());
+  }
+
+  // int64 currentTerm = 5;
+  if (this->currentterm() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int64Size(
+        this->_internal_currentterm());
+  }
+
+  // int64 commitIndex = 7;
+  if (this->commitindex() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int64Size(
+        this->_internal_commitindex());
+  }
+
+  // int64 lastApplied = 8;
+  if (this->lastapplied() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int64Size(
+        this->_internal_lastapplied());
+  }
+
+  // int64 lastLogIndex = 9;
+  if (this->lastlogindex() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int64Size(
+        this->_internal_lastlogindex());
+  }
+
+  // int64 lastLogTerm = 10;
+  if (this->lastlogterm() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int64Size(
+        this->_internal_lastlogterm());
+  }
+
+  // int32 leaderId = 6;
+  if (this->leaderid() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
+        this->_internal_leaderid());
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void GetNodeStatusResponse::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:kv.GetNodeStatusResponse)
+  GOOGLE_DCHECK_NE(&from, this);
+  const GetNodeStatusResponse* source =
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<GetNodeStatusResponse>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:kv.GetNodeStatusResponse)
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:kv.GetNodeStatusResponse)
+    MergeFrom(*source);
+  }
+}
+
+void GetNodeStatusResponse::MergeFrom(const GetNodeStatusResponse& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:kv.GetNodeStatusResponse)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  entries_.MergeFrom(from.entries_);
+  if (from.error().size() > 0) {
+    _internal_set_error(from._internal_error());
+  }
+  if (from.state().size() > 0) {
+    _internal_set_state(from._internal_state());
+  }
+  if (from.success() != 0) {
+    _internal_set_success(from._internal_success());
+  }
+  if (from.nodeid() != 0) {
+    _internal_set_nodeid(from._internal_nodeid());
+  }
+  if (from.currentterm() != 0) {
+    _internal_set_currentterm(from._internal_currentterm());
+  }
+  if (from.commitindex() != 0) {
+    _internal_set_commitindex(from._internal_commitindex());
+  }
+  if (from.lastapplied() != 0) {
+    _internal_set_lastapplied(from._internal_lastapplied());
+  }
+  if (from.lastlogindex() != 0) {
+    _internal_set_lastlogindex(from._internal_lastlogindex());
+  }
+  if (from.lastlogterm() != 0) {
+    _internal_set_lastlogterm(from._internal_lastlogterm());
+  }
+  if (from.leaderid() != 0) {
+    _internal_set_leaderid(from._internal_leaderid());
+  }
+}
+
+void GetNodeStatusResponse::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:kv.GetNodeStatusResponse)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void GetNodeStatusResponse::CopyFrom(const GetNodeStatusResponse& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:kv.GetNodeStatusResponse)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool GetNodeStatusResponse::IsInitialized() const {
+  return true;
+}
+
+void GetNodeStatusResponse::InternalSwap(GetNodeStatusResponse* other) {
+  using std::swap;
+  _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
+  entries_.InternalSwap(&other->entries_);
+  error_.Swap(&other->error_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  state_.Swap(&other->state_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(GetNodeStatusResponse, leaderid_)
+      + sizeof(GetNodeStatusResponse::leaderid_)
+      - PROTOBUF_FIELD_OFFSET(GetNodeStatusResponse, success_)>(
+          reinterpret_cast<char*>(&success_),
+          reinterpret_cast<char*>(&other->success_));
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata GetNodeStatusResponse::GetMetadata() const {
+  return GetMetadataStatic();
+}
+
+
+// ===================================================================
+
 KvServerRpc::~KvServerRpc() {}
 
 const ::PROTOBUF_NAMESPACE_ID::ServiceDescriptor* KvServerRpc::descriptor() {
@@ -1976,6 +3070,14 @@ void KvServerRpc::Delete(::PROTOBUF_NAMESPACE_ID::RpcController* controller,
   done->Run();
 }
 
+void KvServerRpc::GetNodeStatus(::PROTOBUF_NAMESPACE_ID::RpcController* controller,
+                         const ::kv::GetNodeStatusRequest*,
+                         ::kv::GetNodeStatusResponse*,
+                         ::google::protobuf::Closure* done) {
+  controller->SetFailed("Method GetNodeStatus() not implemented.");
+  done->Run();
+}
+
 void KvServerRpc::CallMethod(const ::PROTOBUF_NAMESPACE_ID::MethodDescriptor* method,
                              ::PROTOBUF_NAMESPACE_ID::RpcController* controller,
                              const ::PROTOBUF_NAMESPACE_ID::Message* request,
@@ -2007,6 +3109,14 @@ void KvServerRpc::CallMethod(const ::PROTOBUF_NAMESPACE_ID::MethodDescriptor* me
                  response),
              done);
       break;
+    case 3:
+      GetNodeStatus(controller,
+             ::PROTOBUF_NAMESPACE_ID::internal::DownCast<const ::kv::GetNodeStatusRequest*>(
+                 request),
+             ::PROTOBUF_NAMESPACE_ID::internal::DownCast<::kv::GetNodeStatusResponse*>(
+                 response),
+             done);
+      break;
     default:
       GOOGLE_LOG(FATAL) << "Bad method index; this should never happen.";
       break;
@@ -2023,6 +3133,8 @@ const ::PROTOBUF_NAMESPACE_ID::Message& KvServerRpc::GetRequestPrototype(
       return ::kv::GetRequest::default_instance();
     case 2:
       return ::kv::DeleteRequest::default_instance();
+    case 3:
+      return ::kv::GetNodeStatusRequest::default_instance();
     default:
       GOOGLE_LOG(FATAL) << "Bad method index; this should never happen.";
       return *::PROTOBUF_NAMESPACE_ID::MessageFactory::generated_factory()
@@ -2040,6 +3152,8 @@ const ::PROTOBUF_NAMESPACE_ID::Message& KvServerRpc::GetResponsePrototype(
       return ::kv::GetResponse::default_instance();
     case 2:
       return ::kv::DeleteResponse::default_instance();
+    case 3:
+      return ::kv::GetNodeStatusResponse::default_instance();
     default:
       GOOGLE_LOG(FATAL) << "Bad method index; this should never happen.";
       return *::PROTOBUF_NAMESPACE_ID::MessageFactory::generated_factory()
@@ -2079,6 +3193,13 @@ void KvServerRpc_Stub::Delete(::PROTOBUF_NAMESPACE_ID::RpcController* controller
   channel_->CallMethod(descriptor()->method(2),
                        controller, request, response, done);
 }
+void KvServerRpc_Stub::GetNodeStatus(::PROTOBUF_NAMESPACE_ID::RpcController* controller,
+                              const ::kv::GetNodeStatusRequest* request,
+                              ::kv::GetNodeStatusResponse* response,
+                              ::google::protobuf::Closure* done) {
+  channel_->CallMethod(descriptor()->method(3),
+                       controller, request, response, done);
+}
 
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace kv
@@ -2100,6 +3221,15 @@ template<> PROTOBUF_NOINLINE ::kv::DeleteRequest* Arena::CreateMaybeMessage< ::k
 }
 template<> PROTOBUF_NOINLINE ::kv::DeleteResponse* Arena::CreateMaybeMessage< ::kv::DeleteResponse >(Arena* arena) {
   return Arena::CreateMessageInternal< ::kv::DeleteResponse >(arena);
+}
+template<> PROTOBUF_NOINLINE ::kv::LogEntryInfo* Arena::CreateMaybeMessage< ::kv::LogEntryInfo >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::kv::LogEntryInfo >(arena);
+}
+template<> PROTOBUF_NOINLINE ::kv::GetNodeStatusRequest* Arena::CreateMaybeMessage< ::kv::GetNodeStatusRequest >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::kv::GetNodeStatusRequest >(arena);
+}
+template<> PROTOBUF_NOINLINE ::kv::GetNodeStatusResponse* Arena::CreateMaybeMessage< ::kv::GetNodeStatusResponse >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::kv::GetNodeStatusResponse >(arena);
 }
 PROTOBUF_NAMESPACE_CLOSE
 

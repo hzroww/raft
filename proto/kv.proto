@@ -41,8 +41,33 @@ message DeleteResponse {
     int32 leaderId = 3;
 }
 
+message LogEntryInfo {
+    int64 index = 1;
+    int64 term = 2;
+    string op = 3;      // "PUT" / "DELETE" / "NOOP" / "CONFIG"
+    string key = 4;
+    string value = 5;
+}
+
+message GetNodeStatusRequest {}
+
+message GetNodeStatusResponse {
+    bool success = 1;
+    string error = 2;
+    int32 nodeId = 3;
+    string state = 4;          // "Leader" / "Follower" / "Candidate"
+    int64 currentTerm = 5;
+    int32 leaderId = 6;
+    int64 commitIndex = 7;
+    int64 lastApplied = 8;
+    int64 lastLogIndex = 9;
+    int64 lastLogTerm = 10;
+    repeated LogEntryInfo entries = 11;   // most recent entries (<=50)
+}
+
 service KvServerRpc {
     rpc Put(PutRequest) returns (PutResponse);
     rpc Get(GetRequest) returns (GetResponse);
     rpc Delete(DeleteRequest) returns (DeleteResponse);
+    rpc GetNodeStatus(GetNodeStatusRequest) returns (GetNodeStatusResponse);
 }

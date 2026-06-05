@@ -4,6 +4,7 @@
 
 #include <google/protobuf/service.h>
 
+#include <algorithm>
 #include <future>
 #include <utility>
 
@@ -29,10 +30,12 @@ void RejectNotLeader(Response* response, int32_t leader_id) {
 KvServerService::KvServerService(KvStore* store,
                                  raft_core::RaftNode* raft_node,
                                  CommitWaitRegistry* wait_registry,
+                                 raft_core::IRaftStorage* storage,
                                  std::chrono::milliseconds commit_timeout)
     : store_(store),
       raft_node_(raft_node),
       wait_registry_(wait_registry),
+      storage_(storage),
       commit_timeout_(commit_timeout) {}
 
 void KvServerService::Put(google::protobuf::RpcController* /*controller*/,
@@ -162,6 +165,78 @@ void KvServerService::Delete(google::protobuf::RpcController* /*controller*/,
     response->set_success(result.success);
     response->set_error(result.error);
     response->set_leaderid(LeaderIdForResponse());
+    Finish(done);
+}
+
+void KvServerService::GetNodeStatus(
+    google::protobuf::RpcController*    /*controller*/,
+    const kv::GetNodeStatusRequest*    /*request*/,
+    kv::GetNodeStatusResponse*         response,
+    google::protobuf::Closure*         done) {
+    if (!raft_node_) {
+        response->set_success(false);
+        response->set_error("raft node is not configured");
+        Finish(done);
+        return;
+    }
+
+    response->set_nodeid(static_cast<int32_t>(raft_node_->SelfId()));
+    response->set_state(raft_core::ToString(raft_node_->State()));
+    response->set_currentterm(raft_node_->CurrentTerm());
+    response->set_leaderid(static_cast<int32_t>(raft_node_->LeaderId()));
+    response->set_commitindex(raft_node_->CommitIndex());
+    response->set_lastapplied(raft_node_->LastApplied());
+
+    if (!storage_) {
+        response->set_success(true);
+        Finish(done);
+        return;
+    }
+
+    // Reading the persistent log must happen on the raft main thread, since
+    // IRaftStorage is only safe to touch from there. Hop onto it via Post()
+    // and block until the snapshot of recent entries is collected.
+    constexpr raft_core::Index kMaxEntries = 50;
+    std::promise<void> ready;
+    std::future<void>  ready_future = ready.get_future();
+
+    raft_node_->Post([this, response, kMaxEntries, &ready]() {
+        raft_core::Index last_index = 0;
+        raft_core::Term  last_term  = 0;
+        storage_->LastIndexTerm(&last_index, &last_term);
+        response->set_lastlogindex(last_index);
+        response->set_lastlogterm(last_term);
+
+        raft_core::Index start = std::max<raft_core::Index>(1, last_index - kMaxEntries + 1);
+        for (raft_core::Index i = start; i <= last_index; ++i) {
+            raft_core::LogEntry entry;
+            if (!storage_->EntryAt(i, &entry)) {
+                continue;
+            }
+            kv::LogEntryInfo* info = response->add_entries();
+            info->set_index(entry.index);
+            info->set_term(entry.term);
+
+            if (entry.type == raft_core::EntryType::Config) {
+                info->set_op("CONFIG");
+            } else if (entry.command.empty()) {
+                info->set_op("NOOP");
+            } else {
+                kv::KvCommand command;
+                if (DecodeCommand(entry.command, &command)) {
+                    info->set_op(command.op() == kv::KvCommand::PUT ? "PUT" : "DELETE");
+                    info->set_key(command.key());
+                    info->set_value(command.value());
+                } else {
+                    info->set_op("UNKNOWN");
+                }
+            }
+        }
+        ready.set_value();
+    });
+
+    ready_future.wait();
+    response->set_success(true);
     Finish(done);
 }
 

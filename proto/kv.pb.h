@@ -48,7 +48,7 @@ struct TableStruct_kv_2eproto {
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::AuxillaryParseTableField aux[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
-  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[6]
+  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[9]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::FieldMetadata field_metadata[];
   static const ::PROTOBUF_NAMESPACE_ID::internal::SerializationTable serialization_table[];
@@ -62,12 +62,21 @@ extern DeleteRequestDefaultTypeInternal _DeleteRequest_default_instance_;
 class DeleteResponse;
 class DeleteResponseDefaultTypeInternal;
 extern DeleteResponseDefaultTypeInternal _DeleteResponse_default_instance_;
+class GetNodeStatusRequest;
+class GetNodeStatusRequestDefaultTypeInternal;
+extern GetNodeStatusRequestDefaultTypeInternal _GetNodeStatusRequest_default_instance_;
+class GetNodeStatusResponse;
+class GetNodeStatusResponseDefaultTypeInternal;
+extern GetNodeStatusResponseDefaultTypeInternal _GetNodeStatusResponse_default_instance_;
 class GetRequest;
 class GetRequestDefaultTypeInternal;
 extern GetRequestDefaultTypeInternal _GetRequest_default_instance_;
 class GetResponse;
 class GetResponseDefaultTypeInternal;
 extern GetResponseDefaultTypeInternal _GetResponse_default_instance_;
+class LogEntryInfo;
+class LogEntryInfoDefaultTypeInternal;
+extern LogEntryInfoDefaultTypeInternal _LogEntryInfo_default_instance_;
 class PutRequest;
 class PutRequestDefaultTypeInternal;
 extern PutRequestDefaultTypeInternal _PutRequest_default_instance_;
@@ -78,8 +87,11 @@ extern PutResponseDefaultTypeInternal _PutResponse_default_instance_;
 PROTOBUF_NAMESPACE_OPEN
 template<> ::kv::DeleteRequest* Arena::CreateMaybeMessage<::kv::DeleteRequest>(Arena*);
 template<> ::kv::DeleteResponse* Arena::CreateMaybeMessage<::kv::DeleteResponse>(Arena*);
+template<> ::kv::GetNodeStatusRequest* Arena::CreateMaybeMessage<::kv::GetNodeStatusRequest>(Arena*);
+template<> ::kv::GetNodeStatusResponse* Arena::CreateMaybeMessage<::kv::GetNodeStatusResponse>(Arena*);
 template<> ::kv::GetRequest* Arena::CreateMaybeMessage<::kv::GetRequest>(Arena*);
 template<> ::kv::GetResponse* Arena::CreateMaybeMessage<::kv::GetResponse>(Arena*);
+template<> ::kv::LogEntryInfo* Arena::CreateMaybeMessage<::kv::LogEntryInfo>(Arena*);
 template<> ::kv::PutRequest* Arena::CreateMaybeMessage<::kv::PutRequest>(Arena*);
 template<> ::kv::PutResponse* Arena::CreateMaybeMessage<::kv::PutResponse>(Arena*);
 PROTOBUF_NAMESPACE_CLOSE
@@ -1237,6 +1249,647 @@ class DeleteResponse PROTOBUF_FINAL :
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_kv_2eproto;
 };
+// -------------------------------------------------------------------
+
+class LogEntryInfo PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:kv.LogEntryInfo) */ {
+ public:
+  inline LogEntryInfo() : LogEntryInfo(nullptr) {};
+  virtual ~LogEntryInfo();
+
+  LogEntryInfo(const LogEntryInfo& from);
+  LogEntryInfo(LogEntryInfo&& from) noexcept
+    : LogEntryInfo() {
+    *this = ::std::move(from);
+  }
+
+  inline LogEntryInfo& operator=(const LogEntryInfo& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline LogEntryInfo& operator=(LogEntryInfo&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const LogEntryInfo& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const LogEntryInfo* internal_default_instance() {
+    return reinterpret_cast<const LogEntryInfo*>(
+               &_LogEntryInfo_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    6;
+
+  friend void swap(LogEntryInfo& a, LogEntryInfo& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(LogEntryInfo* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(LogEntryInfo* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline LogEntryInfo* New() const final {
+    return CreateMaybeMessage<LogEntryInfo>(nullptr);
+  }
+
+  LogEntryInfo* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<LogEntryInfo>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const LogEntryInfo& from);
+  void MergeFrom(const LogEntryInfo& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(LogEntryInfo* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "kv.LogEntryInfo";
+  }
+  protected:
+  explicit LogEntryInfo(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_kv_2eproto);
+    return ::descriptor_table_kv_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kOpFieldNumber = 3,
+    kKeyFieldNumber = 4,
+    kValueFieldNumber = 5,
+    kIndexFieldNumber = 1,
+    kTermFieldNumber = 2,
+  };
+  // string op = 3;
+  void clear_op();
+  const std::string& op() const;
+  void set_op(const std::string& value);
+  void set_op(std::string&& value);
+  void set_op(const char* value);
+  void set_op(const char* value, size_t size);
+  std::string* mutable_op();
+  std::string* release_op();
+  void set_allocated_op(std::string* op);
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  std::string* unsafe_arena_release_op();
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  void unsafe_arena_set_allocated_op(
+      std::string* op);
+  private:
+  const std::string& _internal_op() const;
+  void _internal_set_op(const std::string& value);
+  std::string* _internal_mutable_op();
+  public:
+
+  // string key = 4;
+  void clear_key();
+  const std::string& key() const;
+  void set_key(const std::string& value);
+  void set_key(std::string&& value);
+  void set_key(const char* value);
+  void set_key(const char* value, size_t size);
+  std::string* mutable_key();
+  std::string* release_key();
+  void set_allocated_key(std::string* key);
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  std::string* unsafe_arena_release_key();
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  void unsafe_arena_set_allocated_key(
+      std::string* key);
+  private:
+  const std::string& _internal_key() const;
+  void _internal_set_key(const std::string& value);
+  std::string* _internal_mutable_key();
+  public:
+
+  // string value = 5;
+  void clear_value();
+  const std::string& value() const;
+  void set_value(const std::string& value);
+  void set_value(std::string&& value);
+  void set_value(const char* value);
+  void set_value(const char* value, size_t size);
+  std::string* mutable_value();
+  std::string* release_value();
+  void set_allocated_value(std::string* value);
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  std::string* unsafe_arena_release_value();
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  void unsafe_arena_set_allocated_value(
+      std::string* value);
+  private:
+  const std::string& _internal_value() const;
+  void _internal_set_value(const std::string& value);
+  std::string* _internal_mutable_value();
+  public:
+
+  // int64 index = 1;
+  void clear_index();
+  ::PROTOBUF_NAMESPACE_ID::int64 index() const;
+  void set_index(::PROTOBUF_NAMESPACE_ID::int64 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int64 _internal_index() const;
+  void _internal_set_index(::PROTOBUF_NAMESPACE_ID::int64 value);
+  public:
+
+  // int64 term = 2;
+  void clear_term();
+  ::PROTOBUF_NAMESPACE_ID::int64 term() const;
+  void set_term(::PROTOBUF_NAMESPACE_ID::int64 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int64 _internal_term() const;
+  void _internal_set_term(::PROTOBUF_NAMESPACE_ID::int64 value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:kv.LogEntryInfo)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr op_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr key_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr value_;
+  ::PROTOBUF_NAMESPACE_ID::int64 index_;
+  ::PROTOBUF_NAMESPACE_ID::int64 term_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_kv_2eproto;
+};
+// -------------------------------------------------------------------
+
+class GetNodeStatusRequest PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:kv.GetNodeStatusRequest) */ {
+ public:
+  inline GetNodeStatusRequest() : GetNodeStatusRequest(nullptr) {};
+  virtual ~GetNodeStatusRequest();
+
+  GetNodeStatusRequest(const GetNodeStatusRequest& from);
+  GetNodeStatusRequest(GetNodeStatusRequest&& from) noexcept
+    : GetNodeStatusRequest() {
+    *this = ::std::move(from);
+  }
+
+  inline GetNodeStatusRequest& operator=(const GetNodeStatusRequest& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline GetNodeStatusRequest& operator=(GetNodeStatusRequest&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const GetNodeStatusRequest& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const GetNodeStatusRequest* internal_default_instance() {
+    return reinterpret_cast<const GetNodeStatusRequest*>(
+               &_GetNodeStatusRequest_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    7;
+
+  friend void swap(GetNodeStatusRequest& a, GetNodeStatusRequest& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(GetNodeStatusRequest* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(GetNodeStatusRequest* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline GetNodeStatusRequest* New() const final {
+    return CreateMaybeMessage<GetNodeStatusRequest>(nullptr);
+  }
+
+  GetNodeStatusRequest* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<GetNodeStatusRequest>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const GetNodeStatusRequest& from);
+  void MergeFrom(const GetNodeStatusRequest& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(GetNodeStatusRequest* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "kv.GetNodeStatusRequest";
+  }
+  protected:
+  explicit GetNodeStatusRequest(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_kv_2eproto);
+    return ::descriptor_table_kv_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // @@protoc_insertion_point(class_scope:kv.GetNodeStatusRequest)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_kv_2eproto;
+};
+// -------------------------------------------------------------------
+
+class GetNodeStatusResponse PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:kv.GetNodeStatusResponse) */ {
+ public:
+  inline GetNodeStatusResponse() : GetNodeStatusResponse(nullptr) {};
+  virtual ~GetNodeStatusResponse();
+
+  GetNodeStatusResponse(const GetNodeStatusResponse& from);
+  GetNodeStatusResponse(GetNodeStatusResponse&& from) noexcept
+    : GetNodeStatusResponse() {
+    *this = ::std::move(from);
+  }
+
+  inline GetNodeStatusResponse& operator=(const GetNodeStatusResponse& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline GetNodeStatusResponse& operator=(GetNodeStatusResponse&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const GetNodeStatusResponse& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const GetNodeStatusResponse* internal_default_instance() {
+    return reinterpret_cast<const GetNodeStatusResponse*>(
+               &_GetNodeStatusResponse_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    8;
+
+  friend void swap(GetNodeStatusResponse& a, GetNodeStatusResponse& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(GetNodeStatusResponse* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(GetNodeStatusResponse* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline GetNodeStatusResponse* New() const final {
+    return CreateMaybeMessage<GetNodeStatusResponse>(nullptr);
+  }
+
+  GetNodeStatusResponse* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<GetNodeStatusResponse>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const GetNodeStatusResponse& from);
+  void MergeFrom(const GetNodeStatusResponse& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(GetNodeStatusResponse* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "kv.GetNodeStatusResponse";
+  }
+  protected:
+  explicit GetNodeStatusResponse(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_kv_2eproto);
+    return ::descriptor_table_kv_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kEntriesFieldNumber = 11,
+    kErrorFieldNumber = 2,
+    kStateFieldNumber = 4,
+    kSuccessFieldNumber = 1,
+    kNodeIdFieldNumber = 3,
+    kCurrentTermFieldNumber = 5,
+    kCommitIndexFieldNumber = 7,
+    kLastAppliedFieldNumber = 8,
+    kLastLogIndexFieldNumber = 9,
+    kLastLogTermFieldNumber = 10,
+    kLeaderIdFieldNumber = 6,
+  };
+  // repeated .kv.LogEntryInfo entries = 11;
+  int entries_size() const;
+  private:
+  int _internal_entries_size() const;
+  public:
+  void clear_entries();
+  ::kv::LogEntryInfo* mutable_entries(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::kv::LogEntryInfo >*
+      mutable_entries();
+  private:
+  const ::kv::LogEntryInfo& _internal_entries(int index) const;
+  ::kv::LogEntryInfo* _internal_add_entries();
+  public:
+  const ::kv::LogEntryInfo& entries(int index) const;
+  ::kv::LogEntryInfo* add_entries();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::kv::LogEntryInfo >&
+      entries() const;
+
+  // string error = 2;
+  void clear_error();
+  const std::string& error() const;
+  void set_error(const std::string& value);
+  void set_error(std::string&& value);
+  void set_error(const char* value);
+  void set_error(const char* value, size_t size);
+  std::string* mutable_error();
+  std::string* release_error();
+  void set_allocated_error(std::string* error);
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  std::string* unsafe_arena_release_error();
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  void unsafe_arena_set_allocated_error(
+      std::string* error);
+  private:
+  const std::string& _internal_error() const;
+  void _internal_set_error(const std::string& value);
+  std::string* _internal_mutable_error();
+  public:
+
+  // string state = 4;
+  void clear_state();
+  const std::string& state() const;
+  void set_state(const std::string& value);
+  void set_state(std::string&& value);
+  void set_state(const char* value);
+  void set_state(const char* value, size_t size);
+  std::string* mutable_state();
+  std::string* release_state();
+  void set_allocated_state(std::string* state);
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  std::string* unsafe_arena_release_state();
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  void unsafe_arena_set_allocated_state(
+      std::string* state);
+  private:
+  const std::string& _internal_state() const;
+  void _internal_set_state(const std::string& value);
+  std::string* _internal_mutable_state();
+  public:
+
+  // bool success = 1;
+  void clear_success();
+  bool success() const;
+  void set_success(bool value);
+  private:
+  bool _internal_success() const;
+  void _internal_set_success(bool value);
+  public:
+
+  // int32 nodeId = 3;
+  void clear_nodeid();
+  ::PROTOBUF_NAMESPACE_ID::int32 nodeid() const;
+  void set_nodeid(::PROTOBUF_NAMESPACE_ID::int32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_nodeid() const;
+  void _internal_set_nodeid(::PROTOBUF_NAMESPACE_ID::int32 value);
+  public:
+
+  // int64 currentTerm = 5;
+  void clear_currentterm();
+  ::PROTOBUF_NAMESPACE_ID::int64 currentterm() const;
+  void set_currentterm(::PROTOBUF_NAMESPACE_ID::int64 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int64 _internal_currentterm() const;
+  void _internal_set_currentterm(::PROTOBUF_NAMESPACE_ID::int64 value);
+  public:
+
+  // int64 commitIndex = 7;
+  void clear_commitindex();
+  ::PROTOBUF_NAMESPACE_ID::int64 commitindex() const;
+  void set_commitindex(::PROTOBUF_NAMESPACE_ID::int64 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int64 _internal_commitindex() const;
+  void _internal_set_commitindex(::PROTOBUF_NAMESPACE_ID::int64 value);
+  public:
+
+  // int64 lastApplied = 8;
+  void clear_lastapplied();
+  ::PROTOBUF_NAMESPACE_ID::int64 lastapplied() const;
+  void set_lastapplied(::PROTOBUF_NAMESPACE_ID::int64 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int64 _internal_lastapplied() const;
+  void _internal_set_lastapplied(::PROTOBUF_NAMESPACE_ID::int64 value);
+  public:
+
+  // int64 lastLogIndex = 9;
+  void clear_lastlogindex();
+  ::PROTOBUF_NAMESPACE_ID::int64 lastlogindex() const;
+  void set_lastlogindex(::PROTOBUF_NAMESPACE_ID::int64 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int64 _internal_lastlogindex() const;
+  void _internal_set_lastlogindex(::PROTOBUF_NAMESPACE_ID::int64 value);
+  public:
+
+  // int64 lastLogTerm = 10;
+  void clear_lastlogterm();
+  ::PROTOBUF_NAMESPACE_ID::int64 lastlogterm() const;
+  void set_lastlogterm(::PROTOBUF_NAMESPACE_ID::int64 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int64 _internal_lastlogterm() const;
+  void _internal_set_lastlogterm(::PROTOBUF_NAMESPACE_ID::int64 value);
+  public:
+
+  // int32 leaderId = 6;
+  void clear_leaderid();
+  ::PROTOBUF_NAMESPACE_ID::int32 leaderid() const;
+  void set_leaderid(::PROTOBUF_NAMESPACE_ID::int32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_leaderid() const;
+  void _internal_set_leaderid(::PROTOBUF_NAMESPACE_ID::int32 value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:kv.GetNodeStatusResponse)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::kv::LogEntryInfo > entries_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr error_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr state_;
+  bool success_;
+  ::PROTOBUF_NAMESPACE_ID::int32 nodeid_;
+  ::PROTOBUF_NAMESPACE_ID::int64 currentterm_;
+  ::PROTOBUF_NAMESPACE_ID::int64 commitindex_;
+  ::PROTOBUF_NAMESPACE_ID::int64 lastapplied_;
+  ::PROTOBUF_NAMESPACE_ID::int64 lastlogindex_;
+  ::PROTOBUF_NAMESPACE_ID::int64 lastlogterm_;
+  ::PROTOBUF_NAMESPACE_ID::int32 leaderid_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_kv_2eproto;
+};
 // ===================================================================
 
 class KvServerRpc_Stub;
@@ -1263,6 +1916,10 @@ class KvServerRpc : public ::PROTOBUF_NAMESPACE_ID::Service {
   virtual void Delete(::PROTOBUF_NAMESPACE_ID::RpcController* controller,
                        const ::kv::DeleteRequest* request,
                        ::kv::DeleteResponse* response,
+                       ::google::protobuf::Closure* done);
+  virtual void GetNodeStatus(::PROTOBUF_NAMESPACE_ID::RpcController* controller,
+                       const ::kv::GetNodeStatusRequest* request,
+                       ::kv::GetNodeStatusResponse* response,
                        ::google::protobuf::Closure* done);
 
   // implements Service ----------------------------------------------
@@ -1304,6 +1961,10 @@ class KvServerRpc_Stub : public KvServerRpc {
   void Delete(::PROTOBUF_NAMESPACE_ID::RpcController* controller,
                        const ::kv::DeleteRequest* request,
                        ::kv::DeleteResponse* response,
+                       ::google::protobuf::Closure* done);
+  void GetNodeStatus(::PROTOBUF_NAMESPACE_ID::RpcController* controller,
+                       const ::kv::GetNodeStatusRequest* request,
+                       ::kv::GetNodeStatusResponse* response,
                        ::google::protobuf::Closure* done);
  private:
   ::PROTOBUF_NAMESPACE_ID::RpcChannel* channel_;
@@ -2414,9 +3075,671 @@ inline void DeleteResponse::set_leaderid(::PROTOBUF_NAMESPACE_ID::int32 value) {
   // @@protoc_insertion_point(field_set:kv.DeleteResponse.leaderId)
 }
 
+// -------------------------------------------------------------------
+
+// LogEntryInfo
+
+// int64 index = 1;
+inline void LogEntryInfo::clear_index() {
+  index_ = PROTOBUF_LONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 LogEntryInfo::_internal_index() const {
+  return index_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 LogEntryInfo::index() const {
+  // @@protoc_insertion_point(field_get:kv.LogEntryInfo.index)
+  return _internal_index();
+}
+inline void LogEntryInfo::_internal_set_index(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  
+  index_ = value;
+}
+inline void LogEntryInfo::set_index(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  _internal_set_index(value);
+  // @@protoc_insertion_point(field_set:kv.LogEntryInfo.index)
+}
+
+// int64 term = 2;
+inline void LogEntryInfo::clear_term() {
+  term_ = PROTOBUF_LONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 LogEntryInfo::_internal_term() const {
+  return term_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 LogEntryInfo::term() const {
+  // @@protoc_insertion_point(field_get:kv.LogEntryInfo.term)
+  return _internal_term();
+}
+inline void LogEntryInfo::_internal_set_term(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  
+  term_ = value;
+}
+inline void LogEntryInfo::set_term(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  _internal_set_term(value);
+  // @@protoc_insertion_point(field_set:kv.LogEntryInfo.term)
+}
+
+// string op = 3;
+inline void LogEntryInfo::clear_op() {
+  op_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline const std::string& LogEntryInfo::op() const {
+  // @@protoc_insertion_point(field_get:kv.LogEntryInfo.op)
+  return _internal_op();
+}
+inline void LogEntryInfo::set_op(const std::string& value) {
+  _internal_set_op(value);
+  // @@protoc_insertion_point(field_set:kv.LogEntryInfo.op)
+}
+inline std::string* LogEntryInfo::mutable_op() {
+  // @@protoc_insertion_point(field_mutable:kv.LogEntryInfo.op)
+  return _internal_mutable_op();
+}
+inline const std::string& LogEntryInfo::_internal_op() const {
+  return op_.Get();
+}
+inline void LogEntryInfo::_internal_set_op(const std::string& value) {
+  
+  op_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value, GetArena());
+}
+inline void LogEntryInfo::set_op(std::string&& value) {
+  
+  op_.Set(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:kv.LogEntryInfo.op)
+}
+inline void LogEntryInfo::set_op(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  op_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
+              GetArena());
+  // @@protoc_insertion_point(field_set_char:kv.LogEntryInfo.op)
+}
+inline void LogEntryInfo::set_op(const char* value,
+    size_t size) {
+  
+  op_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:kv.LogEntryInfo.op)
+}
+inline std::string* LogEntryInfo::_internal_mutable_op() {
+  
+  return op_.Mutable(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline std::string* LogEntryInfo::release_op() {
+  // @@protoc_insertion_point(field_release:kv.LogEntryInfo.op)
+  return op_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void LogEntryInfo::set_allocated_op(std::string* op) {
+  if (op != nullptr) {
+    
+  } else {
+    
+  }
+  op_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), op,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:kv.LogEntryInfo.op)
+}
+inline std::string* LogEntryInfo::unsafe_arena_release_op() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:kv.LogEntryInfo.op)
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  
+  return op_.UnsafeArenaRelease(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      GetArena());
+}
+inline void LogEntryInfo::unsafe_arena_set_allocated_op(
+    std::string* op) {
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  if (op != nullptr) {
+    
+  } else {
+    
+  }
+  op_.UnsafeArenaSetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      op, GetArena());
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:kv.LogEntryInfo.op)
+}
+
+// string key = 4;
+inline void LogEntryInfo::clear_key() {
+  key_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline const std::string& LogEntryInfo::key() const {
+  // @@protoc_insertion_point(field_get:kv.LogEntryInfo.key)
+  return _internal_key();
+}
+inline void LogEntryInfo::set_key(const std::string& value) {
+  _internal_set_key(value);
+  // @@protoc_insertion_point(field_set:kv.LogEntryInfo.key)
+}
+inline std::string* LogEntryInfo::mutable_key() {
+  // @@protoc_insertion_point(field_mutable:kv.LogEntryInfo.key)
+  return _internal_mutable_key();
+}
+inline const std::string& LogEntryInfo::_internal_key() const {
+  return key_.Get();
+}
+inline void LogEntryInfo::_internal_set_key(const std::string& value) {
+  
+  key_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value, GetArena());
+}
+inline void LogEntryInfo::set_key(std::string&& value) {
+  
+  key_.Set(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:kv.LogEntryInfo.key)
+}
+inline void LogEntryInfo::set_key(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  key_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
+              GetArena());
+  // @@protoc_insertion_point(field_set_char:kv.LogEntryInfo.key)
+}
+inline void LogEntryInfo::set_key(const char* value,
+    size_t size) {
+  
+  key_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:kv.LogEntryInfo.key)
+}
+inline std::string* LogEntryInfo::_internal_mutable_key() {
+  
+  return key_.Mutable(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline std::string* LogEntryInfo::release_key() {
+  // @@protoc_insertion_point(field_release:kv.LogEntryInfo.key)
+  return key_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void LogEntryInfo::set_allocated_key(std::string* key) {
+  if (key != nullptr) {
+    
+  } else {
+    
+  }
+  key_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), key,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:kv.LogEntryInfo.key)
+}
+inline std::string* LogEntryInfo::unsafe_arena_release_key() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:kv.LogEntryInfo.key)
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  
+  return key_.UnsafeArenaRelease(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      GetArena());
+}
+inline void LogEntryInfo::unsafe_arena_set_allocated_key(
+    std::string* key) {
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  if (key != nullptr) {
+    
+  } else {
+    
+  }
+  key_.UnsafeArenaSetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      key, GetArena());
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:kv.LogEntryInfo.key)
+}
+
+// string value = 5;
+inline void LogEntryInfo::clear_value() {
+  value_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline const std::string& LogEntryInfo::value() const {
+  // @@protoc_insertion_point(field_get:kv.LogEntryInfo.value)
+  return _internal_value();
+}
+inline void LogEntryInfo::set_value(const std::string& value) {
+  _internal_set_value(value);
+  // @@protoc_insertion_point(field_set:kv.LogEntryInfo.value)
+}
+inline std::string* LogEntryInfo::mutable_value() {
+  // @@protoc_insertion_point(field_mutable:kv.LogEntryInfo.value)
+  return _internal_mutable_value();
+}
+inline const std::string& LogEntryInfo::_internal_value() const {
+  return value_.Get();
+}
+inline void LogEntryInfo::_internal_set_value(const std::string& value) {
+  
+  value_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value, GetArena());
+}
+inline void LogEntryInfo::set_value(std::string&& value) {
+  
+  value_.Set(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:kv.LogEntryInfo.value)
+}
+inline void LogEntryInfo::set_value(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  value_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
+              GetArena());
+  // @@protoc_insertion_point(field_set_char:kv.LogEntryInfo.value)
+}
+inline void LogEntryInfo::set_value(const char* value,
+    size_t size) {
+  
+  value_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:kv.LogEntryInfo.value)
+}
+inline std::string* LogEntryInfo::_internal_mutable_value() {
+  
+  return value_.Mutable(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline std::string* LogEntryInfo::release_value() {
+  // @@protoc_insertion_point(field_release:kv.LogEntryInfo.value)
+  return value_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void LogEntryInfo::set_allocated_value(std::string* value) {
+  if (value != nullptr) {
+    
+  } else {
+    
+  }
+  value_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:kv.LogEntryInfo.value)
+}
+inline std::string* LogEntryInfo::unsafe_arena_release_value() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:kv.LogEntryInfo.value)
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  
+  return value_.UnsafeArenaRelease(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      GetArena());
+}
+inline void LogEntryInfo::unsafe_arena_set_allocated_value(
+    std::string* value) {
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  if (value != nullptr) {
+    
+  } else {
+    
+  }
+  value_.UnsafeArenaSetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      value, GetArena());
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:kv.LogEntryInfo.value)
+}
+
+// -------------------------------------------------------------------
+
+// GetNodeStatusRequest
+
+// -------------------------------------------------------------------
+
+// GetNodeStatusResponse
+
+// bool success = 1;
+inline void GetNodeStatusResponse::clear_success() {
+  success_ = false;
+}
+inline bool GetNodeStatusResponse::_internal_success() const {
+  return success_;
+}
+inline bool GetNodeStatusResponse::success() const {
+  // @@protoc_insertion_point(field_get:kv.GetNodeStatusResponse.success)
+  return _internal_success();
+}
+inline void GetNodeStatusResponse::_internal_set_success(bool value) {
+  
+  success_ = value;
+}
+inline void GetNodeStatusResponse::set_success(bool value) {
+  _internal_set_success(value);
+  // @@protoc_insertion_point(field_set:kv.GetNodeStatusResponse.success)
+}
+
+// string error = 2;
+inline void GetNodeStatusResponse::clear_error() {
+  error_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline const std::string& GetNodeStatusResponse::error() const {
+  // @@protoc_insertion_point(field_get:kv.GetNodeStatusResponse.error)
+  return _internal_error();
+}
+inline void GetNodeStatusResponse::set_error(const std::string& value) {
+  _internal_set_error(value);
+  // @@protoc_insertion_point(field_set:kv.GetNodeStatusResponse.error)
+}
+inline std::string* GetNodeStatusResponse::mutable_error() {
+  // @@protoc_insertion_point(field_mutable:kv.GetNodeStatusResponse.error)
+  return _internal_mutable_error();
+}
+inline const std::string& GetNodeStatusResponse::_internal_error() const {
+  return error_.Get();
+}
+inline void GetNodeStatusResponse::_internal_set_error(const std::string& value) {
+  
+  error_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value, GetArena());
+}
+inline void GetNodeStatusResponse::set_error(std::string&& value) {
+  
+  error_.Set(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:kv.GetNodeStatusResponse.error)
+}
+inline void GetNodeStatusResponse::set_error(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  error_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
+              GetArena());
+  // @@protoc_insertion_point(field_set_char:kv.GetNodeStatusResponse.error)
+}
+inline void GetNodeStatusResponse::set_error(const char* value,
+    size_t size) {
+  
+  error_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:kv.GetNodeStatusResponse.error)
+}
+inline std::string* GetNodeStatusResponse::_internal_mutable_error() {
+  
+  return error_.Mutable(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline std::string* GetNodeStatusResponse::release_error() {
+  // @@protoc_insertion_point(field_release:kv.GetNodeStatusResponse.error)
+  return error_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void GetNodeStatusResponse::set_allocated_error(std::string* error) {
+  if (error != nullptr) {
+    
+  } else {
+    
+  }
+  error_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), error,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:kv.GetNodeStatusResponse.error)
+}
+inline std::string* GetNodeStatusResponse::unsafe_arena_release_error() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:kv.GetNodeStatusResponse.error)
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  
+  return error_.UnsafeArenaRelease(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      GetArena());
+}
+inline void GetNodeStatusResponse::unsafe_arena_set_allocated_error(
+    std::string* error) {
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  if (error != nullptr) {
+    
+  } else {
+    
+  }
+  error_.UnsafeArenaSetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      error, GetArena());
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:kv.GetNodeStatusResponse.error)
+}
+
+// int32 nodeId = 3;
+inline void GetNodeStatusResponse::clear_nodeid() {
+  nodeid_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 GetNodeStatusResponse::_internal_nodeid() const {
+  return nodeid_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 GetNodeStatusResponse::nodeid() const {
+  // @@protoc_insertion_point(field_get:kv.GetNodeStatusResponse.nodeId)
+  return _internal_nodeid();
+}
+inline void GetNodeStatusResponse::_internal_set_nodeid(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  nodeid_ = value;
+}
+inline void GetNodeStatusResponse::set_nodeid(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_nodeid(value);
+  // @@protoc_insertion_point(field_set:kv.GetNodeStatusResponse.nodeId)
+}
+
+// string state = 4;
+inline void GetNodeStatusResponse::clear_state() {
+  state_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline const std::string& GetNodeStatusResponse::state() const {
+  // @@protoc_insertion_point(field_get:kv.GetNodeStatusResponse.state)
+  return _internal_state();
+}
+inline void GetNodeStatusResponse::set_state(const std::string& value) {
+  _internal_set_state(value);
+  // @@protoc_insertion_point(field_set:kv.GetNodeStatusResponse.state)
+}
+inline std::string* GetNodeStatusResponse::mutable_state() {
+  // @@protoc_insertion_point(field_mutable:kv.GetNodeStatusResponse.state)
+  return _internal_mutable_state();
+}
+inline const std::string& GetNodeStatusResponse::_internal_state() const {
+  return state_.Get();
+}
+inline void GetNodeStatusResponse::_internal_set_state(const std::string& value) {
+  
+  state_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value, GetArena());
+}
+inline void GetNodeStatusResponse::set_state(std::string&& value) {
+  
+  state_.Set(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:kv.GetNodeStatusResponse.state)
+}
+inline void GetNodeStatusResponse::set_state(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  state_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
+              GetArena());
+  // @@protoc_insertion_point(field_set_char:kv.GetNodeStatusResponse.state)
+}
+inline void GetNodeStatusResponse::set_state(const char* value,
+    size_t size) {
+  
+  state_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:kv.GetNodeStatusResponse.state)
+}
+inline std::string* GetNodeStatusResponse::_internal_mutable_state() {
+  
+  return state_.Mutable(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline std::string* GetNodeStatusResponse::release_state() {
+  // @@protoc_insertion_point(field_release:kv.GetNodeStatusResponse.state)
+  return state_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void GetNodeStatusResponse::set_allocated_state(std::string* state) {
+  if (state != nullptr) {
+    
+  } else {
+    
+  }
+  state_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), state,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:kv.GetNodeStatusResponse.state)
+}
+inline std::string* GetNodeStatusResponse::unsafe_arena_release_state() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:kv.GetNodeStatusResponse.state)
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  
+  return state_.UnsafeArenaRelease(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      GetArena());
+}
+inline void GetNodeStatusResponse::unsafe_arena_set_allocated_state(
+    std::string* state) {
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  if (state != nullptr) {
+    
+  } else {
+    
+  }
+  state_.UnsafeArenaSetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      state, GetArena());
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:kv.GetNodeStatusResponse.state)
+}
+
+// int64 currentTerm = 5;
+inline void GetNodeStatusResponse::clear_currentterm() {
+  currentterm_ = PROTOBUF_LONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 GetNodeStatusResponse::_internal_currentterm() const {
+  return currentterm_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 GetNodeStatusResponse::currentterm() const {
+  // @@protoc_insertion_point(field_get:kv.GetNodeStatusResponse.currentTerm)
+  return _internal_currentterm();
+}
+inline void GetNodeStatusResponse::_internal_set_currentterm(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  
+  currentterm_ = value;
+}
+inline void GetNodeStatusResponse::set_currentterm(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  _internal_set_currentterm(value);
+  // @@protoc_insertion_point(field_set:kv.GetNodeStatusResponse.currentTerm)
+}
+
+// int32 leaderId = 6;
+inline void GetNodeStatusResponse::clear_leaderid() {
+  leaderid_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 GetNodeStatusResponse::_internal_leaderid() const {
+  return leaderid_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 GetNodeStatusResponse::leaderid() const {
+  // @@protoc_insertion_point(field_get:kv.GetNodeStatusResponse.leaderId)
+  return _internal_leaderid();
+}
+inline void GetNodeStatusResponse::_internal_set_leaderid(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  leaderid_ = value;
+}
+inline void GetNodeStatusResponse::set_leaderid(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_leaderid(value);
+  // @@protoc_insertion_point(field_set:kv.GetNodeStatusResponse.leaderId)
+}
+
+// int64 commitIndex = 7;
+inline void GetNodeStatusResponse::clear_commitindex() {
+  commitindex_ = PROTOBUF_LONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 GetNodeStatusResponse::_internal_commitindex() const {
+  return commitindex_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 GetNodeStatusResponse::commitindex() const {
+  // @@protoc_insertion_point(field_get:kv.GetNodeStatusResponse.commitIndex)
+  return _internal_commitindex();
+}
+inline void GetNodeStatusResponse::_internal_set_commitindex(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  
+  commitindex_ = value;
+}
+inline void GetNodeStatusResponse::set_commitindex(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  _internal_set_commitindex(value);
+  // @@protoc_insertion_point(field_set:kv.GetNodeStatusResponse.commitIndex)
+}
+
+// int64 lastApplied = 8;
+inline void GetNodeStatusResponse::clear_lastapplied() {
+  lastapplied_ = PROTOBUF_LONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 GetNodeStatusResponse::_internal_lastapplied() const {
+  return lastapplied_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 GetNodeStatusResponse::lastapplied() const {
+  // @@protoc_insertion_point(field_get:kv.GetNodeStatusResponse.lastApplied)
+  return _internal_lastapplied();
+}
+inline void GetNodeStatusResponse::_internal_set_lastapplied(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  
+  lastapplied_ = value;
+}
+inline void GetNodeStatusResponse::set_lastapplied(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  _internal_set_lastapplied(value);
+  // @@protoc_insertion_point(field_set:kv.GetNodeStatusResponse.lastApplied)
+}
+
+// int64 lastLogIndex = 9;
+inline void GetNodeStatusResponse::clear_lastlogindex() {
+  lastlogindex_ = PROTOBUF_LONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 GetNodeStatusResponse::_internal_lastlogindex() const {
+  return lastlogindex_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 GetNodeStatusResponse::lastlogindex() const {
+  // @@protoc_insertion_point(field_get:kv.GetNodeStatusResponse.lastLogIndex)
+  return _internal_lastlogindex();
+}
+inline void GetNodeStatusResponse::_internal_set_lastlogindex(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  
+  lastlogindex_ = value;
+}
+inline void GetNodeStatusResponse::set_lastlogindex(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  _internal_set_lastlogindex(value);
+  // @@protoc_insertion_point(field_set:kv.GetNodeStatusResponse.lastLogIndex)
+}
+
+// int64 lastLogTerm = 10;
+inline void GetNodeStatusResponse::clear_lastlogterm() {
+  lastlogterm_ = PROTOBUF_LONGLONG(0);
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 GetNodeStatusResponse::_internal_lastlogterm() const {
+  return lastlogterm_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 GetNodeStatusResponse::lastlogterm() const {
+  // @@protoc_insertion_point(field_get:kv.GetNodeStatusResponse.lastLogTerm)
+  return _internal_lastlogterm();
+}
+inline void GetNodeStatusResponse::_internal_set_lastlogterm(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  
+  lastlogterm_ = value;
+}
+inline void GetNodeStatusResponse::set_lastlogterm(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  _internal_set_lastlogterm(value);
+  // @@protoc_insertion_point(field_set:kv.GetNodeStatusResponse.lastLogTerm)
+}
+
+// repeated .kv.LogEntryInfo entries = 11;
+inline int GetNodeStatusResponse::_internal_entries_size() const {
+  return entries_.size();
+}
+inline int GetNodeStatusResponse::entries_size() const {
+  return _internal_entries_size();
+}
+inline void GetNodeStatusResponse::clear_entries() {
+  entries_.Clear();
+}
+inline ::kv::LogEntryInfo* GetNodeStatusResponse::mutable_entries(int index) {
+  // @@protoc_insertion_point(field_mutable:kv.GetNodeStatusResponse.entries)
+  return entries_.Mutable(index);
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::kv::LogEntryInfo >*
+GetNodeStatusResponse::mutable_entries() {
+  // @@protoc_insertion_point(field_mutable_list:kv.GetNodeStatusResponse.entries)
+  return &entries_;
+}
+inline const ::kv::LogEntryInfo& GetNodeStatusResponse::_internal_entries(int index) const {
+  return entries_.Get(index);
+}
+inline const ::kv::LogEntryInfo& GetNodeStatusResponse::entries(int index) const {
+  // @@protoc_insertion_point(field_get:kv.GetNodeStatusResponse.entries)
+  return _internal_entries(index);
+}
+inline ::kv::LogEntryInfo* GetNodeStatusResponse::_internal_add_entries() {
+  return entries_.Add();
+}
+inline ::kv::LogEntryInfo* GetNodeStatusResponse::add_entries() {
+  // @@protoc_insertion_point(field_add:kv.GetNodeStatusResponse.entries)
+  return _internal_add_entries();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::kv::LogEntryInfo >&
+GetNodeStatusResponse::entries() const {
+  // @@protoc_insertion_point(field_list:kv.GetNodeStatusResponse.entries)
+  return entries_;
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

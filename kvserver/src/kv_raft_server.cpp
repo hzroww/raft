@@ -130,7 +130,7 @@ KvRaftServer::KvRaftServer(Config cfg)
         cfg_.snapshot_threshold);
 
     service_ = std::make_unique<KvServerService>(
-        &store_, /*raft_node=*/nullptr, &wait_registry_);
+        &store_, /*raft_node=*/nullptr, &wait_registry_, &storage_);
 
     raft_core::RaftNode::Config rcfg;
     rcfg.self_id         = cfg_.node_id;

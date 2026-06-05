@@ -2,6 +2,7 @@
 
 #include "rpc_codec.h"
 #include "rpc_controller.h"
+#include "rpc_test_partition.h"
 #include "log.h"
 
 #include <google/protobuf/descriptor.h>
@@ -94,6 +95,12 @@ void RpcChannel::CallMethod(const google::protobuf::MethodDescriptor* method,
                             const google::protobuf::Message*          request,
                             google::protobuf::Message*                response,
                             google::protobuf::Closure*                done) {
+    if (rpc_test_partition::IsPartitioned(port_)) {
+        static_cast<RpcController*>(controller)->SetFailed("test partition");
+        if (done) done->Run();
+        return;
+    }
+
     std::string body;
     if (!request->SerializeToString(&body)) {
         LOG_ERROR() << "serialize request failed service="
